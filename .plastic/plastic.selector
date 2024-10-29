@@ -1,0 +1,4 @@
+repository "Bubble Struggle Game@BrodandoPersonal@cloud"
+  path "/"
+    br "/main"
+    co "/main"
