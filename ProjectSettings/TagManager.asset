@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ball
+  - SupportBall
   layers:
   - Default
   - TransparentFX
@@ -11,10 +13,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Chain
+  - Wall
+  - Ball
   - 
   - 
   - 
@@ -40,6 +42,12 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2626329763
+    locked: 0
+  - name: Chain
+    uniqueID: 593061607
+    locked: 0
+  - name: Player
+    uniqueID: 804581451
     locked: 0
   - name: Default
     uniqueID: 0
