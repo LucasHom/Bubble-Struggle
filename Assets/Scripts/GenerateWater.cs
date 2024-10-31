@@ -29,12 +29,10 @@ public class Chain : MonoBehaviour
                 remainingWater = 50;
             }
             canShoot = true;
-            Debug.Log(remainingWater);
         }
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot)
         {
             StartCoroutine(ShootDelay());
-            Debug.Log(remainingWater);
         }
     }
 

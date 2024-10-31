@@ -10,10 +10,13 @@ public class Ball : MonoBehaviour
 
     public GameObject nextBall;
 
+    private GenerateBalls BallGenerator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d.AddForce(startForce, ForceMode2D.Impulse);
+        BallGenerator = FindObjectOfType<GenerateBalls>();
     }
 
     // Update is called once per frame
@@ -36,6 +39,8 @@ public class Ball : MonoBehaviour
             }
             if (nextBall.tag == "SupportBall")
             {
+                BallGenerator.ballsRemaining -= 1;
+                Debug.Log(BallGenerator.ballsRemaining);
                 ball01.GetComponent<SupportBall>().supportStartForce = new Vector2(2f, 7f);
                 ball02.GetComponent<SupportBall>().supportStartForce = new Vector2(-2f, 7f);
             }

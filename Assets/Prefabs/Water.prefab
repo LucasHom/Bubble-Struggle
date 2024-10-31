@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2382393508138609593}
   - component: {fileID: -8483203007732740682}
   m_Layer: 7
-  m_Name: Chain
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

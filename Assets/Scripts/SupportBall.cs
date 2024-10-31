@@ -29,8 +29,11 @@ public class SupportBall : MonoBehaviour
     }
 
     public void Grow()
-    {
-        transform.localScale += new Vector3(0.1f, 0.1f, 0f);
+    {  
+        if (transform.localScale.x < 2)
+        {
+            transform.localScale += new Vector3(0.1f, 0.1f, 0f);
+        }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }
 }

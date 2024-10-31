@@ -11,12 +11,10 @@ public class ChainCollision : MonoBehaviour
 
         if (col.tag == "Ball")
         {
-            Debug.Log("Split ball in two");
             col.GetComponent<Ball>().Split();
         }
         if (col.tag == "SupportBall")
         {
-            Debug.Log("Hit support");
             col.GetComponent<SupportBall>().Grow();
         }
         if (col.gameObject.tag == "Wall")
