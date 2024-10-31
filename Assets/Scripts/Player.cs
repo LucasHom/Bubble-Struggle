@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     {
         //Use gathered input to make actual movements
         //Vector2 could also be Vector2.right * movement
-        rb2d.MovePosition(rb2d.position + new Vector2 (movement * Time.fixedDeltaTime, 0f));
+        //rb2d.MovePosition(rb2d.position + new Vector2 (movement * Time.fixedDeltaTime, 0f));
+
+        rb2d.velocity = new Vector2(movement, 0f);
     }
 }

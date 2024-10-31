@@ -8,6 +8,14 @@ public class SupportBall : MonoBehaviour
     [SerializeField] private Vector2 growForce;
     [SerializeField] private Rigidbody2D rb2d;
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

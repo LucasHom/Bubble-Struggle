@@ -7,8 +7,7 @@ public class ChainCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Something hit the chain");
-        Chain.IsFired = false;
+        //Chain.IsFired = false;
 
         if (col.tag == "Ball")
         {
@@ -20,6 +19,16 @@ public class ChainCollision : MonoBehaviour
             Debug.Log("Hit support");
             col.GetComponent<SupportBall>().Grow();
         }
+        if (col.gameObject.tag == "Wall")
+        {
+            //Special wall particlees?
+            Destroy(transform.parent.gameObject);
+        }
+        if (col.gameObject.tag == "Ground")
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        
     }
     // Start is called before the first frame update
     void Start()
