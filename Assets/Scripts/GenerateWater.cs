@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chain : MonoBehaviour
+public class GenerateWater : MonoBehaviour
 {
     [SerializeField] GameObject waterProjectilePrefab; 
     [SerializeField] Transform shootPoint;
     [SerializeField] Rigidbody2D rbPlayer;
     [SerializeField] float shootForce = 10f;
     [SerializeField] float horizontalForcePadding = 0.3f;
-    [SerializeField] float remainingWater = 50f;
+    [SerializeField] float remainingWater = 10f;
+    [SerializeField] float maxWater = 10f;
 
     [SerializeField] private float delayTime = 0.1f;  
     private bool canShoot = true; 
+    [SerializeField] private GameObject player;
+
+    private Player playerScript;
+
+    void Start()
+    {
+        playerScript = player.GetComponent<Player>();  
+    }
 
     void Update()
     {
@@ -21,16 +30,23 @@ public class Chain : MonoBehaviour
             canShoot = false;
         }
         //Temporary refill
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
+            Debug.Log(remainingWater);
+            playerScript.isReloading = true;
             remainingWater += 5;
-            if (remainingWater > 50)
+            
+            if (remainingWater > maxWater)
             {
-                remainingWater = 50;
+                remainingWater = maxWater;
             }
             canShoot = true;
         }
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot)
+        else
+        {
+            playerScript.isReloading = false;
+        }
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading)
         {
             StartCoroutine(ShootDelay());
         }
@@ -45,7 +61,7 @@ public class Chain : MonoBehaviour
         canShoot = true;
 
         ShootWater();
-
+ 
         
     }
 

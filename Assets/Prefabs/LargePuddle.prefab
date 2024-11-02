@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6299765533239844623
+--- !u!1 &3108103524748267466
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6557772299989005533}
-  - component: {fileID: 3996779119145677416}
-  - component: {fileID: 1021431625920056546}
-  - component: {fileID: 7341066128213047641}
-  - component: {fileID: 6114618960299285609}
-  m_Layer: 9
-  m_Name: ball_small
-  m_TagString: Ball
+  - component: {fileID: 7586333900454203858}
+  - component: {fileID: 4473936262323759492}
+  - component: {fileID: 3925410383438565870}
+  - component: {fileID: 2633107662598678443}
+  m_Layer: 0
+  m_Name: LargePuddle
+  m_TagString: Puddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6557772299989005533
+--- !u!4 &7586333900454203858
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299765533239844623}
+  m_GameObject: {fileID: 3108103524748267466}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 2.59, y: -4.378, z: 0}
+  m_LocalScale: {x: 4, y: 0.64, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3996779119145677416
+--- !u!212 &4473936262323759492
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299765533239844623}
+  m_GameObject: {fileID: 3108103524748267466}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,11 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1188184453
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ce6afb6c728c2c6448b7ae89ac1b19cf, type: 3}
-  m_Color: {r: 0.8999301, g: 0.9308176, b: 0.67615986, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 0adeef8fca2c4e74b8629d46a8b0fc75, type: 3}
+  m_Color: {r: 0.42352945, g: 0.4431373, b: 0.10980393, a: 0.87058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,16 +86,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1021431625920056546
-CircleCollider2D:
+--- !u!114 &3925410383438565870
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299765533239844623}
+  m_GameObject: {fileID: 3108103524748267466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b331e9f7ad626246b33e1ad9937bfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remainDuration: 1.8
+  fadeDuration: 0.2
+--- !u!61 &2633107662598678443
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108103524748267466}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 49235bd6e298e2b409c8b25bec17ae79, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -116,56 +129,19 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.08}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.45
---- !u!50 &7341066128213047641
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299765533239844623}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &6114618960299285609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299765533239844623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5d36d0a37ae95246b242744b74970f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startForce: {x: 0, y: 0}
-  rb2d: {fileID: 7341066128213047641}
-  nextBall: {fileID: 6299765533239844623, guid: 051744ab5c274b049a95217847608fd8, type: 3}
-  largePuddle: {fileID: 3108103524748267466, guid: b9165cc6d4b5f694ea1f0e28018e4290, type: 3}
-  mediumPuddle: {fileID: 3324956249124175538, guid: 1050e64177cc379419863dd9d6304f14, type: 3}
-  smallPuddle: {fileID: 4887229780612648611, guid: 8757c2aef9671d84b835f5988ae67c50, type: 3}
-  horizontalBarrierForce: 2
-  freezeTime: 1
+  m_Size: {x: 0.29, y: 0.32}
+  m_EdgeRadius: 0

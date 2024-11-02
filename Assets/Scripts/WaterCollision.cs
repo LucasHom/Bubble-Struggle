@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainCollision : MonoBehaviour
+public class WaterCollision : MonoBehaviour
 {
 
     void OnTriggerEnter2D(Collider2D col)
@@ -12,10 +12,12 @@ public class ChainCollision : MonoBehaviour
         if (col.tag == "Ball")
         {
             col.GetComponent<Ball>().Split();
+            Destroy(transform.parent.gameObject);
         }
         if (col.tag == "SupportBall")
         {
             col.GetComponent<SupportBall>().Grow();
+            Destroy(transform.parent.gameObject);
         }
         if (col.gameObject.tag == "Wall")
         {
