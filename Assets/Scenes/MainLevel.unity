@@ -467,9 +467,11 @@ MonoBehaviour:
   shootForce: 11
   horizontalForcePadding: 0.5
   remainingWater: 10
-  maxWater: 10
-  delayTime: 0.1
+  maxWater: 20
+  shootDelay: 0.1
   player: {fileID: 1587596006}
+  reloadDelay: 0.06
+  reloadAmount: 1
 --- !u!4 &839196638
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1322,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587596006}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1466,8 +1468,15 @@ MonoBehaviour:
   playerSpeed: 6
   rb2d: {fileID: 1587596007}
   spriteRenderer: {fileID: 1587596009}
+  bc2d: {fileID: 1587596008}
   puddleBuffer: 3
-  playerCanMove: 1
+  playerHealthy: 1
+  playerIsFrozen: 0
+  isReloading: 0
+  invincibilityDuration: 0
+  isInvincible: 0
+  flashInterval: 0.15
+  freezeTime: 1.5
 --- !u!1 &1592178383
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class Ball : MonoBehaviour
     [SerializeField] private GameObject mediumPuddle;
     [SerializeField] private GameObject smallPuddle;
     [SerializeField] private float horizontalBarrierForce = 2f;
-    [SerializeField] private float freezeTime = 1.5f;
 
     private WaveManager BallGenerator;
 
@@ -34,16 +33,6 @@ public class Ball : MonoBehaviour
     {
         
     }
-
-    private IEnumerator freezePlayer(GameObject player)
-    {
-        //Stop movement and shooting
-        player.GetComponent<Player>().playerHealthy = false;
-        yield return new WaitForSeconds(freezeTime);
-        //Start movement and shooting
-        player.GetComponent<Player>().playerHealthy = true;
-
-    } 
 
     //Gets name of prefab without "(Clone)" modifier
     private string getPureName(string oldName)
@@ -82,7 +71,13 @@ public class Ball : MonoBehaviour
         }
         if (col.gameObject.tag == "Player")
         {
-            StartCoroutine(freezePlayer(col.gameObject));
+            if (!col.gameObject.GetComponent<Player>().playerIsFrozen)
+            {
+                Debug.Log("Started freeze routine");
+                //StartCoroutine(freezePlayer(col.gameObject));
+                StartCoroutine(col.gameObject.GetComponent<Player>().freezePlayer());
+            }
+            
         }
     }
 

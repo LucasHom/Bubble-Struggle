@@ -9,17 +9,22 @@ public class GenerateWater : MonoBehaviour
     [SerializeField] Rigidbody2D rbPlayer;
     [SerializeField] float shootForce = 10f;
     [SerializeField] float horizontalForcePadding = 0.3f;
-    [SerializeField] float remainingWater = 10f;
+    [SerializeField] float remainingWater;
     [SerializeField] float maxWater = 10f;
 
-    [SerializeField] private float delayTime = 0.1f;  
+    [SerializeField] private float shootDelay = 0.1f;  
     private bool canShoot = true; 
     [SerializeField] private GameObject player;
+
+    [SerializeField] float reloadDelay = 0.06f;
+    [SerializeField] float reloadAmount = 1f;
+    private bool isReloading = false;
 
     private Player playerScript;
 
     void Start()
     {
+        remainingWater = maxWater;
         playerScript = player.GetComponent<Player>();  
     }
 
@@ -29,34 +34,54 @@ public class GenerateWater : MonoBehaviour
         {
             canShoot = false;
         }
-        //Temporary refill
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            Debug.Log(remainingWater);
-            playerScript.isReloading = true;
-            remainingWater += 5;
-            
-            if (remainingWater > maxWater)
+            if (!isReloading)
             {
-                remainingWater = maxWater;
+                playerScript.isReloading = true;
+                StartCoroutine(ReloadWater());
             }
-            canShoot = true;
         }
         else
         {
             playerScript.isReloading = false;
+            isReloading = false; 
         }
+
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading)
         {
             StartCoroutine(ShootDelay());
         }
     }
 
+    private IEnumerator ReloadWater()
+    {
+        isReloading = true;
+
+        while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && remainingWater < maxWater)
+        {
+            remainingWater += reloadAmount;
+
+            if (remainingWater > maxWater)
+            {
+                remainingWater = maxWater;
+            }
+
+            canShoot = true;
+            Debug.Log(remainingWater);
+
+            yield return new WaitForSeconds(reloadDelay);
+        }
+        isReloading = false;
+        playerScript.isReloading = false;
+    }
+
     IEnumerator ShootDelay()
     {
         canShoot = false;  
 
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(shootDelay);
 
         canShoot = true;
 

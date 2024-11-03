@@ -8,19 +8,35 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private BoxCollider2D bc2d;
 
     [SerializeField] public float puddleBuffer = 2f;
 
     [SerializeField] public bool playerHealthy = true;
+
+    //test
+    [SerializeField] public bool playerIsFrozen = false;
+
+
     [SerializeField] public bool isReloading = false;
+    [SerializeField] public float invincibilityDuration;
+    [SerializeField] private bool isInvincible = false;
+    [SerializeField] private float flashInterval = 0.2f;
+    [SerializeField] private float freezeTime = 1.5f;
+
+    //private Color originalColor;
 
     private float appliedPuddleBuffer = 0f;
     private float movement = 0f;
 
+    //Update based on real layer
+    private int playerLayer = 6;
+    private int ballLayer = 9;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //originalColor = spriteRenderer.color;
     }
 
     public void applyPuddleBuffer(bool isSlowed)
@@ -35,18 +51,42 @@ public class Player : MonoBehaviour
         }
     }
 
+    //private void toggleTransparency()
+    //{
+    //    if (spriteRenderer.color.a == 1f)
+    //    {
+    //        Color halfTransparentColor = originalColor;
+    //        halfTransparentColor.a = 0.1f; 
+    //        spriteRenderer.color = halfTransparentColor; 
+    //    }
+    //    else
+    //    {
+
+    //        Color fullOpaqueColor = originalColor; 
+    //        fullOpaqueColor.a = 1f; 
+    //        spriteRenderer.color = fullOpaqueColor;
+    //    }
+    //}
+
     public void getPlayerMovement()
     {
         if (!playerHealthy)
         {
             spriteRenderer.color = Color.gray;
             movement = 0f;
+
+            if (!isInvincible)
+            {
+                StartCoroutine(InvincibilityPeriod());
+                StartCoroutine(FlashDuringInvincibility());
+            }
             
         }
-        else if (playerHealthy && !isReloading)
+        else if (playerHealthy && !isReloading && !playerIsFrozen)
         {
             spriteRenderer.color = new Color(255f, 255f, 255f);
             movement = Input.GetAxis("Horizontal") * (playerSpeed - appliedPuddleBuffer);
+
         }
         else
         {
@@ -68,7 +108,53 @@ public class Player : MonoBehaviour
         //Use gathered input to make actual movements
         //Vector2 could also be Vector2.right * movement
         //rb2d.MovePosition(rb2d.position + new Vector2 (movement * Time.fixedDeltaTime, 0f));
-
+        Debug.Log(movement);
         rb2d.velocity = new Vector2(movement, 0f);
+    }
+
+    public IEnumerator freezePlayer()
+    {
+        if (playerIsFrozen) yield break;
+
+        //Stop movement and shooting
+        playerIsFrozen = true;
+        invincibilityDuration = freezeTime + 1.2f;
+        playerHealthy = false;
+        //Debug.Log("waiting");
+        //Debug.Log(freezeTime);
+        yield return new WaitForSeconds(freezeTime);
+        //Debug.Log("done waiting");
+        //Start movement and shooting
+        playerHealthy = true;
+        playerIsFrozen = false;
+
+    }
+    private IEnumerator FlashDuringInvincibility()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < invincibilityDuration)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+            //toggleTransparency();
+            yield return new WaitForSeconds(flashInterval);   
+            elapsedTime += flashInterval;
+        }
+
+        // Ensure player is visible at the end
+        spriteRenderer.enabled = true;
+    }
+
+    private IEnumerator InvincibilityPeriod()
+    {
+        Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, true);
+        isInvincible = true;
+        Debug.Log("Invincible");
+
+        yield return new WaitForSeconds(invincibilityDuration);
+
+        Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, false);
+        isInvincible = false;
+        Debug.Log("Not Invincible");
     }
 }
