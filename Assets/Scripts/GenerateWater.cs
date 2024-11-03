@@ -37,7 +37,8 @@ public class GenerateWater : MonoBehaviour
 
         if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            if (!isReloading)
+            //if (!isReloading)
+            if (!isReloading && !playerScript.playerIsFrozen)
             {
                 playerScript.isReloading = true;
                 StartCoroutine(ReloadWater());
@@ -49,7 +50,7 @@ public class GenerateWater : MonoBehaviour
             isReloading = false; 
         }
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading)
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading && !playerScript.playerIsFrozen)
         {
             StartCoroutine(ShootDelay());
         }

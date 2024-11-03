@@ -75,7 +75,8 @@ public class Ball : MonoBehaviour
             {
                 Debug.Log("Started freeze routine");
                 //StartCoroutine(freezePlayer(col.gameObject));
-                StartCoroutine(col.gameObject.GetComponent<Player>().freezePlayer());
+                col.gameObject.GetComponent<Player>().startFreezePlayerCoroutine();
+
             }
             
         }

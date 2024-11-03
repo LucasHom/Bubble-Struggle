@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
     private int playerLayer = 6;
     private int ballLayer = 9;
 
+    //Movement
+    private float currentHorizontalInput;
+    [SerializeField] private float accelerationRate = 8f;
+    private float horizontalMaxInput = 1f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.color = Color.gray;
             movement = 0f;
+            currentHorizontalInput = 0f;
 
             if (!isInvincible)
             {
@@ -85,7 +92,20 @@ public class Player : MonoBehaviour
         else if (playerHealthy && !isReloading && !playerIsFrozen)
         {
             spriteRenderer.color = new Color(255f, 255f, 255f);
-            movement = Input.GetAxis("Horizontal") * (playerSpeed - appliedPuddleBuffer);
+
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                currentHorizontalInput = Mathf.MoveTowards(currentHorizontalInput, -horizontalMaxInput, accelerationRate * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                currentHorizontalInput = Mathf.MoveTowards(currentHorizontalInput, horizontalMaxInput, accelerationRate * Time.deltaTime);
+            }
+            else
+            {
+                currentHorizontalInput = Mathf.MoveTowards(currentHorizontalInput, 0, accelerationRate * Time.deltaTime);
+            }
+            movement = currentHorizontalInput * (playerSpeed - appliedPuddleBuffer);
 
         }
         else
@@ -93,6 +113,7 @@ public class Player : MonoBehaviour
             //means player is healthy and player is reloading
             spriteRenderer.color = new Color(255f, 255f, 255f);
             movement = 0f;
+            currentHorizontalInput = 0f;
         }
     }
 
@@ -108,10 +129,14 @@ public class Player : MonoBehaviour
         //Use gathered input to make actual movements
         //Vector2 could also be Vector2.right * movement
         //rb2d.MovePosition(rb2d.position + new Vector2 (movement * Time.fixedDeltaTime, 0f));
-        Debug.Log(movement);
+        //Debug.Log(currentHorizontalInput);
         rb2d.velocity = new Vector2(movement, 0f);
     }
 
+    public void startFreezePlayerCoroutine()
+    {
+        StartCoroutine(freezePlayer());
+    }
     public IEnumerator freezePlayer()
     {
         if (playerIsFrozen) yield break;
@@ -149,12 +174,10 @@ public class Player : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, true);
         isInvincible = true;
-        Debug.Log("Invincible");
 
         yield return new WaitForSeconds(invincibilityDuration);
 
         Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, false);
         isInvincible = false;
-        Debug.Log("Not Invincible");
     }
 }
