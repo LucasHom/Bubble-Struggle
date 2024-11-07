@@ -10,14 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D bc2d;
 
-    [SerializeField] public float puddleBuffer = 2f;
-
     [SerializeField] public bool playerHealthy = true;
-
-    //test
     [SerializeField] public bool playerIsFrozen = false;
-
-
     [SerializeField] public bool isReloading = false;
     [SerializeField] public float invincibilityDuration;
     [SerializeField] private bool isInvincible = false;
@@ -26,8 +20,9 @@ public class Player : MonoBehaviour
 
     //private Color originalColor;
 
+    //Puddles
+    [SerializeField] public float puddleBuffer = 2f;
     private float appliedPuddleBuffer = 0f;
-    private float movement = 0f;
 
     //Update based on real layer
     private int playerLayer = 6;
@@ -37,9 +32,8 @@ public class Player : MonoBehaviour
     private float currentHorizontalInput;
     [SerializeField] private float accelerationRate = 8f;
     private float horizontalMaxInput = 1f;
+    private float movement = 0f;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         //originalColor = spriteRenderer.color;

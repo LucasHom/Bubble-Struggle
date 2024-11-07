@@ -35,7 +35,7 @@ public class GenerateWater : MonoBehaviour
             canShoot = false;
         }
 
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)))
         {
             //if (!isReloading)
             if (!isReloading && !playerScript.playerIsFrozen)
@@ -60,7 +60,7 @@ public class GenerateWater : MonoBehaviour
     {
         isReloading = true;
 
-        while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && remainingWater < maxWater)
+        while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)) && remainingWater < maxWater)
         {
             remainingWater += reloadAmount;
 
@@ -93,7 +93,8 @@ public class GenerateWater : MonoBehaviour
 
     void ShootWater()
     {
-        GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+        GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+        //GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position, Quaternion.identity);
 
         Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
         if (rb2d != null)

@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private GameObject largePuddle;
     [SerializeField] private GameObject mediumPuddle;
     [SerializeField] private GameObject smallPuddle;
+    [SerializeField] private float puddleHeight = -4.308f;
     [SerializeField] private float horizontalBarrierForce = 2f;
 
     private WaveManager BallGenerator;
@@ -54,15 +55,15 @@ public class Ball : MonoBehaviour
         {
             if (getPureName(gameObject.name) == "ball_large")
             {
-                Instantiate(largePuddle, new Vector3(rb2d.position.x, -4.378f, 0f), Quaternion.identity);
+                Instantiate(largePuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
             }
             else if (getPureName(gameObject.name) == "ball_medium")
             {
-                Instantiate(mediumPuddle, new Vector3(rb2d.position.x, -4.378f, 0f), Quaternion.identity);
+                Instantiate(mediumPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
             }
             else if (getPureName(gameObject.name) == "ball_small")
             {
-                Instantiate(smallPuddle, new Vector3(rb2d.position.x, -4.378f, 0f), Quaternion.identity);
+                Instantiate(smallPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
             }
             else 
             {
