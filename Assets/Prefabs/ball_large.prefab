@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ce6afb6c728c2c6448b7ae89ac1b19cf, type: 3}
-  m_Color: {r: 0.42065248, g: 0.44025147, b: 0.11490838, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a469dfaaf586d1b4b8d5501f4f60e54b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.93
 --- !u!50 &7341066128213047641
 Rigidbody2D:
   serializedVersion: 4
@@ -167,5 +167,5 @@ MonoBehaviour:
   largePuddle: {fileID: 3108103524748267466, guid: b9165cc6d4b5f694ea1f0e28018e4290, type: 3}
   mediumPuddle: {fileID: 3324956249124175538, guid: 1050e64177cc379419863dd9d6304f14, type: 3}
   smallPuddle: {fileID: 4887229780612648611, guid: 8757c2aef9671d84b835f5988ae67c50, type: 3}
+  puddleHeight: -4.495
   horizontalBarrierForce: 2
-  freezeTime: 2.5

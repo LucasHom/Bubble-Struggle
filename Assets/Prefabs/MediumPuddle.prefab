@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3324956249124175538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.01, y: -4.378, z: 0}
-  m_LocalScale: {x: 2.92, y: 0.64, z: 1}
+  m_LocalPosition: {x: 3.01, y: -4.492, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,13 +74,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1188184453
   m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0adeef8fca2c4e74b8629d46a8b0fc75, type: 3}
-  m_Color: {r: 0.7019608, g: 0.7294118, b: 0.20784315, a: 0.87058824}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 9caf7d140b516a341959a355b4c391e8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1.625, y: 0.6875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   remainDuration: 1.2
   fadeDuration: 0.2
+  defaultSprite: {fileID: 21300000, guid: 9caf7d140b516a341959a355b4c391e8, type: 3}
+  altSprite: {fileID: 21300000, guid: 08216e0d9eab870449d14b705c3e5644, type: 3}
 --- !u!61 &8135065337049437137
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -132,16 +134,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.08}
+  m_Offset: {x: 0.0035312176, y: 0.32600564}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1.625, y: 0.6875}
+    newSize: {x: 1.625, y: 0.6875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29, y: 0.32}
+  m_Size: {x: 1.1727965, y: 0.14814913}
   m_EdgeRadius: 0

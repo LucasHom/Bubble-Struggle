@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3876948860327013021}
   - component: {fileID: 8095742782733113240}
   - component: {fileID: 3254738575960772871}
+  - component: {fileID: 3475510428650687103}
   m_Layer: 7
   m_Name: Chain Graphics
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1599, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2382393508138609593}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 593061607
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 639f4d2a248890347b0e14b4e5ad736d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5df2647a51ca65149b2a866402531879, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,18 +119,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0023116767, y: 0.00077056885}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.12}
+    oldSize: {x: 0.1, y: 0.14}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.12}
+  m_Size: {x: 0.5099202, y: 0.7565094}
   m_EdgeRadius: 0
 --- !u!114 &3254738575960772871
 MonoBehaviour:
@@ -143,6 +144,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9414ac0886dc59f4f92ffe5fea7be7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3475510428650687103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117226522137688471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651e19b6ab8849d4fbfdfcad003a560b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: -8483203007732740682}
+  initialScale: {x: 1, y: 1, z: 1}
 --- !u!1 &7848697821730185877
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,23 @@ public class PuddleCycle : MonoBehaviour
 {
     [SerializeField] private float remainDuration = 1.5f;
     [SerializeField] private float fadeDuration = 0.1f;
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Sprite altSprite;
 
     private Player player;
     // Start is called before the first frame update
+
     void Start()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (Random.Range(0, 2) == 0)
+        {
+            transform.localScale = new Vector3(-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        if (Random.Range(0, 2) == 0)
+        {
+            spriteRenderer.sprite = altSprite;
+        }
         StartCoroutine(PuddleLifeCycle());
     }
 

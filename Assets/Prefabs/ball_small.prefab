@@ -167,5 +167,5 @@ MonoBehaviour:
   largePuddle: {fileID: 3108103524748267466, guid: b9165cc6d4b5f694ea1f0e28018e4290, type: 3}
   mediumPuddle: {fileID: 3324956249124175538, guid: 1050e64177cc379419863dd9d6304f14, type: 3}
   smallPuddle: {fileID: 4887229780612648611, guid: 8757c2aef9671d84b835f5988ae67c50, type: 3}
+  puddleHeight: -4.495
   horizontalBarrierForce: 2
-  freezeTime: 1
