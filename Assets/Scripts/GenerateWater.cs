@@ -9,8 +9,9 @@ public class GenerateWater : MonoBehaviour
     [SerializeField] Rigidbody2D rbPlayer;
     [SerializeField] float shootForce = 10f;
     [SerializeField] float horizontalForcePadding = 0.3f;
-    [SerializeField] float remainingWater;
-    [SerializeField] float maxWater = 10f;
+
+    [SerializeField] public float remainingWater;
+    [SerializeField] public float maxWater = 10f;
 
     [SerializeField] private float shootDelay = 0.1f;  
     private bool canShoot = true; 
