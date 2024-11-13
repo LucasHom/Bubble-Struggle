@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GenerateWater : MonoBehaviour
 {
@@ -14,12 +15,17 @@ public class GenerateWater : MonoBehaviour
     [SerializeField] public float maxWater = 10f;
 
     [SerializeField] private float shootDelay = 0.1f;  
-    private bool canShoot = true; 
+    private bool canShoot = true;
+
+    [SerializeField] private Image ReloadWaterIcon;
     [SerializeField] private GameObject player;
 
     [SerializeField] float reloadDelay = 0.06f;
     [SerializeField] float reloadAmount = 1f;
     private bool isReloading = false;
+    private bool canShowReloadIcon = false;
+    [SerializeField] private bool isReloadIconFlashing = false;
+
 
     private Player playerScript;
 
@@ -34,9 +40,10 @@ public class GenerateWater : MonoBehaviour
         if (remainingWater <= 0)
         {
             canShoot = false;
+            canShowReloadIcon = true;
         }
 
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)))
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Mouse1)))
         {
             //if (!isReloading)
             if (!isReloading && !playerScript.playerIsFrozen)
@@ -51,12 +58,45 @@ public class GenerateWater : MonoBehaviour
             isReloading = false; 
         }
 
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShowReloadIcon)
+        {
+            if (!isReloadIconFlashing)
+            {
+                StartCoroutine(FlashReloadIcon());
+            }
+        }
+
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading && !playerScript.playerIsFrozen)
         {
             StartCoroutine(ShootDelay());
         }
     }
 
+    private IEnumerator FlashReloadIcon()
+    {
+        if (isReloadIconFlashing)
+        {
+            yield break;
+        }
+        isReloadIconFlashing = true;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 1f)
+        {
+            if (isReloading)
+            {
+                ReloadWaterIcon.enabled = false;
+                isReloadIconFlashing = false;
+                yield break;
+            }
+            ReloadWaterIcon.enabled = !ReloadWaterIcon.enabled;
+            //toggleTransparency();
+            yield return new WaitForSeconds(0.15f);
+            elapsedTime += 0.2f;
+        }
+        ReloadWaterIcon.enabled = false;
+        isReloadIconFlashing = false;
+    }
     private IEnumerator ReloadWater()
     {
         isReloading = true;
@@ -71,7 +111,8 @@ public class GenerateWater : MonoBehaviour
             }
 
             canShoot = true;
-            Debug.Log(remainingWater);
+            canShowReloadIcon = false;
+            //Debug.Log(remainingWater);
 
             yield return new WaitForSeconds(reloadDelay);
         }

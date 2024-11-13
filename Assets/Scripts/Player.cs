@@ -87,11 +87,11 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.color = new Color(255f, 255f, 255f);
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
                 currentHorizontalInput = Mathf.MoveTowards(currentHorizontalInput, -horizontalMaxInput, accelerationRate * Time.deltaTime);
             }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 currentHorizontalInput = Mathf.MoveTowards(currentHorizontalInput, horizontalMaxInput, accelerationRate * Time.deltaTime);
             }
