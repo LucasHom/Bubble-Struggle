@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D bc2d;
+    [SerializeField] private ParticleSystem turnDust;
 
     [SerializeField] public bool playerHealthy = true;
     [SerializeField] public bool playerIsFrozen = false;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float accelerationRate = 8f;
     private float horizontalMaxInput = 1f;
     private float movement = 0f;
+    [SerializeField] private bool isFacingRight = true;
 
     void Start()
     {
@@ -115,6 +117,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Gather input
+        if (movement > 0 && !isFacingRight)
+        {
+            flipPlayer();
+        }
+        else if (movement < 0 && isFacingRight)
+        {
+            flipPlayer();
+        }
         getPlayerMovement();
     }
 
@@ -173,5 +183,20 @@ public class Player : MonoBehaviour
 
         Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, false);
         isInvincible = false;
+    }
+
+    private void flipPlayer()
+    {
+        createTurnDust();
+        isFacingRight = !isFacingRight;
+        //Uncomment if I want to actually flip the player, unfortunately also flips reloadCanvas
+        //Vector3 scale = transform.localScale;
+        //scale.x *= -1;
+        //transform.localScale = scale;
+    }
+
+    private void createTurnDust()
+    {
+        turnDust.Play();
     }
 }

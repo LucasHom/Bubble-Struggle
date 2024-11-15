@@ -8,12 +8,15 @@ public class PuddleCycle : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.1f;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite altSprite;
+    [SerializeField] private ParticleSystem puddleSplash;
 
+    [SerializeField] private float splashStrenthScalar = 5f; 
     private Player player;
     // Start is called before the first frame update
 
     void Start()
     {
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (Random.Range(0, 2) == 0)
         {
@@ -30,6 +33,13 @@ public class PuddleCycle : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void createPuddleSplash(float ballSpeed) 
+    {
+        ParticleSystem.MainModule mainModule = puddleSplash.main;
+        mainModule.startSpeed = ballSpeed / splashStrenthScalar;
+        puddleSplash.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D col)

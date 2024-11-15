@@ -55,15 +55,18 @@ public class Ball : MonoBehaviour
         {
             if (getPureName(gameObject.name) == "ball_large")
             {
-                Instantiate(largePuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                GameObject large_puddle = Instantiate(largePuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                large_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
             }
             else if (getPureName(gameObject.name) == "ball_medium")
             {
-                Instantiate(mediumPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                GameObject medium_puddle = Instantiate(mediumPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                medium_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
             }
             else if (getPureName(gameObject.name) == "ball_small")
             {
-                Instantiate(smallPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                GameObject small_puddle = Instantiate(smallPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
+                small_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
             }
             else 
             {

@@ -9,6 +9,10 @@ public class SupportBall : MonoBehaviour
     [SerializeField] private Rigidbody2D rb2d;
     private WaveManager BallGenerator;
 
+    //Flashing Ball
+    [SerializeField] private bool isSBFlashing = false;
+    [SerializeField] private SpriteRenderer spriteRenderer; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,14 @@ public class SupportBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.localScale.x >= 2)
+        {
+            Debug.Log("isFull");
+            if (!isSBFlashing)
+            {
+                StartCoroutine(FlashSupportBall());
+            }
+        }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -36,5 +47,45 @@ public class SupportBall : MonoBehaviour
             transform.localScale += new Vector3(0.1f, 0.1f, 0f);
         }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
+    }
+
+    private IEnumerator FlashSupportBall()
+    {
+        isSBFlashing = true;
+        Color currentColor = spriteRenderer.color;
+
+        while (true)
+        {
+
+
+
+
+
+
+
+
+            //Toggle transparency and add a whte ball behind original
+
+
+
+
+
+
+
+
+
+
+
+            //if (currentColor == originalColor)
+            //{
+            //    spriteRenderer.color = whiterColor;
+            //}
+            //else
+            //{
+            //    spriteRenderer.color = originalColor;
+            //}
+            currentColor = spriteRenderer.color;
+            yield return new WaitForSeconds(0.15f);
+        }
     }
 }
