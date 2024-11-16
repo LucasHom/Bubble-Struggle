@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class WaterCollision : MonoBehaviour
 {
-
     void OnTriggerEnter2D(Collider2D col)
     {
         //Chain.IsFired = false;
-
+        if (col.tag == "BallGuard")
+        {
+            Transform guardedBall = col.gameObject.transform.parent;
+            guardedBall.GetComponent<HitGuard>().ActivateHitGuardPS();
+            Destroy(transform.parent.gameObject);
+        }
         if (col.tag == "Ball")
         {
             col.GetComponent<Ball>().Split();

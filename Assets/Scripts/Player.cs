@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     //Update based on real layer
     private int playerLayer = 6;
     private int ballLayer = 9;
+    private int ballGuardLayer = 11;
 
     //Movement
     private float currentHorizontalInput;
@@ -177,11 +178,13 @@ public class Player : MonoBehaviour
     private IEnumerator InvincibilityPeriod()
     {
         Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, true);
+        Physics2D.IgnoreLayerCollision(playerLayer, ballGuardLayer, true);
         isInvincible = true;
 
         yield return new WaitForSeconds(invincibilityDuration);
 
         Physics2D.IgnoreLayerCollision(playerLayer, ballLayer, false);
+        Physics2D.IgnoreLayerCollision(playerLayer, ballGuardLayer, false);
         isInvincible = false;
     }
 

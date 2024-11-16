@@ -11,7 +11,16 @@ public class SupportBall : MonoBehaviour
 
     //Flashing Ball
     [SerializeField] private bool isSBFlashing = false;
-    [SerializeField] private SpriteRenderer spriteRenderer; 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float SBTransparency = 0.8f;
+    [SerializeField] private float maxSize = 1.5f;
+
+    //Create Explosion
+    [SerializeField] private GameObject waterPellet;
+    [SerializeField] private float maxExplosionForceX = 2f;
+    [SerializeField] private float minExplosionForceY = 8f;
+    [SerializeField] private float maxExplosionForceY = 12f;
+    [SerializeField] private int numExplosionPellets = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +32,8 @@ public class SupportBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.x >= 2)
+        if (transform.localScale.x >= maxSize)
         {
-            Debug.Log("isFull");
             if (!isSBFlashing)
             {
                 StartCoroutine(FlashSupportBall());
@@ -36,13 +44,17 @@ public class SupportBall : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground")
         {
+            if (isSBFlashing)
+            {
+                SupportExplosion();
+            }
             Destroy(gameObject);
             BallGenerator.ballsRemaining -= 1;
         }
     }
     public void Grow()
     {  
-        if (transform.localScale.x < 2)
+        if (transform.localScale.x < maxSize)
         {
             transform.localScale += new Vector3(0.1f, 0.1f, 0f);
         }
@@ -52,40 +64,34 @@ public class SupportBall : MonoBehaviour
     private IEnumerator FlashSupportBall()
     {
         isSBFlashing = true;
-        Color currentColor = spriteRenderer.color;
+        Color SBColor = spriteRenderer.color;
 
         while (true)
         {
+            if (spriteRenderer.color.a == 1f)
+            {
 
-
-
-
-
-
-
-
-            //Toggle transparency and add a whte ball behind original
-
-
-
-
-
-
-
-
-
-
-
-            //if (currentColor == originalColor)
-            //{
-            //    spriteRenderer.color = whiterColor;
-            //}
-            //else
-            //{
-            //    spriteRenderer.color = originalColor;
-            //}
-            currentColor = spriteRenderer.color;
+                SBColor.a = SBTransparency;
+            }
+            else
+            {
+                SBColor.a = 1f;
+            }
+            spriteRenderer.color = SBColor;
             yield return new WaitForSeconds(0.15f);
+        }
+    }
+
+    private void SupportExplosion()
+    {
+        for (int pellets = 0; pellets < numExplosionPellets; pellets++)
+        {
+            Vector2 spawnPosition = new Vector2(transform.position.x, -4.1f);
+            GameObject pellet = Instantiate(waterPellet, spawnPosition, Quaternion.identity);
+
+            Rigidbody2D waterrb2d = pellet.GetComponent<Rigidbody2D>();
+
+            waterrb2d.AddForce(new Vector2(Random.Range(-maxExplosionForceX, maxExplosionForceX), Random.Range(minExplosionForceY, maxExplosionForceY)), ForceMode2D.Impulse);
         }
     }
 }

@@ -48,22 +48,23 @@ public class Ball : MonoBehaviour
         return newName;
     }
 
+
     //Create puddle
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Ground")
         {
-            if (getPureName(gameObject.name) == "ball_large")
+            if (getPureName(gameObject.name) == "ball_large" || getPureName(gameObject.name) == "ball_large_guarded")
             {
                 GameObject large_puddle = Instantiate(largePuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
                 large_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
             }
-            else if (getPureName(gameObject.name) == "ball_medium")
+            else if (getPureName(gameObject.name) == "ball_medium" || getPureName(gameObject.name) == "ball_medium_guarded")
             {
                 GameObject medium_puddle = Instantiate(mediumPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
                 medium_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
             }
-            else if (getPureName(gameObject.name) == "ball_small")
+            else if (getPureName(gameObject.name) == "ball_small" || getPureName(gameObject.name) == "ball_small_guarded")
             {
                 GameObject small_puddle = Instantiate(smallPuddle, new Vector3(rb2d.position.x, puddleHeight, 0f), Quaternion.identity);
                 small_puddle.GetComponent<PuddleCycle>().createPuddleSplash(rb2d.velocity.y);
@@ -111,6 +112,7 @@ public class Ball : MonoBehaviour
 
         Destroy(gameObject);
     }
+
 
     public void SlowDown()
     {

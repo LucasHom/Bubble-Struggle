@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject largeBallPrefab;
     [SerializeField] GameObject mediumBallPrefab;
     [SerializeField] GameObject smallBallPrefab;
+    [SerializeField] GameObject largeBallGuardedPrefab;
     [SerializeField] GameObject supportBallPrefab;
 
     [SerializeField] float timeBetweenSpawn = 0.5f;
@@ -57,7 +58,6 @@ public class WaveManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(timeBetweenSpawn);
                 Instantiate(largeBallPrefab, new Vector3(Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f), Quaternion.identity);
-                
             }
 
             yield return new WaitUntil(() => waveIsOver);

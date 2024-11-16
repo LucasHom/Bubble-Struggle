@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Wall
   - Puddle
+  - BallGuard
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Wall
   - Ball
   - Ground
-  - 
+  - BallGuard
   - 
   - 
   - 
