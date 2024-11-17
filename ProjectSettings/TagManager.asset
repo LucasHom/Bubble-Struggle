@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Puddle
   - BallGuard
+  - Citizen
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Ball
   - Ground
   - BallGuard
-  - 
+  - Citizen
   - 
   - 
   - 
@@ -52,6 +53,9 @@ TagManager:
     locked: 0
   - name: Chain
     uniqueID: 593061607
+    locked: 0
+  - name: Citizen
+    uniqueID: 845432249
     locked: 0
   - name: Player
     uniqueID: 804581451

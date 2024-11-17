@@ -1,34 +1,44 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    //Objects to Spawn
     [SerializeField] GameObject largeBallPrefab;
     [SerializeField] GameObject mediumBallPrefab;
     [SerializeField] GameObject smallBallPrefab;
     [SerializeField] GameObject largeBallGuardedPrefab;
     [SerializeField] GameObject supportBallPrefab;
 
+    //Spawning
     [SerializeField] float timeBetweenSpawn = 0.5f;
     [SerializeField] float timeBetweenWave = 4f;
     [SerializeField] int waveSpawns = 3;
     public int ballsRemaining;
+    private float minXSpawn = -7;
+    private float maxXSpawn = 7;
 
-    [SerializeField] private int currentWave = 1;
+    //Cloud
     [SerializeField] private float maxCloudHeight = 50f;
     [SerializeField] private float maxWaves = 25;
     private float cloudHeightChange;
 
-    private float minXSpawn = -7;
-    private float maxXSpawn = 7;
-    private bool waveIsOver = true;
+    //Camera
     private CameraManager cameraManager;
     private CinemachineBrain cinemachineBrain;
     private CloudMovement cloudMovement;
 
-    // Start is called before the first frame update
+    //Wave Tracking
+    [SerializeField] private int currentWave = 1;
+    private bool waveIsOver = true;
+
+    //Transition Text
+    [SerializeField] TextMeshProUGUI waveNumText;
+    [SerializeField] TextMeshProUGUI waveDescriptionText;
+
     void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
@@ -39,7 +49,7 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         waveIsOver = ballsRemaining < 1;
@@ -53,6 +63,7 @@ public class WaveManager : MonoBehaviour
             //This only applies to the large balls
             ballsRemaining += waveSpawns * 8;
             yield return new WaitForSeconds(1f);
+            DisableTransitionText();
 
             for (int spawned = 0; spawned < waveSpawns; spawned++)
             {
@@ -78,8 +89,23 @@ public class WaveManager : MonoBehaviour
             cameraManager.SwitchToWaveView();
             currentWave++;
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+            yield return new WaitForSeconds(2f);
 
+            EnableTransitionText();
             yield return new WaitForSeconds(timeBetweenWave);
+ 
         }
+    }
+
+    private void EnableTransitionText()
+    {
+        waveNumText.enabled = true;
+        waveDescriptionText.enabled = true;
+    }
+
+    private void DisableTransitionText()
+    {
+        waveNumText.enabled = false;
+        waveDescriptionText.enabled = false;
     }
 }
