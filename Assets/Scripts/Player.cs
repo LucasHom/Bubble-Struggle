@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] public bool playerHealthy = true;
     [SerializeField] public bool playerIsFrozen = false;
     [SerializeField] public bool isReloading = false;
-    [SerializeField] public float invincibilityDuration;
+    [SerializeField] private float invincibilityDuration;
     [SerializeField] private bool isInvincible = false;
     [SerializeField] private float flashInterval = 0.2f;
     [SerializeField] private float freezeTime = 1.5f;

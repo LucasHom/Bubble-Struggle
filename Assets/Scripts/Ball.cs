@@ -74,16 +74,22 @@ public class Ball : MonoBehaviour
                 Debug.LogError("Ball name cannot be found, cannot create puddle");
             }
         }
-        if (col.gameObject.tag == "Player")
+        else if (col.gameObject.tag == "Player")
         {
             if (!col.gameObject.GetComponent<Player>().playerIsFrozen)
             {
                 Debug.Log("Started freeze routine");
-                //StartCoroutine(freezePlayer(col.gameObject));
                 col.gameObject.GetComponent<Player>().startFreezePlayerCoroutine();
-
             }
             
+        }
+        else if (col.gameObject.tag == "Citizen")
+        {
+            if (!col.gameObject.GetComponent<CitizenManager>().citizenIsFrozen)
+            {
+                Debug.Log("Started citizen freeze routine");
+                col.gameObject.GetComponent<CitizenManager>().startFreezeCitizenCoroutine();
+            }
         }
     }
 
