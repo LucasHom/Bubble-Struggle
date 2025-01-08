@@ -25,11 +25,11 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float maxCloudHeight = 50f;
     [SerializeField] private float maxWaves = 25;
     private float cloudHeightChange;
+    private CloudMovement cloudMovement;
 
     //Camera
     private CameraManager cameraManager;
     private CinemachineBrain cinemachineBrain;
-    private CloudMovement cloudMovement;
 
     //Wave Tracking
     [SerializeField] private int currentWave = 1;
@@ -39,12 +39,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveNumText;
     [SerializeField] TextMeshProUGUI waveDescriptionText;
 
+    //Shop
+    [SerializeField] ShopManager shopManager;
+
     void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         cameraManager = FindObjectOfType<CameraManager>();
         cloudMovement = FindObjectOfType<CloudMovement>();
+        shopManager = FindObjectOfType<ShopManager>();
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
+        shopManager.currencyIndicator.SetActive(false);
 
         StartCoroutine(SpawnWave());
     }
@@ -64,6 +69,8 @@ public class WaveManager : MonoBehaviour
             ballsRemaining += waveSpawns * 8;
             yield return new WaitForSeconds(1f);
             DisableTransitionText();
+            //Toggle currency on
+            shopManager.ToggleCurrency();
 
             for (int spawned = 0; spawned < waveSpawns; spawned++)
             {
@@ -72,9 +79,10 @@ public class WaveManager : MonoBehaviour
             }
 
             yield return new WaitUntil(() => waveIsOver);
-            
 
             yield return new WaitForSeconds(1f);
+            //Toggle currency off
+            shopManager.ToggleCurrency();
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);

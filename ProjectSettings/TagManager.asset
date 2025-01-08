@@ -81,3 +81,9 @@ TagManager:
   - name: UI
     uniqueID: 1172134825
     locked: 0
+  - name: ShopUI
+    uniqueID: 2111405837
+    locked: 0
+  - name: Gadgets
+    uniqueID: 1786309121
+    locked: 0

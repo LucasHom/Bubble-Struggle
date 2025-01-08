@@ -144,7 +144,6 @@ public class CitizenManager : MonoBehaviour
 
         //playerHealthy = true;
         citizenIsFrozen = false;
-        Debug.Log("citizen freeze over");
 
     }
 }

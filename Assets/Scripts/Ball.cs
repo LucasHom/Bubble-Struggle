@@ -78,7 +78,7 @@ public class Ball : MonoBehaviour
         {
             if (!col.gameObject.GetComponent<Player>().playerIsFrozen)
             {
-                Debug.Log("Started freeze routine");
+                //Debug.Log("Started freeze routine");
                 col.gameObject.GetComponent<Player>().startFreezePlayerCoroutine();
             }
             
@@ -87,7 +87,7 @@ public class Ball : MonoBehaviour
         {
             if (!col.gameObject.GetComponent<CitizenManager>().citizenIsFrozen)
             {
-                Debug.Log("Started citizen freeze routine");
+                //Debug.Log("Started citizen freeze routine");
                 col.gameObject.GetComponent<CitizenManager>().startFreezeCitizenCoroutine();
             }
         }

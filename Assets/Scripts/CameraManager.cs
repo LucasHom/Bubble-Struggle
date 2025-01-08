@@ -22,18 +22,18 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         // Switch cameras when pressing the "C" key
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SwitchToCloudView();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SwitchToGameView();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SwitchToWaveView();
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    SwitchToCloudView();
+        //}
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    SwitchToGameView();
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    SwitchToWaveView();
+        //}
     }
 
     public void SwitchToGameView()
