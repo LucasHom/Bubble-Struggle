@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: ThaleahFat SDF
+  m_Name: ThaleahFatCurrency
   m_EditorClassIdentifier: 
-  hashCode: -1699987425
+  hashCode: -418692951
   material: {fileID: 3865646728590511294}
-  materialHashCode: 1341457759
+  materialHashCode: 91641577
   m_Version: 1.1.0
   m_SourceFontFileGUID: 5e97d19f528a10b41ab397a535c04535
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 5e97d19f528a10b41ab397a535c04535, type: 3}
@@ -2573,5 +2573,5 @@ Material:
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnderlayColor: {r: 0.2462014, g: 0.1441285, b: 0.003676507, a: 1}
   m_BuildTextureStacks: []

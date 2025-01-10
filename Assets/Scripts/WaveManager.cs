@@ -40,7 +40,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveDescriptionText;
 
     //Shop
-    [SerializeField] ShopManager shopManager;
+    private ShopManager shopManager;
+
+    //Citizens
+    [SerializeField] CitizenManager girlfriend;
 
     void Start()
     {
@@ -71,6 +74,9 @@ public class WaveManager : MonoBehaviour
             DisableTransitionText();
             //Toggle currency on
             shopManager.ToggleCurrency();
+            yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+            shopManager.isShopToggleReady = true;
+            shopManager.isBackgroundToggleReady = true;
 
             for (int spawned = 0; spawned < waveSpawns; spawned++)
             {
@@ -79,10 +85,13 @@ public class WaveManager : MonoBehaviour
             }
 
             yield return new WaitUntil(() => waveIsOver);
+            girlfriend.GiveThanks();
 
             yield return new WaitForSeconds(1f);
             //Toggle currency off
             shopManager.ToggleCurrency();
+            shopManager.isShopToggleReady = false;
+            shopManager.isBackgroundToggleReady = true;
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);

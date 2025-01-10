@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CitizenManager : MonoBehaviour
 {
@@ -38,10 +39,28 @@ public class CitizenManager : MonoBehaviour
     private int ballLayer = 9;
     private int ballGuardLayer = 11;
 
+    //ProvideThanks
+    private ParticleSystem coinPS;
+    private Transform thanksReactionTransform;
+    private GameObject thanksReaction;
+    private TextMeshProUGUI thanksEarned;
+    [SerializeField] private float reactionOffsetY = 0.9f;
+    [SerializeField] private Texture2D ecstaticReaction;
+    [SerializeField] private Texture2D gladReaction;
+    [SerializeField] private Texture2D neutralReaction;
+    [SerializeField] private Texture2D sadReaction;
+
     //[SerializeField] private float chanceToMove = 0.5f;
     void Start()
     {
+        coinPS = transform.Find("CitizenThanksPS").GetComponent<ParticleSystem>();
+        thanksReactionTransform = transform.Find("CitizenCanvas").Find("ThanksReaction");
+        thanksReaction = thanksReactionTransform.gameObject;
+        thanksEarned = thanksReactionTransform.Find("ThanksEarned").GetComponent<TextMeshProUGUI>();
+        thanksReaction.SetActive(false);
+
         invincibilityDuration = freezeTime + 1.2f;
+
         StartCoroutine(MoveBackAndForth());
     }
 
@@ -80,6 +99,67 @@ public class CitizenManager : MonoBehaviour
         movement = currentHorizontalStrength * (citizenSpeed);
         rb2d.velocity = new Vector2(movement, 0f);
     }
+
+    public void GiveThanks()
+    {
+        coinPS.Play();
+        StartCoroutine(ShowReaction());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //updateCurrency here with the new text in a new function to change thanksEarned.text and base the reaction off of the number in text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private IEnumerator ShowReaction()
+    {
+        thanksReaction.SetActive(true);
+        Vector3 startPosition = new Vector3(transform.position.x, transform.position.y + reactionOffsetY, 0f);
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y + reactionOffsetY + 0.6f, 0f);
+
+        Color startColor = Color.white;
+        Color targetColor = new Color(1f, 1f, 1f, 0f);
+
+        float startTime = Time.time;
+        float glideDuration = 0.8f;
+
+        while ((Time.time - startTime) < glideDuration)
+        {
+            float glideProgress = (Time.time - startTime) / glideDuration;
+
+            thanksReaction.GetComponent<RectTransform>().position = Vector3.Lerp(startPosition, targetPosition, glideProgress);
+            thanksReaction.GetComponent<Image>().color = Color.Lerp(startColor, targetColor, glideProgress);
+            thanksEarned.color = Color.Lerp(startColor, targetColor, glideProgress);
+
+            yield return null;
+        }
+
+        thanksReaction.SetActive(false);
+    }
+
+
     private IEnumerator MoveBackAndForth()
     {
         while (true)

@@ -12,6 +12,8 @@ public class ShopManager : MonoBehaviour
     private int currency = 0;
     
     //Open-Close shop
+    public bool isBackgroundToggleReady = false;
+    public bool isShopToggleReady = false;
     private bool isBackgroundActive = false;
     [SerializeField] float shopTransitionDelay = 0.5f;
     [SerializeField] private Image shopBackgroundImage;
@@ -20,6 +22,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         shopBackgroundImage.enabled = false;
+        isBackgroundActive = false;
         Transform currencyCounter = currencyIndicator.transform.Find("CurrencyCounter");
         currencyCounterText = currencyCounter.GetComponent<TextMeshProUGUI>();
         updateCurrency(0);
@@ -29,7 +32,7 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.B) && !isBackgroundActive)
+        if (Input.GetKey(KeyCode.B) && isBackgroundToggleReady && isShopToggleReady)
         {
             ToggleShop();
             StartCoroutine(DelayShopToggle());
@@ -44,14 +47,17 @@ public class ShopManager : MonoBehaviour
 
     private void ToggleShop()
     {
+        isBackgroundActive = !isBackgroundActive;
         shopBackgroundImage.enabled = !shopBackgroundImage.enabled;
+
+        Time.timeScale = isBackgroundActive ? 0f : 1f;
     }
 
     //Function used in Citizen Manager every once in a while
     public void updateCurrency(int amount) {
         currency += amount;
 
-        string newCurrencyText = "";
+        string newCurrencyText = "$";
 
         for (int i = 3; i > 0; i--)
         {
@@ -76,8 +82,15 @@ public class ShopManager : MonoBehaviour
 
     private IEnumerator DelayShopToggle()
     {
-        isBackgroundActive = true;
-        yield return new WaitForSeconds(shopTransitionDelay);
-        isBackgroundActive = false; 
+        updateCurrency(12);
+        isBackgroundToggleReady = false;
+        float elapsedTime = 0f;
+        while (elapsedTime < shopTransitionDelay)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        isBackgroundToggleReady = true;
+
     }
 }
