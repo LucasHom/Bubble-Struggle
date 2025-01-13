@@ -73,7 +73,7 @@ public class ShopManager : MonoBehaviour
         }
         if (currency >= 999)
         {
-            newCurrencyText = "999";
+            newCurrencyText = "$999";
             currency = 999;
         }
 
@@ -82,7 +82,6 @@ public class ShopManager : MonoBehaviour
 
     private IEnumerator DelayShopToggle()
     {
-        updateCurrency(12);
         isBackgroundToggleReady = false;
         float elapsedTime = 0f;
         while (elapsedTime < shopTransitionDelay)

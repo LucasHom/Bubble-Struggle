@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,9 @@ public class CitizenManager : MonoBehaviour
     private int ballLayer = 9;
     private int ballGuardLayer = 11;
 
-    //ProvideThanks
+    //-----------------
+    //Thanks
+    //Express Thanks
     private ParticleSystem coinPS;
     private Transform thanksReactionTransform;
     private GameObject thanksReaction;
@@ -50,9 +53,30 @@ public class CitizenManager : MonoBehaviour
     [SerializeField] private Texture2D neutralReaction;
     [SerializeField] private Texture2D sadReaction;
 
+    //Calculate Thanks
+    [SerializeField] public int maxThanks; //Allow to change when the wave changes
+    [SerializeField] private float lowestThanksPercent = 0.5f;
+    private Dictionary<int, float> healthToThanks = new Dictionary<int, float>();
+    //------------------
+
+    //Health 
+    [SerializeField] private int maxCitizenHealth = 5;
+    [SerializeField] public int citizenHealth;
+
+    //Shop
+    [SerializeField] private ShopManager shopManager;
+
     //[SerializeField] private float chanceToMove = 0.5f;
+
+
+
+
     void Start()
     {
+        //Create health and corresponding percent of thanks to give
+        citizenHealth = maxCitizenHealth;
+        createThanksPercentTable(maxCitizenHealth, 1f);
+
         coinPS = transform.Find("CitizenThanksPS").GetComponent<ParticleSystem>();
         thanksReactionTransform = transform.Find("CitizenCanvas").Find("ThanksReaction");
         thanksReaction = thanksReactionTransform.gameObject;
@@ -91,6 +115,12 @@ public class CitizenManager : MonoBehaviour
                 StartCoroutine(FlashDuringInvincibility());
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R)) 
+        { 
+            GiveThanks();
+        }
+
     }
 
     private void FixedUpdate()
@@ -100,38 +130,54 @@ public class CitizenManager : MonoBehaviour
         rb2d.velocity = new Vector2(movement, 0f);
     }
 
+
+    public void createThanksPercentTable(int health, float percent)
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        float decrement = (1f - lowestThanksPercent) / (maxCitizenHealth - 1);
+
+        healthToThanks.Add(health, percent);
+
+        if (percent <= lowestThanksPercent)
+        {
+            createThanksPercentTable(health - 1, lowestThanksPercent);
+        }
+        else
+        {
+            createThanksPercentTable(health - 1, percent - decrement);
+        }
+    }
+
+
     public void GiveThanks()
     {
         coinPS.Play();
         StartCoroutine(ShowReaction());
+        shopManager.updateCurrency(calcThanks());
     }
 
 
+    private int calcThanks()
+    {
+        return (int)(healthToThanks[citizenHealth] * maxThanks);
+    }
 
 
-
-
-
-
-
-
-
-
-    //updateCurrency here with the new text in a new function to change thanksEarned.text and base the reaction off of the number in text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void ChangeCitizenHealth(int healthChange)
+    {
+        if (citizenHealth <= 0)
+        {
+            citizenHealth = 0;
+        }
+        else
+        {
+            citizenHealth += healthChange;
+        }
+    }
 
     private IEnumerator ShowReaction()
     {
