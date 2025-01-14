@@ -2000,10 +2000,11 @@ MonoBehaviour:
   flashInterval: 0.2
   isInvincible: 0
   reactionOffsetY: 0.9
-  ecstaticReaction: {fileID: 2800000, guid: 4ec543a6de758224b98443a4f1ba7d42, type: 3}
-  gladReaction: {fileID: 2800000, guid: ec1eeae5213feda49aa58499275ea68b, type: 3}
-  neutralReaction: {fileID: 2800000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
-  sadReaction: {fileID: 2800000, guid: b45eb3e478552d8479d6157de8ea2c11, type: 3}
+  ecstaticReaction: {fileID: 21300000, guid: 4ec543a6de758224b98443a4f1ba7d42, type: 3}
+  happyReaction: {fileID: 21300000, guid: ec1eeae5213feda49aa58499275ea68b, type: 3}
+  neutralReaction: {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
+  worriedReaction: {fileID: 21300000, guid: 6767d88cfeb4527478b519bfa35b6df3, type: 3}
+  sadReaction: {fileID: 21300000, guid: b45eb3e478552d8479d6157de8ea2c11, type: 3}
   maxThanks: 20
   lowestThanksPercent: 0.5
   maxCitizenHealth: 5
@@ -14745,7 +14746,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.9}
-  m_SizeDelta: {x: 0.4, y: 0.4}
+  m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770107005
 MonoBehaviour:

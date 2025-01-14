@@ -48,10 +48,11 @@ public class CitizenManager : MonoBehaviour
     private GameObject thanksReaction;
     private TextMeshProUGUI thanksEarned;
     [SerializeField] private float reactionOffsetY = 0.9f;
-    [SerializeField] private Texture2D ecstaticReaction;
-    [SerializeField] private Texture2D gladReaction;
-    [SerializeField] private Texture2D neutralReaction;
-    [SerializeField] private Texture2D sadReaction;
+    [SerializeField] private Sprite ecstaticReaction;
+    [SerializeField] private Sprite happyReaction;
+    [SerializeField] private Sprite neutralReaction;
+    [SerializeField] private Sprite worriedReaction;
+    [SerializeField] private Sprite sadReaction;
 
     //Calculate Thanks
     [SerializeField] public int maxThanks; //Allow to change when the wave changes
@@ -155,15 +156,45 @@ public class CitizenManager : MonoBehaviour
 
     public void GiveThanks()
     {
+        int thanksAmount = calcThanks();
+        updateReaction(thanksAmount);
+        shopManager.updateCurrency(thanksAmount);
         coinPS.Play();
         StartCoroutine(ShowReaction());
-        shopManager.updateCurrency(calcThanks());
     }
 
 
     private int calcThanks()
     {
         return (int)(healthToThanks[citizenHealth] * maxThanks);
+    }
+
+    private void updateReaction(int thanksAmount)
+    {
+        Sprite face = thanksReaction.GetComponent<Image>().sprite;
+        thanksEarned.text = string.Format("${0}", thanksAmount.ToString());
+        switch (citizenHealth)
+        {
+            case 5:
+                face = ecstaticReaction;
+                break;
+            case 4:
+                face = happyReaction;
+                break;
+            case 3:
+                face = neutralReaction;
+                break;
+            case 2:
+                face = worriedReaction;
+                break;
+            case 1:
+                face = sadReaction;
+                break;
+            default:
+                face = sadReaction;
+                break;
+        }
+        thanksReaction.GetComponent<Image>().sprite = face;
     }
 
 
