@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -67,10 +68,6 @@ public class CitizenManager : MonoBehaviour
     //Shop
     [SerializeField] private ShopManager shopManager;
 
-    //[SerializeField] private float chanceToMove = 0.5f;
-
-
-
 
     void Start()
     {
@@ -136,6 +133,7 @@ public class CitizenManager : MonoBehaviour
     {
         if (health <= 0)
         {
+            healthToThanks.Add(0, lowestThanksPercent);
             return;
         }
 
@@ -158,7 +156,7 @@ public class CitizenManager : MonoBehaviour
     {
         int thanksAmount = calcThanks();
         updateReaction(thanksAmount);
-        shopManager.updateCurrency(thanksAmount);
+        StartCoroutine(shopManager.updateCurrency(thanksAmount));
         coinPS.Play();
         StartCoroutine(ShowReaction());
     }
@@ -173,26 +171,34 @@ public class CitizenManager : MonoBehaviour
     {
         Sprite face = thanksReaction.GetComponent<Image>().sprite;
         thanksEarned.text = string.Format("${0}", thanksAmount.ToString());
-        switch (citizenHealth)
+
+        float healthPercentage = (float)citizenHealth / maxCitizenHealth;
+        //Debug.Log(healthPercentage);
+
+        if (healthPercentage >= 1f) 
         {
-            case 5:
-                face = ecstaticReaction;
-                break;
-            case 4:
-                face = happyReaction;
-                break;
-            case 3:
-                face = neutralReaction;
-                break;
-            case 2:
-                face = worriedReaction;
-                break;
-            case 1:
-                face = sadReaction;
-                break;
-            default:
-                face = sadReaction;
-                break;
+            face = ecstaticReaction;
+        }
+        else if (healthPercentage >= 0.8f) 
+        {
+            face = happyReaction;
+        }
+        else if (healthPercentage >= 0.6f) 
+        {
+            face = neutralReaction;
+        }
+        else if (healthPercentage >= 0.4f) 
+        {
+            face = worriedReaction;
+        }
+        else if (healthPercentage > 0.2)
+        {
+            face = sadReaction;
+        }
+        else
+        {
+            face = sadReaction;
+            throw new ArgumentOutOfRangeException("Citizen cannot give reaction with health <= 0, Game should have ended");
         }
         thanksReaction.GetComponent<Image>().sprite = face;
     }
@@ -249,7 +255,7 @@ public class CitizenManager : MonoBehaviour
             float totalDistance = distanceToLeftWall + distanceToRightWall;
             float moveLeftProbability = distanceToRightWall / totalDistance;
             //Debug.Log("Left prob" + moveLeftProbability);
-            randomDirection = Random.value < moveLeftProbability ? 1 : -1;
+            randomDirection = UnityEngine.Random.value < moveLeftProbability ? 1 : -1;
             //Debug.Log("Random direction" + randomDirection);
 
             canCitizenMove = true;

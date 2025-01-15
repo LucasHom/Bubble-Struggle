@@ -87,7 +87,7 @@ public class WaveManager : MonoBehaviour
             yield return new WaitUntil(() => waveIsOver);
             girlfriend.GiveThanks();
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             //Toggle currency off
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
