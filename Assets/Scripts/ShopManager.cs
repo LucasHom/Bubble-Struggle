@@ -20,6 +20,7 @@ public class ShopManager : MonoBehaviour
     private bool isBackgroundActive = false;
     [SerializeField] float shopTransitionDelay = 0.5f;
     [SerializeField] private GameObject shopContent;
+    private Coroutine updateCurrencyCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -51,13 +52,47 @@ public class ShopManager : MonoBehaviour
     {
         isBackgroundActive = !isBackgroundActive;
         shopContent.SetActive(!shopContent.activeSelf);
+        if (shopContent.activeSelf)
+        {
+            resetCurrencyIncrease();
+        }
+
 
         Time.timeScale = isBackgroundActive ? 0f : 1f;
     }
 
-    //Function used in Citizen Manager every once in a while
-    public IEnumerator updateCurrency(int amount) 
+    public void resetCurrencyIncrease()
     {
+        StopUpdateCurrency();
+        currencyCounterText.text = createCurrencyText(currency);
+        currencyCounterText.fontSize = currencyTextMinSize;
+    }
+
+
+
+    public void StartUpdateCurrency(int amount)
+    {
+        updateCurrencyCoroutine = StartCoroutine(updateCurrency(amount));
+    }
+
+    public void StopUpdateCurrency()
+    {
+        if (updateCurrencyCoroutine != null)
+        {
+            StopCoroutine(updateCurrencyCoroutine);
+            updateCurrencyCoroutine = null;
+        }
+    }
+
+
+
+    //Function used in Citizen Manager every once in a while
+    private IEnumerator updateCurrency(int amount) 
+    {
+        int startCurrency = currency;
+        int targetCurrency = currency + amount;
+        currency = targetCurrency;
+
         //Make text bigger
         float elapsedTime = 0f;
         float lerpDuration = 0.2f;
@@ -77,8 +112,7 @@ public class ShopManager : MonoBehaviour
         //Gradually increase currency text
         elapsedTime = 0f;
         lerpDuration = 0.2f;
-        int startCurrency = currency;
-        int targetCurrency = currency + amount;
+
 
         while (elapsedTime < lerpDuration)
         {
@@ -90,8 +124,7 @@ public class ShopManager : MonoBehaviour
         }
 
         currencyCounterText.text = createCurrencyText(targetCurrency);
-        currency = targetCurrency;
-        currency += amount;
+
 
         yield return new WaitForSeconds(0.25f);
 

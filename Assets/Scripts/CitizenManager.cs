@@ -156,7 +156,7 @@ public class CitizenManager : MonoBehaviour
     {
         int thanksAmount = calcThanks();
         updateReaction(thanksAmount);
-        StartCoroutine(shopManager.updateCurrency(thanksAmount));
+        shopManager.StartUpdateCurrency(thanksAmount);
         coinPS.Play();
         StartCoroutine(ShowReaction());
     }
