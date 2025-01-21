@@ -8,10 +8,10 @@ public class ShopManager : MonoBehaviour
 {
     //Currency-Tracking
     [SerializeField] public GameObject currencyIndicator;
-    TextMeshProUGUI currencyCounterText;
+    public TextMeshProUGUI currencyCounterText;
     [SerializeField] float currencyTextMaxSize;
     [SerializeField] float currencyTextMinSize;
-    private int currency = 0;
+    public int currency = 0;
 
     
     //Open-Close shop
@@ -19,7 +19,7 @@ public class ShopManager : MonoBehaviour
     public bool isShopToggleReady = false;
     private bool isBackgroundActive = false;
     [SerializeField] float shopTransitionDelay = 0.5f;
-    [SerializeField] private GameObject shopContent;
+    [SerializeField] public GameObject shopContent;
     private Coroutine updateCurrencyCoroutine;
 
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class ShopManager : MonoBehaviour
         isBackgroundActive = false;
         Transform currencyCounter = currencyIndicator.transform.Find("CurrencyCounter");
         currencyCounterText = currencyCounter.GetComponent<TextMeshProUGUI>();
-        updateCurrency(0);
+        increaseCurrency(0);
         //currencyIndicator.SetActive(true);
     }
 
@@ -63,19 +63,18 @@ public class ShopManager : MonoBehaviour
 
     public void resetCurrencyIncrease()
     {
-        StopUpdateCurrency();
-        currencyCounterText.text = createCurrencyText(currency);
+        StopIncreaseCurrency();
+        updateCurrency();
         currencyCounterText.fontSize = currencyTextMinSize;
     }
+  
 
-
-
-    public void StartUpdateCurrency(int amount)
+    public void StartIncreaseCurrency(int amount)
     {
-        updateCurrencyCoroutine = StartCoroutine(updateCurrency(amount));
+        updateCurrencyCoroutine = StartCoroutine(increaseCurrency(amount));
     }
 
-    public void StopUpdateCurrency()
+    public void StopIncreaseCurrency()
     {
         if (updateCurrencyCoroutine != null)
         {
@@ -84,10 +83,14 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void updateCurrency()
+    {
+        currencyCounterText.text = createCurrencyText(currency);
+    }
 
 
     //Function used in Citizen Manager every once in a while
-    private IEnumerator updateCurrency(int amount) 
+    private IEnumerator increaseCurrency(int amount) 
     {
         int startCurrency = currency;
         int targetCurrency = currency + amount;
@@ -144,7 +147,7 @@ public class ShopManager : MonoBehaviour
     }
 
 
-    public string createCurrencyText(int amount)
+    private string createCurrencyText(int amount)
     {
         int clampedAmount = Mathf.Clamp(amount, 0, 999);
         return $"${clampedAmount:000}";
