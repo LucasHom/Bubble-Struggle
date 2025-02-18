@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float playerSpeed = 6f;
-
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D bc2d;
@@ -31,8 +29,9 @@ public class Player : MonoBehaviour
     private int ballGuardLayer = 11;
 
     //Movement
+    [SerializeField] public float playerSpeed = 6f;
+    [SerializeField] public float accelerationRate = 8f;
     private float currentHorizontalInput;
-    [SerializeField] private float accelerationRate = 8f;
     private float horizontalMaxInput = 1f;
     private float movement = 0f;
     [SerializeField] private bool isFacingRight = true;

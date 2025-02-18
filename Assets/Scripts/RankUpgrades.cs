@@ -11,23 +11,24 @@ public class RankUpgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private GenerateWater WaterGenerator;
     [SerializeField] private ShopManager ShopManager;
     [SerializeField] private FloatingUpgradeText FloatingText;
+    [SerializeField] private Player Player;
 
     //Objects
-    [SerializeField] private GameObject waterCapacityPriceObject;
-    [SerializeField] private TextMeshProUGUI waterCapacityRankText;
-    private TextMeshProUGUI waterCapacityPriceText;
+    [SerializeField] private GameObject PriceObject;
+    [SerializeField] private TextMeshProUGUI RankText;
+    private TextMeshProUGUI PriceText;
     [SerializeField] private GameObject upgradeCostTextPrefab;
     [SerializeField] private GameObject maxedUpgradeTextPrefab;
     [SerializeField] private GameObject notEnoughTextPrefab;
 
     //Prices
-    [SerializeField] private int upgradeWaterCapacityBasePrice = 4;
+    [SerializeField] private int upgradeBasePrice = 4;
 
     //MaxUpgrades
-    [SerializeField] private int maxWaterCapacityUpgrades = 20;
+    [SerializeField] private int maxAmountUpgrades = 20;
 
     //Ranks
-    private int waterCapacityRank = 0;
+    private int upgradeRank = 0;
 
     //Scalars
     private float upgradeMultiplier = 1.15f;
@@ -38,10 +39,10 @@ public class RankUpgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     // Start is called before the first frame update
     void Start()
     {
-        waterCapacityPriceText = waterCapacityPriceObject.GetComponent<TextMeshProUGUI>();
+        PriceText = PriceObject.GetComponent<TextMeshProUGUI>();
 
-        waterCapacityRankText.text = $"Rank {waterCapacityRank}";
-        waterCapacityPriceText.text = $"${upgradeWaterCapacityBasePrice}";
+        RankText.text = $"Rank {upgradeRank}";
+        PriceText.text = $"${upgradeBasePrice}";
     }
 
     // Update is called once per frame
@@ -62,7 +63,7 @@ public class RankUpgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (waterCapacityRank < maxWaterCapacityUpgrades)
+        if (upgradeRank < maxAmountUpgrades)
         {
             transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
         }
@@ -108,7 +109,7 @@ public class RankUpgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         GameObject oldUpgradeCostText = Instantiate(upgradeCostTextPrefab, transform);
         instantiatedObjects.Add(oldUpgradeCostText);
         RectTransform oldCostRectTransform = oldUpgradeCostText.GetComponent<RectTransform>();
-        oldCostRectTransform.position = waterCapacityPriceObject.GetComponent<RectTransform>().position;
+        oldCostRectTransform.position = PriceObject.GetComponent<RectTransform>().position;
 
         oldUpgradeCostText.GetComponent<TextMeshProUGUI>().text = $"${price}";
         
@@ -124,21 +125,81 @@ public class RankUpgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void upgradeWaterCapacity()
     {
-        int price = (int)Mathf.Ceil(upgradeWaterCapacityBasePrice * Mathf.Pow(upgradeMultiplier, waterCapacityRank));
+        int price = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
 
-        if (waterCapacityRank < maxWaterCapacityUpgrades)
+        if (upgradeRank < maxAmountUpgrades)
         {
             if (ShopManager.currency > price)
             {
                 clickVisuals(price);
 
-                waterCapacityRank += 1;
-                waterCapacityRankText.text = $"Rank {waterCapacityRank}";
-                int nextPrice = (int)Mathf.Ceil(upgradeWaterCapacityBasePrice * Mathf.Pow(upgradeMultiplier, waterCapacityRank));
+                upgradeRank += 1;
+                RankText.text = $"Rank {upgradeRank}";
+                int nextPrice = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
 
-                waterCapacityPriceText.text = waterCapacityRank >= maxWaterCapacityUpgrades ? "Max" : $"${nextPrice}";
+                PriceText.text = upgradeRank >= maxAmountUpgrades ? "Max" : $"${nextPrice}";
 
                 WaterGenerator.maxWater += 1;
+            }
+            else
+            {
+                notEnough();
+            }
+        }
+        else
+        {
+            maxedUpgrade();
+        }
+    }
+
+    public void upgradeReloadSpeed()
+    {
+        int price = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+
+        if (upgradeRank < maxAmountUpgrades)
+        {
+            if (ShopManager.currency > price)
+            {
+                clickVisuals(price);
+
+                upgradeRank += 1;
+                RankText.text = $"Rank {upgradeRank}";
+                int nextPrice = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+
+                PriceText.text = upgradeRank >= maxAmountUpgrades ? "Max" : $"${nextPrice}";
+
+                WaterGenerator.reloadDelay -= 0.008f;
+            }
+            else
+            {
+                notEnough();
+            }
+        }
+        else
+        {
+            maxedUpgrade();
+        }
+    }
+
+
+    public void upgradePlayerSpeed()
+    {
+        int price = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+
+        if (upgradeRank < maxAmountUpgrades)
+        {
+            if (ShopManager.currency > price)
+            {
+                clickVisuals(price);
+
+                upgradeRank += 1;
+                RankText.text = $"Rank {upgradeRank}";
+                int nextPrice = (int)Mathf.Ceil(upgradeBasePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+
+                PriceText.text = upgradeRank >= maxAmountUpgrades ? "Max" : $"${nextPrice}";
+
+                Player.playerSpeed += 0.18f;
+                Player.accelerationRate += 0.12f;
             }
             else
             {

@@ -20,7 +20,7 @@ public class GenerateWater : MonoBehaviour
     [SerializeField] private Image ReloadWaterIcon;
     [SerializeField] private GameObject player;
 
-    [SerializeField] float reloadDelay = 0.06f;
+    [SerializeField] public float reloadDelay = 0.06f;
     [SerializeField] float reloadAmount = 1f;
     private bool isReloading = false;
     private bool canShowReloadIcon = false;
