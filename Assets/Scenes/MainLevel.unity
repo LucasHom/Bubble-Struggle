@@ -8468,7 +8468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &890793369
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16570,16 +16570,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d276d3d501bbad4fbed1f01bcc9e31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterGenerator: {fileID: 839196637}
-  ShopManager: {fileID: 839196641}
   FloatingText: {fileID: 839196642}
-  Player: {fileID: 0}
-  PriceObject: {fileID: 559220209215689811}
-  RankText: {fileID: 6722652679944497968}
-  upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
-  maxedUpgradeTextPrefab: {fileID: 8874300344085807400, guid: 197f32a2294619c4193d004823eb3803, type: 3}
+  ShopManager: {fileID: 839196641}
   notEnoughTextPrefab: {fileID: 8874300344085807400, guid: 0ba89aed0b8901e4f9d12f73637f11a6, type: 3}
-  upgradeBasePrice: 4
+  maxedUpgradeTextPrefab: {fileID: 8874300344085807400, guid: 197f32a2294619c4193d004823eb3803, type: 3}
+  upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
+  PriceObject: {fileID: 559220209215689811}
+  basePrice: 4
+  WaterGenerator: {fileID: 839196637}
+  Player: {fileID: 0}
+  RankText: {fileID: 6722652679944497968}
   maxAmountUpgrades: 20
 --- !u!224 &3221691439421237188
 RectTransform:
@@ -17025,6 +17025,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 970499775256146337, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970499775256146337, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RankUpgrades, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: ShopManager
       value: 
@@ -17397,6 +17405,6 @@ SceneRoots:
   - {fileID: 497521583}
   - {fileID: 581747371}
   - {fileID: 564262038}
-  - {fileID: 689633918}
   - {fileID: 690628354}
   - {fileID: 20755982}
+  - {fileID: 689633918}
