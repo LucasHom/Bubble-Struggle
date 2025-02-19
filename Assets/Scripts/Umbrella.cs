@@ -39,6 +39,31 @@ public class Umbrella : MonoBehaviour
     }
 
 
+
+
+
+
+
+
+
+
+    //THERE IS STILL GLITCH WHERE UMBRELLA WILL CONNECT TO INCORRECT UMBRELLA IF BREAKING LINE OF UMBRELLAS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject col = collision.gameObject;
@@ -51,7 +76,14 @@ public class Umbrella : MonoBehaviour
         if (col.tag == "Ball")
         {
             col.GetComponent<Ball>().Split();
-            //Destroy(transform.parent.gameObject);
+            while (activeUmbrellas.Count > 0)
+            {
+                if (activeUmbrellas.Pop() == this)
+                {
+                    break;
+                }
+            }
+            Destroy(gameObject);
         }
         if (col.tag == "SupportBall")
         {
@@ -61,11 +93,11 @@ public class Umbrella : MonoBehaviour
         if (col.gameObject.tag == "Wall")
         {
             //Special wall particlees?
-            //Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
         }
         if (col.gameObject.tag == "Ground")
         {
-            //Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
         }
 
     }
