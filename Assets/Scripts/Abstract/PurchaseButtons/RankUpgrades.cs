@@ -7,32 +7,36 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RankUpgrades : PuchaseProperties
+public class RankUpgrades : PurchaseButton
 {
     //Classes
     [SerializeField] private GenerateWater WaterGenerator;
     [SerializeField] private Player Player;
 
-
-    //MaxUpgrades
-    [SerializeField] private int maxAmountUpgrades = 20;
-
     //Ranks
-    private int upgradeRank = 0;
+    [SerializeField] private int maxAmountUpgrades = 20;
+    private int upgradeRank = default;
 
     //Scalars
-    private float upgradeMultiplier = 1.15f;
+    private float priceMultiplier = 1.15f;
 
     // Start is called before the first frame update
     void Start()
     {
-        StatusText.text = $"Rank {upgradeRank}";
+        InitializeVisibleFields();   
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void InitializeVisibleFields()
+    {
+        StatusText.text = $"Rank {upgradeRank}";
+        PriceText = PriceObject.GetComponent<TextMeshProUGUI>();
+        PriceText.text = $"${basePrice}";
     }
 
     //Rankupgrade override - only increase size if not max upgraded
@@ -51,10 +55,12 @@ public class RankUpgrades : PuchaseProperties
         base.clickVisuals(price);
     }
 
+
+
     //Override for rank upgrade purchase
     public override void AttemptPurchase(Action upgradeAction)
     {
-        int price = (int)Mathf.Ceil(basePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+        int price = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
 
         if (upgradeRank < maxAmountUpgrades)
         {
@@ -64,7 +70,7 @@ public class RankUpgrades : PuchaseProperties
 
                 upgradeRank += 1;
                 StatusText.text = $"Rank {upgradeRank}";
-                int nextPrice = (int)Mathf.Ceil(basePrice * Mathf.Pow(upgradeMultiplier, upgradeRank));
+                int nextPrice = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
 
                 PriceText.text = upgradeRank >= maxAmountUpgrades ? "Max" : $"${nextPrice}";
 

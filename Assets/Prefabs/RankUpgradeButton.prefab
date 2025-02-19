@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 435860320578891927}
   - component: {fileID: 519088121274564067}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,13 +493,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d276d3d501bbad4fbed1f01bcc9e31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterGenerator: {fileID: 0}
-  ShopManager: {fileID: 0}
   FloatingText: {fileID: 0}
-  PriceObject: {fileID: 4575715767471153111}
-  RankText: {fileID: 7280387727297323188}
-  upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
-  maxedUpgradeTextPrefab: {fileID: 8874300344085807400, guid: 197f32a2294619c4193d004823eb3803, type: 3}
+  ShopManager: {fileID: 0}
   notEnoughTextPrefab: {fileID: 8874300344085807400, guid: 0ba89aed0b8901e4f9d12f73637f11a6, type: 3}
-  upgradeBasePrice: 4
+  maxedUpgradeTextPrefab: {fileID: 8874300344085807400, guid: 197f32a2294619c4193d004823eb3803, type: 3}
+  upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
+  PriceObject: {fileID: 4575715767471153111}
+  StatusText: {fileID: 0}
+  basePrice: 0
+  WaterGenerator: {fileID: 0}
+  Player: {fileID: 0}
   maxAmountUpgrades: 20

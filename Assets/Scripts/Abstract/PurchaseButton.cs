@@ -5,9 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
     //Classes
     [SerializeField] protected FloatingUpgradeText FloatingText;
     [SerializeField] protected ShopManager ShopManager;
@@ -23,7 +22,7 @@ public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, I
     protected TextMeshProUGUI PriceText;
 
 
-    [SerializeField] protected int basePrice = 4;
+    [SerializeField] protected int basePrice = default;
 
 
     protected List<GameObject> instantiatedObjects = new List<GameObject>();
@@ -32,8 +31,7 @@ public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, I
     // Start is called before the first frame update
     void Start()
     {
-        PriceText = PriceObject.GetComponent<TextMeshProUGUI>();
-        PriceText.text = $"${basePrice}";
+
     }
 
     // Update is called once per frame
@@ -42,6 +40,7 @@ public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, I
         
     }
 
+    public abstract void InitializeVisibleFields();
 
     public abstract void AttemptPurchase(Action purchaseAction);
 
@@ -52,6 +51,7 @@ public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, I
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Entered");
         transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
     }
 
@@ -62,7 +62,7 @@ public abstract class PuchaseProperties : MonoBehaviour, IPointerEnterHandler, I
 
 
     //Get rid of prefabs on pause
-    private void OnEnable()
+    public virtual void OnEnable()
     {
         foreach (GameObject obj in instantiatedObjects)
         {

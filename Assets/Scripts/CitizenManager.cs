@@ -62,7 +62,7 @@ public class CitizenManager : MonoBehaviour
     //------------------
 
     //Health 
-    [SerializeField] private int maxCitizenHealth = 5;
+    [SerializeField] public int maxCitizenHealth = 5;
     [SerializeField] public int citizenHealth;
 
     //Shop
