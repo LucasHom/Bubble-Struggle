@@ -11,6 +11,7 @@ TagManager:
   - Puddle
   - BallGuard
   - Citizen
+  - Umbrella
   layers:
   - Default
   - TransparentFX

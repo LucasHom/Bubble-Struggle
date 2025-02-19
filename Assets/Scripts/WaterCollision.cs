@@ -6,7 +6,7 @@ public class WaterCollision : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D col)
     {
-        //Chain.IsFired = false;
+        
         if (col.tag == "BallGuard")
         {
             Transform guardedBall = col.gameObject.transform.parent;
