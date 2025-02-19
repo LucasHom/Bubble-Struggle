@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject smallBallPrefab;
     [SerializeField] GameObject largeBallGuardedPrefab;
     [SerializeField] GameObject supportBallPrefab;
+    [SerializeField] GameObject umbrella;
 
     //Spawning
     [SerializeField] float timeBetweenSpawn = 0.5f;
@@ -61,6 +62,14 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         waveIsOver = ballsRemaining < 1;
+
+
+        //DEv thing
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Instantiate(umbrella);
+        }
+        
     }
 
     IEnumerator SpawnWave()

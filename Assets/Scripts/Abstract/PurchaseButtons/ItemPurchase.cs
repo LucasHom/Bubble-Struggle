@@ -13,6 +13,10 @@ public abstract class ItemPurchase : PurchaseButton
     //Scalars
     private float priceMultiplier = 1.15f;
 
+    //Colors
+    private Color readyGreen = new Color(103f / 255f, 190f / 255f, 109f / 255f);
+    private Color readyRed = new Color(193f / 255f, 64f / 255f, 72f / 255f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,14 +36,6 @@ public abstract class ItemPurchase : PurchaseButton
         PriceText.text = $"${basePrice}";
     }
 
-    //Rankupgrade override - only increase size if not max upgraded
-    public override void OnPointerEnter(PointerEventData eventData)
-    {
-        if (isReady)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
-        }
-    }
 
     //Itempurchase override
     public override void clickVisuals(int price)
@@ -85,6 +81,24 @@ public abstract class ItemPurchase : PurchaseButton
             Debug.Log("Float text purchase not ready");
         }
         
+    }
+
+    public void setReadyVisual(bool ready)
+    {
+        if (ready)
+        {
+            StatusText.fontSize = 0.5f;
+            StatusText.color = readyGreen;
+            StatusText.text = $"Ready";
+            isReady = true;
+        }
+        else
+        {
+            StatusText.fontSize = 0.4f;
+            StatusText.color = readyRed;
+            StatusText.text = $"Not Ready";
+            isReady = false;
+        }
     }
 
 }

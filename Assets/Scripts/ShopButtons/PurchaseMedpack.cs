@@ -15,7 +15,6 @@ public class PurchaseMedpack : ItemPurchase
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
@@ -26,17 +25,11 @@ public class PurchaseMedpack : ItemPurchase
     {
         if (Citizen.citizenHealth < Citizen.maxCitizenHealth)
         {
-            StatusText.fontSize = 0.5f;
-            StatusText.color = Color.green;
-            StatusText.text = $"Ready";
-            isReady = true;
+            setReadyVisual(true);
         }
         else
         {
-            StatusText.fontSize = 0.4f;
-            StatusText.color = Color.red;
-            StatusText.text = $"Not Ready";
-            isReady = false;
+            setReadyVisual(false);
         }
 
     }

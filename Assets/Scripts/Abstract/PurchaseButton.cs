@@ -51,7 +51,6 @@ public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Entered");
         transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
     }
 
