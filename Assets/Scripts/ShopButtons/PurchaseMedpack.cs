@@ -7,6 +7,11 @@ public class PurchaseMedpack : ItemPurchase
 {
 
     [SerializeField] private CitizenManager Citizen;
+    [SerializeField] private GameObject medpackPrefab;
+
+    private float minSpawnX = -7;
+    private float maxSpawnX = 7;
+    private float spawnY = 6f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +28,7 @@ public class PurchaseMedpack : ItemPurchase
 
     public override void determineIsReady()
     {
-        if (Citizen.citizenHealth < Citizen.maxCitizenHealth)
+        if (Citizen.citizenHealth < Citizen.maxCitizenHealth && Citizen.citizenHealth + Medpack.activeMedpacks < Citizen.maxCitizenHealth)
         {
             setReadyVisual(true);
         }
@@ -36,6 +41,10 @@ public class PurchaseMedpack : ItemPurchase
 
     public void purchaseMedpack()
     {
-        AttemptPurchase(() => { Citizen.citizenHealth += 1; });
+
+        AttemptPurchase(() => {
+            Medpack.activeMedpacks++;
+            Instantiate(medpackPrefab, new Vector3(Random.Range(minSpawnX, maxSpawnX), spawnY, 0f), Quaternion.identity); 
+        });
     }
 }

@@ -34,7 +34,7 @@ public class WaterCollision : MonoBehaviour
         }
         if (col.gameObject.tag == "Medpack")
         {
-            col.GetComponent<Medpack>().Weaken();
+            col.GetComponent<Medpack>().Bounce();
             Destroy(transform.parent.gameObject);
         }
     }

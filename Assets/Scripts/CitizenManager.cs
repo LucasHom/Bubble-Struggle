@@ -204,18 +204,6 @@ public class CitizenManager : MonoBehaviour
     }
 
 
-    public void ChangeCitizenHealth(int healthChange)
-    {
-        if (citizenHealth <= 0)
-        {
-            citizenHealth = 0;
-        }
-        else
-        {
-            citizenHealth += healthChange;
-        }
-    }
-
     private IEnumerator ShowReaction()
     {
         thanksReaction.SetActive(true);
@@ -308,5 +296,17 @@ public class CitizenManager : MonoBehaviour
         //playerHealthy = true;
         citizenIsFrozen = false;
 
+    }
+
+    public int getCitizenHealth()
+    {
+        return citizenHealth;
+    }
+
+    public void setCitizenHealth(int health)
+    {
+        {
+            citizenHealth = health;
+        }
     }
 }
