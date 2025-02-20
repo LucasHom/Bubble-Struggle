@@ -32,7 +32,11 @@ public class WaterCollision : MonoBehaviour
         {
             Destroy(transform.parent.gameObject);
         }
-        
+        if (col.gameObject.tag == "Medpack")
+        {
+            col.GetComponent<Medpack>().Weaken();
+            Destroy(transform.parent.gameObject);
+        }
     }
     // Start is called before the first frame update
     void Start()
