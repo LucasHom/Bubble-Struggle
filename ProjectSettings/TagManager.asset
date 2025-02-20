@@ -27,7 +27,7 @@ TagManager:
   - BallGuard
   - Citizen
   - Item
-  - 
+  - Medpack
   - 
   - 
   - 
@@ -57,6 +57,9 @@ TagManager:
     locked: 0
   - name: Citizen
     uniqueID: 845432249
+    locked: 0
+  - name: Item
+    uniqueID: 3522466615
     locked: 0
   - name: Player
     uniqueID: 804581451

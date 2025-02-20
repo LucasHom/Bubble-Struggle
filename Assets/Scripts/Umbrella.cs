@@ -26,6 +26,7 @@ public class Umbrella : MonoBehaviour
     //Bounce
     [SerializeField] private float bounceForceX = 1f;
     [SerializeField] private float bounceForceY = 1f;
+    private Coroutine deleteGroundedCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,7 @@ public class Umbrella : MonoBehaviour
     void Update()
     {
         //highlightTopUmbrella();
+
     }
 
 
@@ -125,7 +127,13 @@ public class Umbrella : MonoBehaviour
         {
             while (activeUmbrellas.Count > 0)
             {
-                if (activeUmbrellas.Pop() == this)
+                Umbrella popped = activeUmbrellas.Pop();
+                HingeJoint2D hinge = popped.GetComponent<HingeJoint2D>();
+                if (hinge != null)
+                {
+                    Destroy(hinge);
+                }
+                if (popped == this)
                 {
                     break;
                 }
@@ -167,6 +175,13 @@ public class Umbrella : MonoBehaviour
     }
 
 
+    private IEnumerator deleteGrounded(GameObject col)
+    {
+        yield return new WaitForSeconds(1.5f);
+        yield return StartCoroutine(TakeDamage(col));
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //GameObject col = collision.gameObject;
@@ -196,16 +211,40 @@ public class Umbrella : MonoBehaviour
         //FIX BECUASE DOESNT BOUNCE STRONG ENOUGH WHEN ATTATCHED TO OTHER UMBRELLAS
         if (col.gameObject.tag == "Wall")
         {
-            rb2d.AddForce(new Vector2(0f, bounceForceY), ForceMode2D.Impulse);
+            if (col.gameObject.name == "Left_Apartment")
+            {
+                rb2d.AddForce(new Vector2(bounceForceX, bounceForceY), ForceMode2D.Impulse);
+            }
+            else 
+            {
+                rb2d.AddForce(new Vector2(-bounceForceX, bounceForceY), ForceMode2D.Impulse);
+            }
+
             StartCoroutine(TakeDamage(col));
         }
         if (col.gameObject.tag == "Ground")
         {
+            deleteGroundedCoroutine = StartCoroutine(deleteGrounded(col));
             rb2d.AddForce(new Vector2(0f, bounceForceY), ForceMode2D.Impulse);
             StartCoroutine(TakeDamage(col));
         }
 
     }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        GameObject col = collision.gameObject;
+        if (col.gameObject.tag == "Ground")
+        {
+            if (deleteGroundedCoroutine != null)
+            {
+                StopCoroutine(deleteGroundedCoroutine);
+            }
+
+        }
+    }
+
 
 
 

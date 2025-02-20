@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6595173006214495907}
   - component: {fileID: 8657262005840989489}
   - component: {fileID: 2353310858525051940}
+  - component: {fileID: 5130598671758959170}
   m_Layer: 13
   m_Name: Umbrella
   m_TagString: Umbrella
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -772500681
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b7a0c4aff0acfbd48aae00c5b1834c78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -131,6 +132,8 @@ MonoBehaviour:
   rb2d: {fileID: 5037389089182390237}
   maxHealth: 3
   flashDuration: 0.15
+  bounceForceX: 3
+  bounceForceY: 2
 --- !u!70 &8657262005840989489
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -211,3 +214,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.91}
   m_EdgeRadius: 0
+--- !u!58 &5130598671758959170
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561221744652574769}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.003934443, y: 1.01}
+  serializedVersion: 2
+  m_Radius: 0.21
