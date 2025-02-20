@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6595173006214495907}
   - component: {fileID: 8657262005840989489}
   - component: {fileID: 2353310858525051940}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Umbrella
   m_TagString: Umbrella
   m_Icon: {fileID: 0}
@@ -128,6 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   citizen: {fileID: 0}
+  rb2d: {fileID: 5037389089182390237}
+  maxHealth: 3
+  flashDuration: 0.15
 --- !u!70 &8657262005840989489
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

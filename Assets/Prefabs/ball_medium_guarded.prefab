@@ -5083,6 +5083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitGuardPS: {fileID: 5546404384880101774}
+  rb2d: {fileID: 1671353658836758419}
+  bounceForce: {x: 0, y: 8}
 --- !u!1 &8452444276105042756
 GameObject:
   m_ObjectHideFlags: 0

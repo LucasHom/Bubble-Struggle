@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private GameObject smallPuddle;
     [SerializeField] private float puddleHeight = -4.308f;
     [SerializeField] private float horizontalBarrierForce = 2f;
+    [SerializeField] private Vector2 bounceForce = new Vector2(0f, 12f);
 
     private WaveManager BallGenerator;
 
@@ -126,4 +127,10 @@ public class Ball : MonoBehaviour
         rb2d.velocity = new Vector2(0f, 0f);
         rb2d.AddForce(new Vector3(Random.Range(-horizontalBarrierForce, horizontalBarrierForce), 0f, 0f), ForceMode2D.Impulse);
     }
+
+    public void Bounce()
+    {
+        rb2d.AddForce(bounceForce, ForceMode2D.Impulse);
+    }
+
 }

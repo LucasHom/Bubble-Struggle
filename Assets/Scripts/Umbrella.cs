@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Search;
 using UnityEngine;
 
 public class Umbrella : MonoBehaviour
 {
-    private static Stack<Umbrella> activeUmbrellas = new Stack<Umbrella>();
 
     [SerializeField] private CitizenManager citizen;
+    [SerializeField] private Rigidbody2D rb2d;
 
+    public static Stack<Umbrella> activeUmbrellas = new Stack<Umbrella>();
+
+    //Debug
+    private Umbrella lastHighlighted = null;
+
+    //Health
+    private int health = default;
+    [SerializeField] private int maxHealth = 3;
+
+    //Flash
+    [SerializeField] private float flashDuration = 0.15f;
+    private Coroutine flashCoroutine;
+
+    //Bounce
+    [SerializeField] private float bounceForceX = 1f;
+    [SerializeField] private float bounceForceY = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         citizen = FindObjectOfType<CitizenManager>();
 
         if (activeUmbrellas.Count == 0)
@@ -41,41 +59,70 @@ public class Umbrella : MonoBehaviour
 
 
 
-
-
-
-
-
-
-    //THERE IS STILL GLITCH WHERE UMBRELLA WILL CONNECT TO INCORRECT UMBRELLA IF BREAKING LINE OF UMBRELLAS
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Update()
     {
-        GameObject col = collision.gameObject;
-        if (col.tag == "BallGuard")
+        //highlightTopUmbrella();
+    }
+
+
+    //Highlight umbrellas debug
+    void ResetHighlight(Umbrella umbrella)
+    {
+        SpriteRenderer sr = umbrella.GetComponent<SpriteRenderer>();
+        if (sr != null)
         {
-            //Transform guardedBall = col.gameObject.transform.parent;
-            //guardedBall.GetComponent<HitGuard>().ActivateHitGuardPS();
-            //Destroy(transform.parent.gameObject);
+            sr.color = Color.white;
         }
-        if (col.tag == "Ball")
+    }
+
+    void DrawColliderOutline(Collider2D collider)
+    {
+        if (collider is CircleCollider2D circle)
         {
-            col.GetComponent<Ball>().Split();
+            Debug.DrawRay(circle.transform.position, Vector2.right * circle.radius, Color.red);
+            Debug.DrawRay(circle.transform.position, Vector2.up * circle.radius, Color.red);
+        }
+    }
+
+    void highlightTopUmbrella()
+    {
+        if (activeUmbrellas.Count > 0)
+        {
+            Umbrella topUmbrella = activeUmbrellas.Peek();
+
+            // Reset the last highlighted umbrella if it's not the top anymore
+            if (lastHighlighted != null && lastHighlighted != topUmbrella)
+            {
+                ResetHighlight(lastHighlighted);
+            }
+
+            // Highlight the top umbrella
+            Collider2D collider = topUmbrella.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                SpriteRenderer sr = topUmbrella.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                {
+                    sr.color = Color.red;
+                }
+
+                DrawColliderOutline(collider);
+            }
+
+            lastHighlighted = topUmbrella;
+        }
+        else if (lastHighlighted != null)
+        {
+            ResetHighlight(lastHighlighted);
+            lastHighlighted = null;
+        }
+    }
+
+    private void popUnattatchedUmbrellas(GameObject col)
+    {
+
+        if (activeUmbrellas.ToArray().Contains(this))
+        {
             while (activeUmbrellas.Count > 0)
             {
                 if (activeUmbrellas.Pop() == this)
@@ -83,21 +130,79 @@ public class Umbrella : MonoBehaviour
                     break;
                 }
             }
+        }
+
+    }
+
+    private IEnumerator FlashWhite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+
+        spriteRenderer.color = Color.gray;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
+
+        flashCoroutine = null;
+    }
+
+    private IEnumerator TakeDamage(GameObject col)
+    {
+        health--;
+
+
+        if (flashCoroutine == null)
+        {
+            flashCoroutine = StartCoroutine(FlashWhite());
+        }
+
+        if (health <= 0)
+        {
+            //yield return flashCoroutine;
+            yield return new WaitForSeconds(flashDuration);
+            popUnattatchedUmbrellas(col);
             Destroy(gameObject);
+        }
+
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //GameObject col = collision.gameObject;
+        GameObject col = collision.GetContact(0).collider.gameObject;
+
+        if (col.tag == "BallGuard")
+        {
+            Transform guardedBall = col.gameObject.transform.parent;
+            guardedBall.GetComponent<Ball>().Bounce();
+
+            StartCoroutine(TakeDamage(col));
+        }
+        if (col.tag == "Ball")
+        {
+            col.GetComponent<Ball>().Split();
+
+            StartCoroutine(TakeDamage(col));
         }
         if (col.tag == "SupportBall")
         {
-            //col.GetComponent<SupportBall>().Grow();
-            //Destroy(transform.parent.gameObject);
+            col.GetComponent<SupportBall>().Bounce();
         }
+
+
+
+
+        //FIX BECUASE DOESNT BOUNCE STRONG ENOUGH WHEN ATTATCHED TO OTHER UMBRELLAS
         if (col.gameObject.tag == "Wall")
         {
-            //Special wall particlees?
-            Destroy(gameObject);
+            rb2d.AddForce(new Vector2(0f, bounceForceY), ForceMode2D.Impulse);
+            StartCoroutine(TakeDamage(col));
         }
         if (col.gameObject.tag == "Ground")
         {
-            Destroy(gameObject);
+            rb2d.AddForce(new Vector2(0f, bounceForceY), ForceMode2D.Impulse);
+            StartCoroutine(TakeDamage(col));
         }
 
     }

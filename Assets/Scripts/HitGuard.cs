@@ -20,7 +20,8 @@ public class HitGuard : MonoBehaviour
 
     public void ActivateHitGuardPS()
     {
-        Debug.Log("went");
         hitGuardPS.Play();
     }
+
+
 }

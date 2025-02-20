@@ -61,6 +61,11 @@ public class SupportBall : MonoBehaviour
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }
 
+    public void Bounce()
+    {
+        rb2d.AddForce(growForce, ForceMode2D.Impulse);
+    }
+
     private IEnumerator FlashSupportBall()
     {
         isSBFlashing = true;
