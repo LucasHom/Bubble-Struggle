@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public abstract class ItemPurchase : PurchaseButton
 {
     [SerializeField] protected bool isReady = false;
+    [SerializeField] protected GameObject notReadyTextPrefab;
 
     //Ranks
     private int priceRank = default;
@@ -78,9 +79,23 @@ public abstract class ItemPurchase : PurchaseButton
         }
         else
         {
-            Debug.Log("Float text purchase not ready");
+            Debug.Log("Floating text");
+            NotReady();
         }
         
+    }
+
+    public abstract string NotReadyText();
+
+    protected void NotReady()
+    {
+        GameObject notReadyText = Instantiate(notReadyTextPrefab, transform);
+        notReadyText.GetComponent<TextMeshProUGUI>().text = NotReadyText();
+        instantiatedObjects.Add(notReadyText);
+        RectTransform notReadyTransform = maxedUpgradeTextPrefab.GetComponent<RectTransform>();
+        notReadyTransform.position = new Vector3(0f, 0f, 0f);
+
+        StartCoroutine(FloatingText.FloatAndDeleteText(notReadyText, 0.8f));
     }
 
     public void setReadyVisual(bool ready)

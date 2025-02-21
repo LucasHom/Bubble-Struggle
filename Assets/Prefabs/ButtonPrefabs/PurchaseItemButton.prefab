@@ -157,7 +157,9 @@ MonoBehaviour:
   StatusText: {fileID: 236392616252667636}
   basePrice: 30
   isReady: 0
+  notReadyTextPrefab: {fileID: 8874300344085807400, guid: d0a663699d7fc3b4e9c426b34bbe7893, type: 3}
   Citizen: {fileID: 0}
+  medpackPrefab: {fileID: 0}
 --- !u!1 &3794376812153256068
 GameObject:
   m_ObjectHideFlags: 0

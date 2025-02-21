@@ -7,7 +7,9 @@ public class ButtonSecurityManager : MonoBehaviour
 {
     [SerializeField] private GameObject lockedButtonPrefab;
 
-    private static Dictionary<string, GameObject> shopButtonDict;
+    private static Dictionary<string, GameObjectPair> shopButtonDict;
+
+    [SerializeField] private Transform UIParent;
 
     //Buttons
     [SerializeField] private GameObject waterCapacityButton;
@@ -25,20 +27,26 @@ public class ButtonSecurityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shopButtonDict = new Dictionary<string, GameObject>
+        shopButtonDict = new Dictionary<string, GameObjectPair>
         {
-            { "WaterCapacityButton", waterCapacityButton },
-            { "ReloadSpeedButton", reloadSpeedButton },
-            { "PlayerSpeedButton", playerSpeedButton },
-            { "UmbrellaButton", umbrellaButton },
+            { "WaterCapacityButton", new GameObjectPair(waterCapacityButton) },
+            { "ReloadSpeedButton", new GameObjectPair(reloadSpeedButton) },
+            { "PlayerSpeedButton", new GameObjectPair(playerSpeedButton) },
+            { "UmbrellaButton", new GameObjectPair(umbrellaButton) },
             //{ "", object5 },
-            { "MedpackButton", medpackButton }
+            { "MedpackButton", new GameObjectPair(medpackButton) }
             //{ "", object7 },
             //{ "", object8 },
             //{ "", object9 }
         };
 
-        Lock("WaterCapacityButton");
+        //Lock("WaterCapacityButton");
+        //Lock("ReloadSpeedButton");
+        //Lock("PlayerSpeedButton");
+        //Lock("UmbrellaButton");
+        //Lock("MedpackButton");
+
+        //Unlock("WaterCapacityButton");
     }
 
     // Update is called once per frame
@@ -47,14 +55,18 @@ public class ButtonSecurityManager : MonoBehaviour
         
     }
 
-    public void Unlock(string button)
+    public static void Unlock(string button)
     {
-        shopButtonDict[button].SetActive(true);
+        if(shopButtonDict[button].object2 != null)
+        {
+            Destroy(shopButtonDict[button].object2);
+        }
+        shopButtonDict[button].object1.SetActive(true);
     }
 
     public void Lock(string button)
     {
-
-        shopButtonDict[button].SetActive(false);
+        shopButtonDict[button].object2 = Instantiate(lockedButtonPrefab, shopButtonDict[button].object1.transform.position, Quaternion.identity, UIParent);
+        shopButtonDict[button].object1.SetActive(false);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PurchaseUmbrella : ItemPurchase
 {
     [SerializeField] GameObject umbrellaPrefab;
+    [SerializeField] string notReadyText = "Umbrella max reached";
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,11 @@ public class PurchaseUmbrella : ItemPurchase
             setReadyVisual(false);
         }
 
+    }
+
+    public override string NotReadyText()
+    {
+        return notReadyText;
     }
 
     public void purchaseUmbrella()

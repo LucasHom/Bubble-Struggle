@@ -13,6 +13,8 @@ public class PurchaseMedpack : ItemPurchase
     private float maxSpawnX = 7;
     private float spawnY = 5.5f;
 
+    [SerializeField] string notReadyText = "Max health reached";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,5 +48,10 @@ public class PurchaseMedpack : ItemPurchase
             Medpack.activeMedpacks++;
             Instantiate(medpackPrefab, new Vector3(Random.Range(minSpawnX, maxSpawnX), spawnY, 0f), Quaternion.identity); 
         });
+    }
+
+    public override string NotReadyText()
+    {
+        return notReadyText;
     }
 }
