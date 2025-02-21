@@ -11,7 +11,7 @@ public abstract class ItemPurchase : PurchaseButton
     private int priceRank = default;
 
     //Scalars
-    private float priceMultiplier = 1.15f;
+    private float priceMultiplier = 1.1f;
 
     //Colors
     private Color readyGreen = new Color(103f / 255f, 190f / 255f, 109f / 255f);

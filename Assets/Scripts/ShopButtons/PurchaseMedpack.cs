@@ -11,7 +11,7 @@ public class PurchaseMedpack : ItemPurchase
 
     private float minSpawnX = -7;
     private float maxSpawnX = 7;
-    private float spawnY = 6f;
+    private float spawnY = 5.5f;
 
     // Start is called before the first frame update
     void Start()

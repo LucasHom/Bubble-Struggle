@@ -68,8 +68,10 @@ public class Medpack : MonoBehaviour
         {
             //Add 1 health to citizen
             CitizenManager cman = col.GetComponent<CitizenManager>();
-            cman.setCitizenHealth(cman.getCitizenHealth() + 1);
-
+            if (cman.getCitizenHealth() < cman.maxCitizenHealth)
+            {
+                cman.setCitizenHealth(cman.getCitizenHealth() + 1);
+            }
 
             StartCoroutine(FlashyDestroy());
 

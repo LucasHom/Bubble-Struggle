@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor.Search;
 using UnityEngine;
 
@@ -9,6 +11,8 @@ public class Umbrella : MonoBehaviour
 
     [SerializeField] private CitizenManager citizen;
     [SerializeField] private Rigidbody2D rb2d;
+    private PurchaseUmbrella purchaseUmbrella;
+    [SerializeField] private TextMeshProUGUI healthIndicator;
 
     public static Stack<Umbrella> activeUmbrellas = new Stack<Umbrella>();
 
@@ -33,6 +37,9 @@ public class Umbrella : MonoBehaviour
     {
         health = maxHealth;
         citizen = FindObjectOfType<CitizenManager>();
+        purchaseUmbrella = FindObjectOfType<PurchaseUmbrella>();
+
+
 
         if (activeUmbrellas.Count == 0)
         {
@@ -42,6 +49,12 @@ public class Umbrella : MonoBehaviour
         }
         else
         {
+            //Increase health of lower umbrellas
+            foreach (Umbrella umbrella in activeUmbrellas)
+            {
+                umbrella.health += 1;
+            }
+
             transform.position = activeUmbrellas.Peek().transform.position + new Vector3(0, 0.95f);
             HingeJoint2D hinge = gameObject.AddComponent<HingeJoint2D>();
             hinge.connectedBody = activeUmbrellas.Peek().GetComponent<Rigidbody2D>();
@@ -55,6 +68,9 @@ public class Umbrella : MonoBehaviour
         }
 
         activeUmbrellas.Push(this);
+        purchaseUmbrella.determineIsReady();
+
+
     }
 
 
@@ -63,8 +79,14 @@ public class Umbrella : MonoBehaviour
     void Update()
     {
         //highlightTopUmbrella();
+        healthIndicator.text = $"{health}";
+        if(health < 0)
+        {
+            health = 0;
+        }
 
     }
+
 
 
     //Highlight umbrellas debug
@@ -119,6 +141,7 @@ public class Umbrella : MonoBehaviour
             lastHighlighted = null;
         }
     }
+
 
     private void popUnattatchedUmbrellas(GameObject col)
     {
@@ -205,10 +228,6 @@ public class Umbrella : MonoBehaviour
             col.GetComponent<SupportBall>().Bounce();
         }
 
-
-
-
-        //FIX BECUASE DOESNT BOUNCE STRONG ENOUGH WHEN ATTATCHED TO OTHER UMBRELLAS
         if (col.gameObject.tag == "Wall")
         {
             if (col.gameObject.name == "Left_Apartment")
