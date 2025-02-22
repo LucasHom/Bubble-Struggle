@@ -22,6 +22,9 @@ public class SupportBall : MonoBehaviour
     [SerializeField] private float maxExplosionForceY = 12f;
     [SerializeField] private int numExplosionPellets = 10;
 
+    //Caught in net
+    public bool isMaxSize = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,15 @@ public class SupportBall : MonoBehaviour
         if (transform.localScale.x < maxSize)
         {
             transform.localScale += new Vector3(0.1f, 0.1f, 0f);
+        }
+
+        if (transform.localScale.x >= maxSize)
+        {
+            isMaxSize = true;
+            if (gameObject.GetComponent<FixedJoint2D>() != null)
+            {
+                Destroy(gameObject.GetComponent<FixedJoint2D>());
+            }
         }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }
@@ -98,5 +110,19 @@ public class SupportBall : MonoBehaviour
 
             waterrb2d.AddForce(new Vector2(Random.Range(-maxExplosionForceX, maxExplosionForceX), Random.Range(minExplosionForceY, maxExplosionForceY)), ForceMode2D.Impulse);
         }
+    }
+
+    public IEnumerator StickToNet(GameObject net)
+    {
+        while (rb2d.velocity.magnitude > 0.3f)
+        {
+            rb2d.gravityScale = 0f;
+            rb2d.velocity *= 0.9f;
+            Debug.Log(rb2d.velocity.magnitude);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        FixedJoint2D fixedJoint = gameObject.AddComponent<FixedJoint2D>();
+        fixedJoint.connectedBody = net.GetComponent<Rigidbody2D>();
     }
 }

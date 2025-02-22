@@ -13,6 +13,7 @@ TagManager:
   - Citizen
   - Umbrella
   - Medpack
+  - Net
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Citizen
   - Item
   - Medpack
-  - 
+  - Net
   - 
   - 
   - 
@@ -52,6 +53,9 @@ TagManager:
     locked: 0
   - name: BackgroundObjects
     uniqueID: 745484563
+    locked: 0
+  - name: Net
+    uniqueID: 1488243643
     locked: 0
   - name: Chain
     uniqueID: 593061607
