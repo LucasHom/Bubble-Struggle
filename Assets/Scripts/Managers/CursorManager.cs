@@ -4,17 +4,51 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Texture2D crosshairActive;
+    [SerializeField] Texture2D crosshairInactive;
+    [SerializeField] Texture2D defaultCursor;
+
+    [SerializeField] ShopManager shopManager;
+
+    private bool switchedToCrosshair;
+
     void Start()
     {
-        //Make cursor a faucet twisty switch that turns into switched version when mouse down
-        //center curson correctly
-        //change cursur to mouse and offset correctly in shop
+        SetCrosshair(crosshairInactive);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (shopManager.shopContent.activeSelf == false)
+        {
+            if (switchedToCrosshair == false)
+            {
+                SetCrosshair(crosshairInactive);
+                
+            }
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+            {
+                SetCrosshair(crosshairActive);
+            }
+
+            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) 
+            {
+                SetCrosshair(crosshairInactive);
+            }
+        }
+        else
+        {
+            switchedToCrosshair = false;
+            Vector2 hotspot = Vector2.zero;
+            Cursor.SetCursor(defaultCursor, hotspot, CursorMode.Auto);
+        }
+
+    }
+
+    void SetCrosshair(Texture2D cursor)
+    {
+        switchedToCrosshair = true;
+        Vector2 hotspot = new Vector2(cursor.width / 2, cursor.height / 2);
+        Cursor.SetCursor(cursor, hotspot, CursorMode.Auto);
     }
 }

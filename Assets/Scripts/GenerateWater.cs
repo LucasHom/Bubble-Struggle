@@ -26,7 +26,7 @@ public class GenerateWater : MonoBehaviour
     private bool canShowReloadIcon = false;
     [SerializeField] private bool isReloadIconFlashing = false;
 
-
+    private Coroutine specialShoot = null;
 
 
     private Player playerScript;
@@ -75,7 +75,11 @@ public class GenerateWater : MonoBehaviour
 
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse1)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading && !playerScript.playerIsFrozen)
         {
-            StartCoroutine(ShootSidewaysDelay());
+            if (specialShoot == null)
+            {
+                specialShoot = StartCoroutine(ShootWaterSpecial());
+            }
+
         }
     }
 
@@ -138,16 +142,7 @@ public class GenerateWater : MonoBehaviour
         ShootWater();
     }
 
-    IEnumerator ShootSidewaysDelay()
-    {
-        canShoot = false;
 
-        yield return new WaitForSeconds(shootDelay);
-
-        canShoot = true;
-
-        ShootWaterSideways();
-    }
 
     //void ShootWater()
     //{
@@ -184,27 +179,48 @@ public class GenerateWater : MonoBehaviour
         remainingWater -= 1;
     }
 
-    void ShootWaterSideways()
-    {
-        GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
-        //GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position, Quaternion.identity);
+    //void ShootWaterSideways()
+    //{
+    //    GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+    //    //GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position, Quaternion.identity);
 
-        Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
-        if (rb2d != null)
-        {
-            Vector2 direction;
-            if (player.GetComponent<Player>().isFacingRight)
-            {
-                direction = new Vector2(1, 0.25f);
-            }
-            else
-            {
-                direction = new Vector2(-1, 0.25f);
-            }
+    //    Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
+    //    if (rb2d != null)
+    //    {
+    //        Vector2 direction;
+    //        if (player.GetComponent<Player>().isFacingRight)
+    //        {
+    //            direction = new Vector2(1, 0.25f);
+    //        }
+    //        else
+    //        {
+    //            direction = new Vector2(-1, 0.25f);
+    //        }
             
-            rb2d.AddForce(direction * shootForce, ForceMode2D.Impulse);
-        }
-        remainingWater -= 1;
-    }
+    //        rb2d.AddForce(direction * shootForce, ForceMode2D.Impulse);
+    //    }
+    //    remainingWater -= 1;
+    //}
 
+
+    IEnumerator ShootWaterSpecial()
+    {
+        while (remainingWater > 0)
+        {
+            yield return new WaitForSeconds(0.01f);
+            GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+
+            Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
+
+            Vector2 direction;
+
+            //direction = new Vector2(Random.Range(-1, 1), Random.Range(0.25f, 0.5f));
+            direction = new Vector2(Random.Range(-1f, 1f), Random.Range(0.25f, 1f)).normalized;
+
+            rb2d.AddForce(direction * (shootForce/2), ForceMode2D.Impulse);
+
+            remainingWater -= 1;
+        }
+        specialShoot = null;
+    }
 }
