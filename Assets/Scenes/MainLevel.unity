@@ -8278,6 +8278,7 @@ GameObject:
   - component: {fileID: 839196640}
   - component: {fileID: 839196641}
   - component: {fileID: 839196642}
+  - component: {fileID: 839196643}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8301,7 +8302,6 @@ MonoBehaviour:
   shootPoint: {fileID: 1587596010}
   rbPlayer: {fileID: 1587596007}
   shootForce: 11
-  horizontalForcePadding: 0.5
   remainingWater: 0
   maxWater: 5
   shootDelay: 0.1
@@ -8319,7 +8319,7 @@ Transform:
   m_GameObject: {fileID: 839196636}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8170004, y: 0.8388982, z: 0.03133182}
+  m_LocalPosition: {x: 0, y: -3.12, z: 0.03133182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8402,6 +8402,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShopManager: {fileID: 839196641}
+--- !u!114 &839196643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839196636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f6196b1361f7a42bd9b3bb6468a856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &863206363
 GameObject:
   m_ObjectHideFlags: 0
@@ -15573,6 +15585,8 @@ MonoBehaviour:
   playerSpeed: 6
   accelerationRate: 8
   isFacingRight: 1
+  upZoneAngleStart: -60
+  upZoneAngleEnd: 60
 --- !u!1 &1592178383
 GameObject:
   m_ObjectHideFlags: 0

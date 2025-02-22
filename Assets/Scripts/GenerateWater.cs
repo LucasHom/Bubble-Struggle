@@ -27,6 +27,8 @@ public class GenerateWater : MonoBehaviour
     [SerializeField] private bool isReloadIconFlashing = false;
 
 
+
+
     private Player playerScript;
 
     void Start()
@@ -43,7 +45,7 @@ public class GenerateWater : MonoBehaviour
             canShowReloadIcon = true;
         }
 
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Mouse1)))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.R))
         {
             //if (!isReloading)
             if (!isReloading && !playerScript.playerIsFrozen)
@@ -58,7 +60,7 @@ public class GenerateWater : MonoBehaviour
             isReloading = false; 
         }
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShowReloadIcon)
+        if (Input.GetKey(KeyCode.Space) || (Input.GetKey(KeyCode.Mouse0) && canShowReloadIcon) || (Input.GetKey(KeyCode.Mouse1) && canShowReloadIcon) )
         {
             if (!isReloadIconFlashing)
             {
@@ -69,6 +71,11 @@ public class GenerateWater : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading && !playerScript.playerIsFrozen)
         {
             StartCoroutine(ShootDelay());
+        }
+
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse1)) && canShoot && playerScript.playerHealthy && !playerScript.isReloading && !playerScript.playerIsFrozen)
+        {
+            StartCoroutine(ShootSidewaysDelay());
         }
     }
 
@@ -129,10 +136,41 @@ public class GenerateWater : MonoBehaviour
         canShoot = true;
 
         ShootWater();
- 
-        
     }
 
+    IEnumerator ShootSidewaysDelay()
+    {
+        canShoot = false;
+
+        yield return new WaitForSeconds(shootDelay);
+
+        canShoot = true;
+
+        ShootWaterSideways();
+    }
+
+    //void ShootWater()
+    //{
+    //    GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+    //    //GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position, Quaternion.identity);
+
+    //    Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
+    //    if (rb2d != null)
+    //    {
+    //        // Get mouse position in world space
+    //        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //        mousePosition.z = 0f; // Ensure z is 0 for 2D
+
+    //        // Calculate direction from shoot point to mouse
+    //        //Vector2 shootDirection = (mousePosition - shootPoint.position).normalized;
+    //        Vector2 shootDirection = player.GetComponent<Player>().GetShootDirection(mousePosition);
+    //        rb2d.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);
+    //    }
+    //    remainingWater -= 1;
+    //}
+
+
+    //Old shoot water logic
     void ShootWater()
     {
         GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
@@ -145,4 +183,28 @@ public class GenerateWater : MonoBehaviour
         }
         remainingWater -= 1;
     }
+
+    void ShootWaterSideways()
+    {
+        GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+        //GameObject waterProjectile = Instantiate(waterProjectilePrefab, shootPoint.position, Quaternion.identity);
+
+        Rigidbody2D rb2d = waterProjectile.GetComponent<Rigidbody2D>();
+        if (rb2d != null)
+        {
+            Vector2 direction;
+            if (player.GetComponent<Player>().isFacingRight)
+            {
+                direction = new Vector2(1, 0.25f);
+            }
+            else
+            {
+                direction = new Vector2(-1, 0.25f);
+            }
+            
+            rb2d.AddForce(direction * shootForce, ForceMode2D.Impulse);
+        }
+        remainingWater -= 1;
+    }
+
 }

@@ -34,7 +34,11 @@ public class Player : MonoBehaviour
     private float currentHorizontalInput;
     private float horizontalMaxInput = 1f;
     private float movement = 0f;
-    [SerializeField] private bool isFacingRight = true;
+    [SerializeField] public bool isFacingRight = true;
+
+    //Shooting
+    //[SerializeField] private float upZoneAngleStart = -60f;
+    //[SerializeField] private float upZoneAngleEnd = 60f;
 
     void Start()
     {
@@ -201,4 +205,49 @@ public class Player : MonoBehaviour
     {
         turnDust.Play();
     }
+
+
+    //public Vector2 GetShootDirection(Vector3 mousePosition)
+    //{
+    //    Vector2 direction = mousePosition - transform.position;
+    //    float angle = Vector2.SignedAngle(Vector2.up, direction);
+    //    Debug.Log(angle);
+
+    //    if (angle >= upZoneAngleStart && angle <= upZoneAngleEnd)
+    //    {
+    //        return Vector2.up; // Shoot up
+    //    }
+    //    else
+    //    {
+    //        if (direction.x > 0)
+    //        {
+    //            return new Vector2(1, 0.25f); 
+    //        }
+    //        else
+    //        {
+    //            return new Vector2(-1, 0.25f); 
+    //        } 
+    //    }
+    //}
+
+
+    ////Draw Shoot Boundries
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.white;
+    //    Gizmos.DrawWireSphere(transform.position, 0.2f); 
+
+    //    Gizmos.color = Color.yellow;
+    //    Vector3 rightBoundary = Quaternion.Euler(0, 0, upZoneAngleStart) * Vector3.up;
+    //    Vector3 leftBoundary = Quaternion.Euler(0, 0, upZoneAngleEnd) * Vector3.up;
+
+    //    Gizmos.DrawLine(transform.position, transform.position + rightBoundary * 2);
+    //    Gizmos.DrawLine(transform.position, transform.position + leftBoundary * 2);
+
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(transform.position, transform.position + Vector3.right * 2);
+
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawLine(transform.position, transform.position + Vector3.left * 2);
+    //}
 }
