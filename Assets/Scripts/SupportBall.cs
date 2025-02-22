@@ -64,11 +64,9 @@ public class SupportBall : MonoBehaviour
 
         if (transform.localScale.x >= maxSize)
         {
+            FixedJoint2D fixedJoint = gameObject.GetComponent<FixedJoint2D>();
             isMaxSize = true;
-            if (gameObject.GetComponent<FixedJoint2D>() != null)
-            {
-                Destroy(gameObject.GetComponent<FixedJoint2D>());
-            }
+            Destroy(fixedJoint);
         }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }
@@ -118,11 +116,18 @@ public class SupportBall : MonoBehaviour
         {
             rb2d.gravityScale = 0f;
             rb2d.velocity *= 0.9f;
-            Debug.Log(rb2d.velocity.magnitude);
+
             yield return new WaitForSeconds(0.01f);
         }
 
         FixedJoint2D fixedJoint = gameObject.AddComponent<FixedJoint2D>();
         fixedJoint.connectedBody = net.GetComponent<Rigidbody2D>();
+        if (gameObject.GetComponent<FixedJoint2D>() != null)
+        {
+            FixedJoint2D attatchedJoint = gameObject.GetComponent<FixedJoint2D>();
+            Net attatchedNet = attatchedJoint.connectedBody.GetComponent<Net>();
+            attatchedNet.durability -= 1;
+
+        }
     }
 }
