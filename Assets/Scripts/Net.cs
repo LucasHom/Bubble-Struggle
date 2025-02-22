@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Net : MonoBehaviour
 {
@@ -15,11 +16,18 @@ public class Net : MonoBehaviour
     private float minSpawnY = -1.5f;
     private float maxSpawnY = 0.0f;
 
+    public static List<Net> activeNets = new List<Net>();
+
     // Start is called before the first frame update
     void Start()
     {
+        PurchaseNet purchaseNet = FindObjectOfType<PurchaseNet>();
+
         durability = maxDurbility;
         createSpawnPosition();
+        activeNets.Add(this);
+
+        purchaseNet.determineIsReady();
     }
 
     // Update is called once per frame
@@ -36,6 +44,7 @@ public class Net : MonoBehaviour
 
 
             Debug.Log("Make a destroy net coroutine");
+            activeNets.Remove(this);
             Destroy(gameObject);
 
 
@@ -54,6 +63,7 @@ public class Net : MonoBehaviour
     private void createSpawnPosition()
     {
         transform.position = new Vector2(Random.Range(minSpawnX, maxSpawnX), Random.Range(minSpawnY, maxSpawnY));
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

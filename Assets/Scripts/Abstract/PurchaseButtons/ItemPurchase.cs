@@ -60,7 +60,7 @@ public abstract class ItemPurchase : PurchaseButton
 
         if (isReady)
         {
-            if (ShopManager.currency > price)
+            if (ShopManager.currency >= price)
             {
                 clickVisuals(price);
 
