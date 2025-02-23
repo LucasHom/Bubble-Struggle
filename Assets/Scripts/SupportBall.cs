@@ -54,6 +54,16 @@ public class SupportBall : MonoBehaviour
             Destroy(gameObject);
             BallGenerator.ballsRemaining -= 1;
         }
+
+        if (col.gameObject.tag == "Umbrella")
+        {
+            if (gameObject.GetComponent<FixedJoint2D>() != null)
+            {
+                FixedJoint2D fixedJoint = gameObject.GetComponent<FixedJoint2D>();
+                Destroy(fixedJoint);
+                rb2d.gravityScale = 1f;
+            }
+        }
     }
     public void Grow()
     {  
@@ -67,6 +77,7 @@ public class SupportBall : MonoBehaviour
             FixedJoint2D fixedJoint = gameObject.GetComponent<FixedJoint2D>();
             isMaxSize = true;
             Destroy(fixedJoint);
+            rb2d.gravityScale = 1f;
         }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }
