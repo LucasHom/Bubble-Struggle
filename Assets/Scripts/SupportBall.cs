@@ -78,6 +78,7 @@ public class SupportBall : MonoBehaviour
             isMaxSize = true;
             Destroy(fixedJoint);
             rb2d.gravityScale = 1f;
+            rb2d.AddForce(new Vector2(Random.Range(-0.4f, 0.4f), 0f), ForceMode2D.Impulse);
         }
         rb2d.AddForce(growForce, ForceMode2D.Impulse);
     }

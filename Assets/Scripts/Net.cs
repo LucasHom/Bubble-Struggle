@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class Net : MonoBehaviour
 {
     private Coroutine slowDownRoutine;
@@ -11,20 +12,35 @@ public class Net : MonoBehaviour
     [SerializeField] int maxDurbility = 20;
     public int durability;
 
+
+    //Spawning
     private float minSpawnX = -6.8f;
     private float maxSpawnX = 6.8f;
     private float minSpawnY = -1.5f;
     private float maxSpawnY = 0.0f;
+    private Vector2 spawnPosition = default;
+    private int attempts = 0;
+    private bool positionFound = false;
+    private Vector2 boxSize = new Vector2(1.5f, 1.5f);
+
+
+
+    private LayerMask netLayer;
+
+
+
 
     public static List<Net> activeNets = new List<Net>();
 
     // Start is called before the first frame update
     void Start()
     {
+        netLayer = LayerMask.GetMask("Net");
         PurchaseNet purchaseNet = FindObjectOfType<PurchaseNet>();
 
         durability = maxDurbility;
-        createSpawnPosition();
+        //createSpawnPosition();
+        CreateSpawnPosition();
         activeNets.Add(this);
 
         purchaseNet.determineIsReady();
@@ -60,20 +76,59 @@ public class Net : MonoBehaviour
         }
     }
 
-    private void createSpawnPosition()
+    //private void createSpawnPosition()
+    //{
+    //    transform.position = new Vector2(Random.Range(minSpawnX, maxSpawnX), Random.Range(minSpawnY, maxSpawnY));
+
+    //}
+
+    private void CreateSpawnPosition()
     {
-        transform.position = new Vector2(Random.Range(minSpawnX, maxSpawnX), Random.Range(minSpawnY, maxSpawnY));
+        do
+        {
+            spawnPosition = new Vector2(Random.Range(minSpawnX, maxSpawnX), Random.Range(minSpawnY, maxSpawnY));
+
+            Collider2D hit = Physics2D.OverlapBox(spawnPosition, boxSize, 0f, netLayer);
+
+            if (hit == null)
+            {
+                //Debug.Log("position found");
+                positionFound = true;
+            }
+            else
+            {
+                //Debug.Log("hit other net");
+            }
+            attempts++;
+        }
+        while (!positionFound && attempts < 100);
+
+        if (positionFound)
+        {
+            transform.position = spawnPosition;
+        }
+        else
+        {
+            Debug.LogWarning("Couldn't find a valid spawn position after 100 attempts.");
+        }
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (spawnPosition != default)
+        {
+            Gizmos.DrawWireCube(spawnPosition, boxSize);
+        }
 
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         GameObject col = collision.gameObject;
-        if (col.tag == "Net")
-        {
-            createSpawnPosition();
-        }
 
         if (col.tag == "SupportBall")
         {
