@@ -19,6 +19,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float horizontalBarrierForce = 2f;
     [SerializeField] private Vector2 bounceForce = new Vector2(0f, 12f);
 
+    //Track balls
+    public static int numActiveBalls = 0;
+
     private WaveManager BallGenerator;
 
     private bool hasSplit = false;
@@ -27,7 +30,8 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb2d.AddForce(startForce, ForceMode2D.Impulse);
-        
+
+        numActiveBalls++;
     }
 
     // Update is called once per frame
@@ -108,11 +112,13 @@ public class Ball : MonoBehaviour
 
             if (nextBall.tag == "Ball")
             {
+                numActiveBalls -= 1;
                 ball01.GetComponent<Ball>().startForce = new Vector2(2f, 5f);
                 ball02.GetComponent<Ball>().startForce = new Vector2(-2f, 5f);
             }
             if (nextBall.tag == "SupportBall")
             {
+                numActiveBalls -= 1;
                 ball01.GetComponent<SupportBall>().supportStartForce = new Vector2(2f, 7f);
                 ball02.GetComponent<SupportBall>().supportStartForce = new Vector2(-2f, 7f);
             }

@@ -18,7 +18,18 @@ public class WaveManager : MonoBehaviour
     [SerializeField] float timeBetweenSpawn = 0.5f;
     [SerializeField] float timeBetweenWave = 4f;
     [SerializeField] int waveSpawns = 3;
+    private bool checkWaveIsOver = false;
+
+
+
+
     public int ballsRemaining;
+
+
+
+
+
+
     private float minXSpawn = -7;
     private float maxXSpawn = 7;
 
@@ -46,6 +57,12 @@ public class WaveManager : MonoBehaviour
     //Citizens
     [SerializeField] CitizenManager girlfriend;
 
+
+
+    [SerializeField] int tempBalls;
+
+
+
     void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
@@ -61,7 +78,17 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        waveIsOver = ballsRemaining < 1;
+
+
+
+        tempBalls = Ball.numActiveBalls;
+
+
+
+        if (checkWaveIsOver)
+        {
+            updateWaveIsOver();
+        }
 
 
         //DEv thing
@@ -72,13 +99,17 @@ public class WaveManager : MonoBehaviour
         
     }
 
+    private void updateWaveIsOver()
+    {
+        waveIsOver = Ball.numActiveBalls < 1;
+    }
+
     IEnumerator SpawnWave()
     {
         while (true)
         {
             cameraManager.SwitchToGameView();
-            //This only applies to the large balls
-            ballsRemaining += waveSpawns * 8;
+
             yield return new WaitForSeconds(1f);
             DisableTransitionText();
             //Toggle currency on
@@ -87,13 +118,20 @@ public class WaveManager : MonoBehaviour
             shopManager.isShopToggleReady = true;
             shopManager.isBackgroundToggleReady = true;
 
+            waveIsOver = false;
+
             for (int spawned = 0; spawned < waveSpawns; spawned++)
             {
                 yield return new WaitForSeconds(timeBetweenSpawn);
                 Instantiate(largeBallPrefab, new Vector3(Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f), Quaternion.identity);
             }
 
+
+            checkWaveIsOver = true;
             yield return new WaitUntil(() => waveIsOver);
+            checkWaveIsOver = false;
+
+
             girlfriend.GiveThanks();
 
             yield return new WaitForSeconds(3f);

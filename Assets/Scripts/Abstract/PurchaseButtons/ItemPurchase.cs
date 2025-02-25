@@ -1,10 +1,13 @@
 using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public abstract class ItemPurchase : PurchaseButton
 {
+
+    //Ready
     [SerializeField] protected bool isReady = false;
     [SerializeField] protected GameObject notReadyTextPrefab;
 
@@ -15,7 +18,7 @@ public abstract class ItemPurchase : PurchaseButton
     private float priceMultiplier = 1.1f;
 
     //Colors
-    private Color readyGreen = new Color(103f / 255f, 190f / 255f, 109f / 255f);
+    private Color readyWhite = Color.white;
     private Color readyRed = new Color(193f / 255f, 64f / 255f, 72f / 255f);
 
     // Start is called before the first frame update
@@ -79,18 +82,19 @@ public abstract class ItemPurchase : PurchaseButton
         }
         else
         {
-            Debug.Log("Floating text");
             NotReady();
         }
         
     }
 
-    public abstract string NotReadyText();
+    public abstract string GetNotReadyFloatText();
+
+    public abstract string GetStatusAmount();
 
     protected void NotReady()
     {
         GameObject notReadyText = Instantiate(notReadyTextPrefab, transform);
-        notReadyText.GetComponent<TextMeshProUGUI>().text = NotReadyText();
+        notReadyText.GetComponent<TextMeshProUGUI>().text = GetNotReadyFloatText();
         instantiatedObjects.Add(notReadyText);
         RectTransform notReadyTransform = maxedUpgradeTextPrefab.GetComponent<RectTransform>();
         notReadyTransform.position = new Vector3(0f, 0f, 0f);
@@ -100,18 +104,17 @@ public abstract class ItemPurchase : PurchaseButton
 
     public void setReadyVisual(bool ready)
     {
+        StatusText.text = $"Ready<space=-0.025>:<scale=0.3> </scale>{GetStatusAmount()}";
         if (ready)
         {
             StatusText.fontSize = 0.5f;
-            StatusText.color = readyGreen;
-            StatusText.text = $"Ready";
+            StatusText.color = readyWhite;
             isReady = true;
         }
         else
         {
-            StatusText.fontSize = 0.4f;
+            StatusText.fontSize = 0.5f;
             StatusText.color = readyRed;
-            StatusText.text = $"Not Ready";
             isReady = false;
         }
     }

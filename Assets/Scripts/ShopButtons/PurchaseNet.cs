@@ -7,7 +7,9 @@ public class PurchaseNet : ItemPurchase
 {
     [SerializeField] private GameObject netPrefab;
 
-    [SerializeField] string notReadyText = "Max nets reached";
+    [SerializeField] private static string notReadyFloatText = "Out of stock, net loss!";
+
+    [SerializeField] int maxNets = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,7 @@ public class PurchaseNet : ItemPurchase
 
     public override void determineIsReady()
     {
-        if (Net.activeNets.Count < 5)
+        if (Net.activeNets.Count < maxNets)
         {
             setReadyVisual(true);
         }
@@ -42,8 +44,13 @@ public class PurchaseNet : ItemPurchase
         });
     }
 
-    public override string NotReadyText()
+    public override string GetNotReadyFloatText()
     {
-        return notReadyText;
+        return notReadyFloatText;
+    }
+
+    public override string GetStatusAmount()
+    {
+        return $"{maxNets - Net.activeNets.Count}";
     }
 }

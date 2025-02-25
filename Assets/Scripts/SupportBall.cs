@@ -28,7 +28,7 @@ public class SupportBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2d.AddForce(supportStartForce, ForceMode2D.Impulse);
+        rb2d.AddForce(supportStartForce, ForceMode2D.Impulse); 
         BallGenerator = FindObjectOfType<WaveManager>();
     }
 
@@ -134,6 +134,8 @@ public class SupportBall : MonoBehaviour
 
         FixedJoint2D fixedJoint = gameObject.AddComponent<FixedJoint2D>();
         fixedJoint.connectedBody = net.GetComponent<Rigidbody2D>();
+
+
         if (gameObject.GetComponent<FixedJoint2D>() != null)
         {
             FixedJoint2D attatchedJoint = gameObject.GetComponent<FixedJoint2D>();
@@ -141,5 +143,23 @@ public class SupportBall : MonoBehaviour
             attatchedNet.durability -= 1;
 
         }
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, 0.28f, LayerMask.GetMask("Net"));
+        if (collider == null)
+        {
+            //Debug.Log("No collider found");
+            Destroy(fixedJoint);
+            rb2d.gravityScale = 1f;
+        }
+        else
+        {
+            if (!collider.CompareTag("Net"))
+            {
+                Debug.Log($"Connected incorrectly to {collider.tag}");
+                Destroy(fixedJoint);
+                rb2d.gravityScale = 1f;
+            }
+        }
+
+
     }
 }

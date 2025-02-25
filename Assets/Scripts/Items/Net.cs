@@ -76,11 +76,6 @@ public class Net : MonoBehaviour
         }
     }
 
-    //private void createSpawnPosition()
-    //{
-    //    transform.position = new Vector2(Random.Range(minSpawnX, maxSpawnX), Random.Range(minSpawnY, maxSpawnY));
-
-    //}
 
     private void CreateSpawnPosition()
     {

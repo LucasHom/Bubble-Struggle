@@ -5,7 +5,9 @@ using UnityEngine;
 public class PurchaseUmbrella : ItemPurchase
 {
     [SerializeField] GameObject umbrellaPrefab;
-    [SerializeField] string notReadyText = "Umbrella max reached";
+    [SerializeField] int maxUmbrellas = 10;
+
+    [SerializeField] private static string notReadyFloatText = "Out of stock, pour timing!";
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,7 @@ public class PurchaseUmbrella : ItemPurchase
 
     public override void determineIsReady()
     {
-        if (Umbrella.activeUmbrellas.Count < 10)
+        if (Umbrella.activeUmbrellas.Count < maxUmbrellas)
         {
             setReadyVisual(true);
         }
@@ -33,10 +35,6 @@ public class PurchaseUmbrella : ItemPurchase
 
     }
 
-    public override string NotReadyText()
-    {
-        return notReadyText;
-    }
 
     public void purchaseUmbrella()
     {
@@ -44,5 +42,14 @@ public class PurchaseUmbrella : ItemPurchase
         AttemptPurchase(() => {
             Instantiate(umbrellaPrefab);
         });
+    }
+    public override string GetNotReadyFloatText()
+    {
+        return notReadyFloatText;
+    }
+
+    public override string GetStatusAmount()
+    {
+        return $"{maxUmbrellas - Umbrella.activeUmbrellas.Count}";
     }
 }

@@ -223,10 +223,10 @@ public class Umbrella : MonoBehaviour
 
             StartCoroutine(TakeDamage(col));
         }
-        if (col.tag == "SupportBall")
-        {
-            col.GetComponent<SupportBall>().Bounce();
-        }
+        //if (col.tag == "SupportBall")
+        //{
+        //    col.GetComponent<SupportBall>().Bounce();
+        //}
 
         if (col.gameObject.tag == "Wall")
         {

@@ -13,7 +13,7 @@ public class PurchaseMedpack : ItemPurchase
     private float maxSpawnX = 7;
     private float spawnY = 5.5f;
 
-    [SerializeField] string notReadyText = "Max health reached";
+    [SerializeField] private static string notReadyFloatText = "Out of stock (American healthcare)";
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +50,13 @@ public class PurchaseMedpack : ItemPurchase
         });
     }
 
-    public override string NotReadyText()
+    public override string GetNotReadyFloatText()
     {
-        return notReadyText;
+        return notReadyFloatText;
+        
+    }
+    public override string GetStatusAmount()
+    {
+        return $"{Citizen.maxCitizenHealth - Citizen.citizenHealth + Medpack.activeMedpacks}";
     }
 }
