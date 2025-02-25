@@ -145,10 +145,10 @@ GameObject:
   - component: {fileID: 1278121545590943732}
   - component: {fileID: 4472266629442054486}
   - component: {fileID: 5037389089182390237}
-  - component: {fileID: 6595173006214495907}
   - component: {fileID: 8657262005840989489}
   - component: {fileID: 2353310858525051940}
   - component: {fileID: 5130598671758959170}
+  - component: {fileID: 6595173006214495907}
   m_Layer: 13
   m_Name: Umbrella
   m_TagString: Umbrella
@@ -251,25 +251,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6595173006214495907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7561221744652574769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8614d3cbcf1e1494b90ff2fdb677c3aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  citizen: {fileID: 0}
-  rb2d: {fileID: 5037389089182390237}
-  healthIndicator: {fileID: 6262271263956626302}
-  maxHealth: 1
-  flashDuration: 0.15
-  bounceForceX: 3
-  bounceForceY: 2
 --- !u!70 &8657262005840989489
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -385,6 +366,25 @@ CircleCollider2D:
   m_Offset: {x: 0.003934443, y: 1.01}
   serializedVersion: 2
   m_Radius: 0.21
+--- !u!114 &6595173006214495907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561221744652574769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8614d3cbcf1e1494b90ff2fdb677c3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  citizen: {fileID: 0}
+  rb2d: {fileID: 5037389089182390237}
+  healthIndicator: {fileID: 6262271263956626302}
+  maxHealth: 1
+  flashDuration: 0.15
+  bounceForceX: 3
+  bounceForceY: 2
 --- !u!1 &7995837966015608874
 GameObject:
   m_ObjectHideFlags: 0

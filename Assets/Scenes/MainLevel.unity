@@ -8463,6 +8463,7 @@ MonoBehaviour:
   waveNumText: {fileID: 140179342}
   waveDescriptionText: {fileID: 1487057403}
   girlfriend: {fileID: 564262034}
+  tempBalls: 0
 --- !u!114 &839196640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9284,7 +9285,7 @@ MonoBehaviour:
   upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
   PriceObject: {fileID: 1034874324}
   StatusText: {fileID: 1034874325}
-  basePrice: 15
+  basePrice: 10
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
   netPrefab: {fileID: 7942808225714819119, guid: 63cfaa70adadc3d42bacb059649f7fbc, type: 3}

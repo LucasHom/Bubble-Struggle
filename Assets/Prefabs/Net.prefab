@@ -411,3 +411,6 @@ MonoBehaviour:
   netDurabilityText: {fileID: 3126011343344871961}
   maxDurbility: 15
   durability: 0
+  growAmount: 1.2
+  growDuration: 0.1
+  shrinkDuration: 0.2

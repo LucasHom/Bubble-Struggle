@@ -13,6 +13,8 @@ public class Net : MonoBehaviour
     public int durability;
 
 
+
+
     //Spawning
     private float minSpawnX = -6.8f;
     private float maxSpawnX = 6.8f;
@@ -24,6 +26,10 @@ public class Net : MonoBehaviour
     private Vector2 boxSize = new Vector2(1.5f, 1.5f);
 
 
+    //Destroy
+    [SerializeField] private float growAmount = 1.2f;
+    [SerializeField] private float growDuration = 0.1f;
+    [SerializeField] private float shrinkDuration = 0.2f;
 
     private LayerMask netLayer;
 
@@ -39,7 +45,6 @@ public class Net : MonoBehaviour
         PurchaseNet purchaseNet = FindObjectOfType<PurchaseNet>();
 
         durability = maxDurbility;
-        //createSpawnPosition();
         CreateSpawnPosition();
         activeNets.Add(this);
 
@@ -52,30 +57,43 @@ public class Net : MonoBehaviour
         netDurabilityText.text = $"{durability}";
         if (durability <= 0)
         {
-            //DO A FANCY DESTROY
-
-
-
-
-
-
-            Debug.Log("Make a destroy net coroutine");
-            activeNets.Remove(this);
-            Destroy(gameObject);
-
-
-
-
-
-
-
-
-
-
+            StartCoroutine(PopDestroySelf());
 
         }
     }
 
+    private IEnumerator PopDestroySelf()
+    {
+        yield return PopEffect();
+        activeNets.Remove(this);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator PopEffect()
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * growAmount;
+
+        // Grow phase
+        float elapsedTime = 0f;
+        while (elapsedTime < growDuration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / growDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = targetScale;
+
+        // Shrink phase
+        elapsedTime = 0f;
+        while (elapsedTime < shrinkDuration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, Vector3.zero, elapsedTime / shrinkDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = Vector3.zero; 
+    }
 
     private void CreateSpawnPosition()
     {
