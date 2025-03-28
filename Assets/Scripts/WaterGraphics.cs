@@ -11,6 +11,7 @@ public class WaterGraphics : MonoBehaviour
     void Start()
     {
         initialScale = transform.localScale;
+
     }
 
     void Update()

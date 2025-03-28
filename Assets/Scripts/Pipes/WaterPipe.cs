@@ -31,17 +31,17 @@ public class WaterPipe : MonoBehaviour
 
             if (highLowRoll < 0.6f)
             {
-                // Random value between 2 and 7
-                pipeStrength = (int)Random.Range(2f, 7f);
+                pipeStrength = (int)Random.Range(2f, 4f);
             }
             else
             {
-                // Random value between 15 and 20
-                pipeStrength = (int)Random.Range(15f, 20f);
+                pipeStrength = (int)Random.Range(8f, 10f);
             }
 
-            shootForce = Mathf.Log(pipeStrength, 1.45f);
-            waterAmount = (int)Mathf.Log(pipeStrength, 1.35f);
+            //shootForce = Mathf.Log(pipeStrength, 1.45f);
+            //waterAmount = (int)Mathf.Log(pipeStrength, 1.35f);
+            shootForce = Mathf.Log(pipeStrength, 1.3f);
+            waterAmount = (int)Mathf.Pow(pipeStrength, 1.2f);
             while (waterAmount > 0)
             {
                 yield return new WaitForSeconds(0.04f);
