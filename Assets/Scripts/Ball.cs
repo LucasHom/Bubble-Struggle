@@ -129,6 +129,32 @@ public class Ball : MonoBehaviour
     }
 
 
+    //Freeze for gusts
+    public void StartFreeze()
+    {
+        StartCoroutine(Freeze());
+    }
+
+    private IEnumerator Freeze()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color(180f/255f, 1f, 1f);
+
+        while (rb2d.velocity.magnitude > 0.1f)
+        {
+            rb2d.gravityScale = 0f;
+            rb2d.velocity *= 0.8f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+        rb2d.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.1f);
+
+        sr.color = Color.white;
+        rb2d.gravityScale = 1f;
+    }
+
+
     public void SlowDown()
     {
         rb2d.velocity = new Vector2(0f, 0f);

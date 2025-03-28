@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Medpack : MonoBehaviour
@@ -12,6 +13,10 @@ public class Medpack : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private ParticleSystem mainPS;
     [SerializeField] private ParticleSystem healthExplosionPS;
+
+    [SerializeField] private TextMeshProUGUI hpText;
+    private int hp = 3;
+
 
     public static int activeMedpacks = 0;
 
@@ -26,7 +31,7 @@ public class Medpack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hpText.text = hp.ToString();
     }
 
 
@@ -34,6 +39,12 @@ public class Medpack : MonoBehaviour
     public void Bounce()
     {
         rb2d.AddForce(hitForce, ForceMode2D.Impulse);
+        hp--;
+
+        if (hp <= 0)
+        {
+            increaseCitizenHealth();
+        }
     }
 
     private IEnumerator FlashyDestroy()
@@ -61,20 +72,26 @@ public class Medpack : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void increaseCitizenHealth()
+    {
+        //Add 1 health to citizen
+        CitizenManager cman = FindObjectOfType<CitizenManager>();
+        if (cman.getCitizenHealth() < cman.maxCitizenHealth)
+        {
+            cman.setCitizenHealth(cman.getCitizenHealth() + 1);
+        }
+
+        StartCoroutine(FlashyDestroy());
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject col = collision.gameObject;
         if (col.tag == "Citizen")
         {
-            //Add 1 health to citizen
-            CitizenManager cman = col.GetComponent<CitizenManager>();
-            if (cman.getCitizenHealth() < cman.maxCitizenHealth)
-            {
-                cman.setCitizenHealth(cman.getCitizenHealth() + 1);
-            }
+            hp = 0;
 
-            StartCoroutine(FlashyDestroy());
-
+            increaseCitizenHealth();
         }
     }
 }

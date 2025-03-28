@@ -6,6 +6,8 @@ public class FreezeGust : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float fadeDuration = 0.5f;
+
+    [SerializeField] ParticleSystem HitPS;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +36,35 @@ public class FreezeGust : MonoBehaviour
         }
     }
 
+    private IEnumerator FadeOut()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        Color color = spriteRenderer.color;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(1f, 0f, timeElapsed / fadeDuration);
+            spriteRenderer.color = color;
+            yield return null;
+        }
+    }
+
     private IEnumerator WaitDestroy()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.5f);
+        yield return StartCoroutine(FadeOut());
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject col = collision.gameObject;
+        if (col.tag == "Ball")
+        {
+            HitPS.Play();
+            col.GetComponent<Ball>().StartFreeze();
+        }
     }
 }
