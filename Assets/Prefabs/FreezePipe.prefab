@@ -4796,7 +4796,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1786309121
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4903,7 +4903,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1786309121
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: bcc735286493bae4eb95059173655afe, type: 3}
   m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
@@ -4929,3 +4929,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeGustPrefab: {fileID: 8008880000559711082, guid: 89cdfb780d9f54d41b969a54f8c56cdb, type: 3}
+  maxShootWait: 8
+  minShootWait: 3

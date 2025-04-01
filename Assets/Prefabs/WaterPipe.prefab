@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1786309121
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: bcc735286493bae4eb95059173655afe, type: 3}
   m_Color: {r: 0.023584902, g: 0.6041957, b: 1, a: 1}
@@ -102,6 +102,7 @@ MonoBehaviour:
   waterProjectilePrefab: {fileID: 154387074278379943, guid: d44056f302f2b1f4fbb9dc2b7344b054, type: 3}
   shootForce: 10
   pipeStrength: 0
+  shootWait: 4
 --- !u!1 &6881362538715796484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,7 +4899,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1786309121
-  m_SortingLayer: 7
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_RenderMode: 0
   m_MeshDistribution: 0

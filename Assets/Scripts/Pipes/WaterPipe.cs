@@ -9,6 +9,8 @@ public class WaterPipe : MonoBehaviour
     [SerializeField] float shootForce = 8f;
     [SerializeField] private int pipeStrength;
 
+    [SerializeField] private float shootWait;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class WaterPipe : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(shootWait);
 
             float highLowRoll = Random.Range(0f, 1f);
 

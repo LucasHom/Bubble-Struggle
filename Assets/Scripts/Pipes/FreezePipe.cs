@@ -6,6 +6,9 @@ public class FreezePipe : MonoBehaviour
 {
     [SerializeField] GameObject freezeGustPrefab;
 
+    [SerializeField] private float maxShootWait;
+    [SerializeField] private float minShootWait;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,7 @@ public class FreezePipe : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(1f, 2f));
+            yield return new WaitForSeconds(Random.Range(minShootWait, maxShootWait));
 
             GameObject freezeGust = Instantiate(freezeGustPrefab, transform.position, Quaternion.identity);
 
