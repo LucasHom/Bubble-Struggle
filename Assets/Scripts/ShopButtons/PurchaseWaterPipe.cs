@@ -1,15 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurchaseNet : ItemPurchase
+public class PurchaseWaterPipe : GadgetPurchase
 {
-    [SerializeField] private GameObject netPrefab;
-
-    [SerializeField] private static string notReadyFloatText = "Out of stock, net loss!";
-
-    [SerializeField] int maxNets = 5;
+    [SerializeField] private GameObject waterPipePrefab;
+    [SerializeField] private static string notReadyFloatText = "Out of stock, lost your flow?";
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +16,21 @@ public class PurchaseNet : ItemPurchase
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void purchaseWaterPipe()
+    {
+        AttemptPurchase(() => {
+            WaterPipe.activeWaterPipes++;
+            Instantiate(waterPipePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        });
     }
 
     public override void determineIsReady()
     {
-        if (Net.activeNets.Count < maxNets)
+        Debug.Log(GetStatusAmount());
+        if (GetStatusAmount() != "0")
         {
             setReadyVisual(true);
         }
@@ -33,16 +38,6 @@ public class PurchaseNet : ItemPurchase
         {
             setReadyVisual(false);
         }
-
-    }
-
-
-
-    public void purchaseNet()
-    {
-        AttemptPurchase(() => {
-            Instantiate(netPrefab);
-        });
     }
 
     public override string GetNotReadyFloatText()
@@ -52,6 +47,8 @@ public class PurchaseNet : ItemPurchase
 
     public override string GetStatusAmount()
     {
-        return $"{maxNets - Net.activeNets.Count}";
+        return $"{maxGadget - WaterPipe.activeWaterPipes}";
     }
+
+
 }

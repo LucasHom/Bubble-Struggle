@@ -40,6 +40,9 @@ public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPoi
         
     }
 
+    //determineIsReady();
+    //PriceText = PriceObject.GetComponent<TextMeshProUGUI>();
+    //PriceText.text = $"${basePrice}";
     public abstract void InitializeVisibleFields();
 
     public abstract void AttemptPurchase(Action purchaseAction);

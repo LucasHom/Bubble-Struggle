@@ -32,7 +32,7 @@ public class ShieldBubblePipe : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minShootWait, maxShootWait));
             Debug.Log(ShieldBubble.numActive);
-            if (ShieldBubble.numActive < 3)
+            if (ShieldBubble.numActive < 2)
             {
                 GameObject shieldBubble = Instantiate(shieldBubblePrefab, transform.position, Quaternion.identity);
 

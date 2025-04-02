@@ -11,11 +11,6 @@ public class ShieldBubble : MonoBehaviour
 
     [SerializeField] Sprite activeSprite;
 
-    void ChangeSprite()
-    {
-        
-    }
-
 
     [SerializeField] private Rigidbody2D rb2d;
 
