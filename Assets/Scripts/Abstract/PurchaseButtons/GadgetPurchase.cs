@@ -81,13 +81,19 @@ public abstract class GadgetPurchase : PurchaseButton
     private IEnumerator WaitForClickThenUpgrade()
     {
 
-        Debug.Log("Waiting for next click");
         bool clicked = false;
         while (!clicked)
         {
             if (Input.GetMouseButtonDown(0))
             {   
                 clicked = true;
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Debug.Log("reset shop");
+                attemptingPurchase = false;
+                waitingForLocation = false;
+                yield break;
             }
             yield return null;
         }

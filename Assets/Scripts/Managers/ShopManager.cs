@@ -54,6 +54,8 @@ public class ShopManager : MonoBehaviour
         shopContent.SetActive(!shopContent.activeSelf);
         if (shopContent.activeSelf)
         {
+            GadgetPurchase.attemptingPurchase = false;
+            GadgetPurchase.waitingForLocation = false;
             resetCurrencyIncrease();
         }
 

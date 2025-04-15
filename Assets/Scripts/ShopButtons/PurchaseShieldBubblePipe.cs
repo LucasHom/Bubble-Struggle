@@ -1,9 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PurchaseWaterPipe : GadgetPurchase
+public class PurchaseShieldBubblePipe : GadgetPurchase
 {
-    [SerializeField] private GameObject waterPipePrefab;
-    [SerializeField] private static string notReadyFloatText = "Out of stock, no flow?";
+    [SerializeField] private GameObject shieldBubblePipePrefab;
+    [SerializeField] private static string notReadyFloatText = "Out of stock, supply drops?";
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +19,11 @@ public class PurchaseWaterPipe : GadgetPurchase
 
     }
 
-    public void purchaseWaterPipe()
+    public void purchaseShieldBubblePipe()
     {
         AttemptPurchase(() => {
-            WaterPipe.activeWaterPipes++;
-            GameObject pipe = Instantiate(waterPipePrefab, nextPipe.transform.position, Quaternion.identity);
+            ShieldBubblePipe.activeShieldBubblePipes++;
+            GameObject pipe = Instantiate(shieldBubblePipePrefab, nextPipe.transform.position, Quaternion.identity);
             if (nextPipe.transform.position.x > 0)
             {
                 pipe.transform.localScale = new Vector3(-Mathf.Abs(pipe.transform.localScale.x), pipe.transform.localScale.y, pipe.transform.localScale.z);
@@ -48,8 +50,6 @@ public class PurchaseWaterPipe : GadgetPurchase
 
     public override string GetStatusAmount()
     {
-        return $"{maxGadget - WaterPipe.activeWaterPipes}";
+        return $"{maxGadget - ShieldBubblePipe.activeShieldBubblePipes}";
     }
-
-
 }

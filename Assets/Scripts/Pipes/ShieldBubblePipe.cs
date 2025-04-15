@@ -14,6 +14,9 @@ public class ShieldBubblePipe : MonoBehaviour
     [SerializeField] private float maxShootWait;
     [SerializeField] private float minShootWait;
 
+    public static int activeShieldBubblePipes = default;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +34,6 @@ public class ShieldBubblePipe : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minShootWait, maxShootWait));
-            Debug.Log(ShieldBubble.numActive);
             if (ShieldBubble.numActive < 2)
             {
                 GameObject shieldBubble = Instantiate(shieldBubblePrefab, transform.position, Quaternion.identity);

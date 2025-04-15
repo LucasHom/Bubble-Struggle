@@ -9,6 +9,8 @@ public class FreezePipe : MonoBehaviour
     [SerializeField] private float maxShootWait;
     [SerializeField] private float minShootWait;
 
+    public static int activeFreezePipes = default;
+
     // Start is called before the first frame update
     void Start()
     {

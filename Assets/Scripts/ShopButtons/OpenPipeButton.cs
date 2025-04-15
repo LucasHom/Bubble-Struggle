@@ -34,7 +34,7 @@ public class OpenPipeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
+        transform.localScale = new Vector3(1f, 1f, 1f) * 1.2f;
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
@@ -45,6 +45,6 @@ public class OpenPipeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
         yield return new WaitForSecondsRealtime(0.06f);
-        transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;
+        transform.localScale = new Vector3(1f, 1f, 1f) * 1.2f;
     }
 }
