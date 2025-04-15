@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class OpenPipeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public bool shopOpen = false;
-    [SerializeField] private Button locationButton;
+    public bool occupied = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,16 @@ public class OpenPipeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void UpdateNextPipePosition()
+    {
+        occupied = true;
+        GadgetPurchase.waitingForLocation = false;
+        GadgetPurchase.locationSelected = true;
+        GadgetPurchase.nextPipeLocation = transform.position;
+        StartCoroutine(ClickEffect());
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)

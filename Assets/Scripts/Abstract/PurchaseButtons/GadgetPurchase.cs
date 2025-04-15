@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class GadgetPurchase : PurchaseButton
 {
@@ -16,10 +17,21 @@ public abstract class GadgetPurchase : PurchaseButton
     private Color readyWhite = Color.white;
     private Color readyRed = new Color(193f / 255f, 64f / 255f, 72f / 255f);
 
+    //openpipes
+    public static bool locationSelected = false;
+    public static Vector3 nextPipeLocation = Vector3.zero;
+    public static bool waitingForLocation = false;
+    [SerializeField] private Button pipeButton1;
+    //[SerializeField] private Button pipeButton2;
+    //[SerializeField] private Button pipeButton3;
+    //[SerializeField] private Button pipeButton4;
+    //[SerializeField] private Button pipeButton5;
+    //[SerializeField] private Button pipeButton6;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -50,12 +62,8 @@ public abstract class GadgetPurchase : PurchaseButton
         {
             if (ShopManager.currency >= basePrice)
             {
-                clickVisuals(basePrice);
-                ShopManager.currency -= basePrice;
-                ShopManager.updateCurrency();
-
-                upgradeAction();
-                determineIsReady();
+                waitingForLocation = true;
+                StartCoroutine(WaitForClickThenUpgrade(upgradeAction));
             }
             else
             {
@@ -68,6 +76,39 @@ public abstract class GadgetPurchase : PurchaseButton
         }
 
     }
+
+    private IEnumerator WaitForClickThenUpgrade(Action upgradeAction)
+    {
+
+        Debug.Log("Waiting for next click");
+
+        while (!locationSelected)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {   
+                break;
+            }
+            yield return null;
+        }
+
+        yield return new WaitForSecondsRealtime(0.1f);
+        if (locationSelected)
+        {
+            Debug.Log("add gadget");
+
+            locationSelected = false;
+
+            clickVisuals(basePrice);
+            ShopManager.currency -= basePrice;
+            ShopManager.updateCurrency();
+
+            upgradeAction();
+            determineIsReady();
+        }
+        Debug.Log("Mouse button clicked!");
+    }
+
+
 
     public abstract string GetNotReadyFloatText();
 

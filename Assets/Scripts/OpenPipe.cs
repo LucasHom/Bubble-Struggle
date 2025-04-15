@@ -19,13 +19,22 @@ public class OpenPipe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shopManager.shopContent.activeSelf)
+        //if (shopManager.shopContent.activeSelf)
+        //{
+        //    buttonScript.shopOpen = true;
+        //}
+        //else
+        //{
+        //    buttonScript.shopOpen = false;
+        //}
+
+        if (shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied)
         {
-            buttonScript.shopOpen = true;
+            locationButton.SetActive(true);
         }
         else
         {
-            buttonScript.shopOpen = false;
+            locationButton.SetActive(false);
         }
     }
 }

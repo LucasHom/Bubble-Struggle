@@ -23,7 +23,7 @@ public class PurchaseWaterPipe : GadgetPurchase
     {
         AttemptPurchase(() => {
             WaterPipe.activeWaterPipes++;
-            Instantiate(waterPipePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            Instantiate(waterPipePrefab, nextPipeLocation, Quaternion.identity);
         });
     }
 
