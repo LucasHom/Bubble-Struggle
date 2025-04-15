@@ -26,7 +26,8 @@ public class OpenPipeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         occupied = true;
         GadgetPurchase.waitingForLocation = false;
         GadgetPurchase.locationSelected = true;
-        GadgetPurchase.nextPipeLocation = transform.position;
+        //GadgetPurchase.nextPipeLocation = transform.position;
+        GadgetPurchase.nextPipe = gameObject;
         GadgetPurchase.recntlyClickedGButton.FinalPurchase();
         StartCoroutine(ClickEffect());
     }

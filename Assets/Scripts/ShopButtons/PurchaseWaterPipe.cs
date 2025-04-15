@@ -23,7 +23,11 @@ public class PurchaseWaterPipe : GadgetPurchase
     {
         AttemptPurchase(() => {
             WaterPipe.activeWaterPipes++;
-            Instantiate(waterPipePrefab, nextPipeLocation, Quaternion.identity);
+            GameObject pipe = Instantiate(waterPipePrefab, nextPipe.transform.position, Quaternion.identity);
+            if (nextPipe.transform.position.x > 0)
+            {
+                pipe.transform.localScale = new Vector3(-Mathf.Abs(pipe.transform.localScale.x), pipe.transform.localScale.y, pipe.transform.localScale.z);
+            }
         });
     }
 

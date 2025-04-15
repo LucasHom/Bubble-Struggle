@@ -20,10 +20,11 @@ public abstract class GadgetPurchase : PurchaseButton
 
     //openpipes
     public static bool locationSelected = false;
-    public static Vector3 nextPipeLocation = Vector3.zero;
+    public static GameObject nextPipe;
     public static bool waitingForLocation = false;
     public static GadgetPurchase recntlyClickedGButton = null;
     public static Action purchaseAction;
+    public static bool attemptingPurchase = false;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,7 @@ public abstract class GadgetPurchase : PurchaseButton
     //Override for gadget purchase
     public override void AttemptPurchase(Action upgradeAction)
     {
+        attemptingPurchase = true;
         recntlyClickedGButton = this;
         if (isReady)
         {
@@ -90,8 +92,14 @@ public abstract class GadgetPurchase : PurchaseButton
             yield return null;
         }
 
+        attemptingPurchase = false;
+
         yield return new WaitForSecondsRealtime(0.2f);
-        waitingForLocation = false;
+        if (!attemptingPurchase)
+        {
+            waitingForLocation = false;
+        }
+
         
     }
 
