@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class GadgetPurchase : PurchaseButton
@@ -21,12 +22,8 @@ public abstract class GadgetPurchase : PurchaseButton
     public static bool locationSelected = false;
     public static Vector3 nextPipeLocation = Vector3.zero;
     public static bool waitingForLocation = false;
-    [SerializeField] private Button pipeButton1;
-    //[SerializeField] private Button pipeButton2;
-    //[SerializeField] private Button pipeButton3;
-    //[SerializeField] private Button pipeButton4;
-    //[SerializeField] private Button pipeButton5;
-    //[SerializeField] private Button pipeButton6;
+    public static GadgetPurchase recntlyClickedGButton = null;
+    public static Action purchaseAction;
 
     // Start is called before the first frame update
     void Start()
@@ -58,12 +55,14 @@ public abstract class GadgetPurchase : PurchaseButton
     //Override for gadget purchase
     public override void AttemptPurchase(Action upgradeAction)
     {
+        recntlyClickedGButton = this;
         if (isReady)
         {
             if (ShopManager.currency >= basePrice)
             {
+                purchaseAction = upgradeAction;
                 waitingForLocation = true;
-                StartCoroutine(WaitForClickThenUpgrade(upgradeAction));
+                StartCoroutine(WaitForClickThenUpgrade());
             }
             else
             {
@@ -77,35 +76,36 @@ public abstract class GadgetPurchase : PurchaseButton
 
     }
 
-    private IEnumerator WaitForClickThenUpgrade(Action upgradeAction)
+    private IEnumerator WaitForClickThenUpgrade()
     {
 
         Debug.Log("Waiting for next click");
-
-        while (!locationSelected)
+        bool clicked = false;
+        while (!clicked)
         {
             if (Input.GetMouseButtonDown(0))
             {   
-                break;
+                clicked = true;
             }
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(0.1f);
-        if (locationSelected)
-        {
-            Debug.Log("add gadget");
+        yield return new WaitForSecondsRealtime(0.2f);
+        waitingForLocation = false;
+        
+    }
 
-            locationSelected = false;
 
-            clickVisuals(basePrice);
-            ShopManager.currency -= basePrice;
-            ShopManager.updateCurrency();
+    public void FinalPurchase()
+    {
+        locationSelected = false;
 
-            upgradeAction();
-            determineIsReady();
-        }
-        Debug.Log("Mouse button clicked!");
+        clickVisuals(basePrice);
+        ShopManager.currency -= basePrice;
+        ShopManager.updateCurrency();
+
+        purchaseAction();
+        determineIsReady();
     }
 
 

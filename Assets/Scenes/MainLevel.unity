@@ -1186,6 +1186,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1947692095}
+  - {fileID: 1303915123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &229843089
@@ -1468,17 +1469,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1111710338977269082, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
   m_PrefabInstance: {fileID: 3698885914749710051}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &370261057 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6851767330084771465, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
-  m_PrefabInstance: {fileID: 8728984385604576681}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &376555720
 GameObject:
   m_ObjectHideFlags: 0
@@ -9632,6 +9622,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1303915122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 196564922}
+    m_Modifications:
+    - target: {fileID: 4623430775143592107, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_Name
+      value: OpenPipe2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689377022371492040, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491241692121179480, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_Name
+      value: LocationButton2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+--- !u!4 &1303915123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+  m_PrefabInstance: {fileID: 1303915122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1329225458
 GameObject:
   m_ObjectHideFlags: 0
@@ -16749,7 +16809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2600465910317561346, guid: 9b5591ebd44fce9499b274af81be8ed6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7595419818095191371, guid: 9b5591ebd44fce9499b274af81be8ed6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17894,7 +17954,6 @@ MonoBehaviour:
   basePrice: 50
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
-  pipeButton1: {fileID: 370261057}
   waterPipePrefab: {fileID: 673658727088726988, guid: 247e29028fdaca1408d7e74f0bc0eeeb, type: 3}
 --- !u!1001 &8728984385604576681
 PrefabInstance:
@@ -17907,6 +17966,10 @@ PrefabInstance:
     - target: {fileID: 4623430775143592107, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
       propertyPath: m_Name
       value: OpenPipe1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623430775143592107, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
+      propertyPath: m_TagString
+      value: LocationButton
       objectReference: {fileID: 0}
     - target: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
       propertyPath: m_LocalPosition.x

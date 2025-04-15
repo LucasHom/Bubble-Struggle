@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 7700060014468071618}
   m_Layer: 5
   m_Name: LocationButton
-  m_TagString: Untagged
+  m_TagString: LocationButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -513,3 +513,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a1c21d6745c934f80a87a33082e4df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occupied: 0

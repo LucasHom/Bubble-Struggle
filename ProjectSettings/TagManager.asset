@@ -16,6 +16,7 @@ TagManager:
   - Net
   - FreezeGust
   - Water
+  - LocationButton
   layers:
   - Default
   - TransparentFX
