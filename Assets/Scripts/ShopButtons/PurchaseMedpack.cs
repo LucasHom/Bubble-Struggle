@@ -57,6 +57,6 @@ public class PurchaseMedpack : ItemPurchase
     }
     public override string GetStatusAmount()
     {
-        return $"{Citizen.maxCitizenHealth - Citizen.citizenHealth + Medpack.activeMedpacks}";
+        return $"{Citizen.maxCitizenHealth - (Citizen.citizenHealth + Medpack.activeMedpacks)}";
     }
 }

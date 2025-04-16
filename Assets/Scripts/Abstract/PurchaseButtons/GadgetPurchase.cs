@@ -88,13 +88,6 @@ public abstract class GadgetPurchase : PurchaseButton
             {   
                 clicked = true;
             }
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                Debug.Log("reset shop");
-                attemptingPurchase = false;
-                waitingForLocation = false;
-                yield break;
-            }
             yield return null;
         }
 

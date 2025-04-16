@@ -49,6 +49,9 @@ public class Medpack : MonoBehaviour
 
     private IEnumerator FlashyDestroy()
     {
+        activeMedpacks--;
+
+
         mainPS.Stop();
         //Play animation if get working
         rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -68,7 +71,6 @@ public class Medpack : MonoBehaviour
             yield return null;
         }
 
-        activeMedpacks--;
         Destroy(gameObject);
     }
 

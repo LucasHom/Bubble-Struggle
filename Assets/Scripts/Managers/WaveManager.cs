@@ -12,7 +12,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject smallBallPrefab;
     [SerializeField] GameObject largeBallGuardedPrefab;
     [SerializeField] GameObject supportBallPrefab;
-    [SerializeField] GameObject umbrella;
 
     //Spawning
     [SerializeField] float timeBetweenSpawn = 0.5f;
@@ -22,12 +21,7 @@ public class WaveManager : MonoBehaviour
 
 
 
-
     public int ballsRemaining;
-
-
-
-
 
 
     private float minXSpawn = -7;
@@ -56,10 +50,8 @@ public class WaveManager : MonoBehaviour
 
     //Citizens
     [SerializeField] CitizenManager girlfriend;
-
-
-
     [SerializeField] int tempBalls;
+    [SerializeField] GameObject citizenHealthIndicator;
 
 
 
@@ -70,6 +62,7 @@ public class WaveManager : MonoBehaviour
         cloudMovement = FindObjectOfType<CloudMovement>();
         shopManager = FindObjectOfType<ShopManager>();
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
+        citizenHealthIndicator.SetActive(false);
         shopManager.currencyIndicator.SetActive(false);
 
         StartCoroutine(SpawnWave());
@@ -90,12 +83,6 @@ public class WaveManager : MonoBehaviour
             updateWaveIsOver();
         }
 
-
-        //DEv thing
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Instantiate(umbrella);
-        }
         
     }
 
@@ -113,6 +100,7 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             DisableTransitionText();
             //Toggle currency on
+            ToggleCitizenHealth();
             shopManager.ToggleCurrency();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             shopManager.isShopToggleReady = true;
@@ -136,6 +124,7 @@ public class WaveManager : MonoBehaviour
 
             yield return new WaitForSeconds(3f);
             //Toggle currency off
+            ToggleCitizenHealth();
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
@@ -171,5 +160,10 @@ public class WaveManager : MonoBehaviour
     {
         waveNumText.enabled = false;
         waveDescriptionText.enabled = false;
+    }
+
+    private void ToggleCitizenHealth()
+    {
+        citizenHealthIndicator.SetActive(!citizenHealthIndicator.activeSelf);
     }
 }
