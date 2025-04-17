@@ -1948,6 +1948,7 @@ MonoBehaviour:
   upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
   PriceObject: {fileID: 395728198}
   StatusText: {fileID: 395728199}
+  newText: {fileID: 804189023}
   basePrice: 120
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
@@ -2993,6 +2994,7 @@ GameObject:
   - component: {fileID: 610947982}
   - component: {fileID: 610947981}
   - component: {fileID: 610947983}
+  - component: {fileID: 610947984}
   m_Layer: 5
   m_Name: PipeLocationText
   m_TagString: Untagged
@@ -3130,6 +3132,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseFontSize: 0.5
   fontSizeMultiplier: 1.1
+--- !u!114 &610947984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610947979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e77329fcf41d1489d3d4a62e8a5023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &622332593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3271,6 +3285,7 @@ MonoBehaviour:
   upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
   PriceObject: {fileID: 1801024733}
   StatusText: {fileID: 628093726}
+  newText: {fileID: 1389866221}
   basePrice: 15
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
@@ -8649,6 +8664,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &804189023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2023075212608240653, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
+  m_PrefabInstance: {fileID: 395728194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &807279040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9714,6 +9734,7 @@ MonoBehaviour:
   upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
   PriceObject: {fileID: 1008244631}
   StatusText: {fileID: 757241621}
+  newText: {fileID: 1305323371}
   basePrice: 90
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
@@ -9965,6 +9986,7 @@ MonoBehaviour:
   upgradeCostTextPrefab: {fileID: 9032931235402571014, guid: 6299f95bf16ba394486c685403096f1d, type: 3}
   PriceObject: {fileID: 1034874324}
   StatusText: {fileID: 1034874325}
+  newText: {fileID: 1912717091}
   basePrice: 10
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
@@ -10208,6 +10230,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
   m_PrefabInstance: {fileID: 1070476906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094928761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2023075212608240653, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
+  m_PrefabInstance: {fileID: 3851191514209178896}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1107441394
 PrefabInstance:
@@ -10988,6 +11015,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
   m_PrefabInstance: {fileID: 1303915122}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305323371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2023075212608240653, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
+  m_PrefabInstance: {fileID: 1008244627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1329225458
 GameObject:
   m_ObjectHideFlags: 0
@@ -11183,6 +11215,11 @@ MonoBehaviour:
   - target: {fileID: 1935402002}
     weight: 1
     radius: 0
+--- !u!1 &1389866221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8031032428776608773, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
+  m_PrefabInstance: {fileID: 622332593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1405410793
 GameObject:
   m_ObjectHideFlags: 0
@@ -17577,6 +17614,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886127307}
   m_CullTransparentMesh: 1
+--- !u!1 &1912717091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8031032428776608773, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
+  m_PrefabInstance: {fileID: 1034874322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1924917766
 GameObject:
   m_ObjectHideFlags: 0
@@ -18478,6 +18520,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurchaseWaterPipeButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7324483360137024664, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
+      propertyPath: newText
+      value: 
+      objectReference: {fileID: 1094928761}
     - target: {fileID: 7324483360137024664, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
       propertyPath: basePrice
       value: 60

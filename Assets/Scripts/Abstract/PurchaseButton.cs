@@ -20,6 +20,7 @@ public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPoi
     [SerializeField] protected GameObject PriceObject;
     [SerializeField] protected TextMeshProUGUI StatusText;
     protected TextMeshProUGUI PriceText;
+    [SerializeField] private GameObject newText;
 
 
     [SerializeField] protected int basePrice = default;
@@ -31,7 +32,7 @@ public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPoi
     // Start is called before the first frame update
     void Start()
     {
-
+        newText.SetActive(true);
     }
 
     // Update is called once per frame
@@ -76,6 +77,7 @@ public abstract class PurchaseButton : MonoBehaviour, IPointerEnterHandler, IPoi
 
     private IEnumerator ClickEffect()
     {
+        newText.SetActive(false);
         transform.localScale = new Vector3(1f, 1f, 1f);
         yield return new WaitForSecondsRealtime(0.06f);
         transform.localScale = new Vector3(1f, 1f, 1f) * 1.05f;

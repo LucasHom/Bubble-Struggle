@@ -10,11 +10,18 @@ public class ChooseLocationText : MonoBehaviour
     [SerializeField] float fontSizeMultiplier;
     private Coroutine emphasizeTextCoroutine = null;
 
+    private EmphasizeText emphasizeText;
+
     // Start is called before the first frame update
     void Start()
     {
         myText = GetComponent<TextMeshProUGUI>();
-        StartCoroutine(EmphasizeText());
+        if (GetComponent<EmphasizeText>() != null)
+        {
+            emphasizeText = GetComponent<EmphasizeText>();
+        }
+
+        StartCoroutine(emphasizeText.Emphasize(myText, baseFontSize, fontSizeMultiplier));
     }
 
     // Update is called once per frame
@@ -24,7 +31,7 @@ public class ChooseLocationText : MonoBehaviour
         {
             if (emphasizeTextCoroutine == null)
             {
-                emphasizeTextCoroutine = StartCoroutine(EmphasizeText());
+                emphasizeTextCoroutine = StartCoroutine(emphasizeText.Emphasize(myText, baseFontSize, fontSizeMultiplier));
             }
             myText.enabled = true;
         }
@@ -39,54 +46,4 @@ public class ChooseLocationText : MonoBehaviour
         }
     }
 
-    private IEnumerator EmphasizeText()
-    {
-        TextMeshProUGUI text = myText;
-
-        float elapsedTime = 0f;
-        float growTime = 0.6f;
-        float shrinkTime = 0.6f;
-
-        while (true)
-        {
-            elapsedTime = 0f;
-
-            // Growing
-            while (elapsedTime < growTime)
-            {
-                elapsedTime += Time.unscaledDeltaTime;
-
-                float newFontSize = Mathf.Lerp(baseFontSize, baseFontSize * fontSizeMultiplier, EaseIn(elapsedTime / growTime));
-
-                text.fontSize = newFontSize;
-
-                yield return null;
-            }
-
-            //Shrinking
-            elapsedTime = 0f;
-
-            while (elapsedTime < shrinkTime)
-            {
-                elapsedTime += Time.unscaledDeltaTime;
-
-                float newFontSize = Mathf.Lerp(baseFontSize * fontSizeMultiplier, baseFontSize, EaseOut(elapsedTime / growTime));
-
-                text.fontSize = newFontSize;
-
-                yield return null;
-            }
-        }
-    }
-
-    private float EaseOut(float time)
-    {
-        return Mathf.Pow(time - 1f, 3) + 1f;
-
-    }
-
-    private float EaseIn(float time)
-    {
-        return Mathf.Pow(time, 3);
-    }
 }
