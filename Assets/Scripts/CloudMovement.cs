@@ -7,10 +7,14 @@ public class CloudMovement : MonoBehaviour
 {
     [SerializeField] public float startingCloudHeight = 10f;
     [SerializeField] private float moveDuration = 1f;
+
+    //Pigeon
+    private PigeonManager pigeonManager;
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0f, startingCloudHeight, 0f);
+        pigeonManager = GetComponent<PigeonManager>();
     }
 
     // Update is called once per frame
@@ -19,11 +23,7 @@ public class CloudMovement : MonoBehaviour
 
     }
 
-    public void ChangeCloudHeight(float height)
-    {
-        StartCoroutine(ChangeCloudHeightCoroutine(height));
-    }
-    private IEnumerator ChangeCloudHeightCoroutine(float height)
+    public IEnumerator ChangeCloudHeight(float height)
     {
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
@@ -36,6 +36,24 @@ public class CloudMovement : MonoBehaviour
 
             yield return null;
         }
+        pigeonManager.SpawnPigeons();
 
+    }
+
+    public void RandomizeColliderOffset(float range = 0.3f)
+    {
+        Collider2D col2d = GetComponent<Collider2D>();
+
+        if (col2d != null)
+        {
+            Vector2 originalOffset = new Vector2(0.52f, 0f);
+            float randomX = Random.Range(-range, range);
+            col2d.offset = new Vector2(randomX, originalOffset.y);
+        }
+    }
+
+    public float getHeight()
+    {
+        return transform.position.y;
     }
 }

@@ -13,6 +13,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject largeBallGuardedPrefab;
     [SerializeField] GameObject supportBallPrefab;
 
+
+
     //Spawning
     [SerializeField] float timeBetweenSpawn = 0.5f;
     [SerializeField] float timeBetweenWave = 4f;
@@ -55,6 +57,7 @@ public class WaveManager : MonoBehaviour
 
 
 
+
     void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
@@ -65,24 +68,20 @@ public class WaveManager : MonoBehaviour
         citizenHealthIndicator.SetActive(false);
         shopManager.currencyIndicator.SetActive(false);
 
+
+
         StartCoroutine(SpawnWave());
     }
 
 
     void Update()
     {
-
-
-
         tempBalls = Ball.numActiveBalls;
-
-
 
         if (checkWaveIsOver)
         {
             updateWaveIsOver();
         }
-
         
     }
 
@@ -135,8 +134,9 @@ public class WaveManager : MonoBehaviour
 
             if (currentWave < maxWaves)
             {
-                cloudMovement.ChangeCloudHeight(cloudHeightChange);
+                StartCoroutine(cloudMovement.ChangeCloudHeight(cloudHeightChange));
             }
+
             yield return new WaitForSeconds(2f);
 
             cameraManager.SwitchToWaveView();
@@ -149,6 +149,9 @@ public class WaveManager : MonoBehaviour
  
         }
     }
+
+
+
 
     private void EnableTransitionText()
     {
