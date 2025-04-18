@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,8 +19,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] float timeBetweenWave = 4f;
     [SerializeField] int waveSpawns = 3;
     private bool checkWaveIsOver = false;
-
-
 
     public int ballsRemaining;
 
@@ -82,13 +79,15 @@ public class WaveManager : MonoBehaviour
         {
             updateWaveIsOver();
         }
-        
+
     }
 
     private void updateWaveIsOver()
     {
         waveIsOver = Ball.numActiveBalls < 1;
     }
+
+
 
     IEnumerator SpawnWave()
     {
@@ -146,7 +145,7 @@ public class WaveManager : MonoBehaviour
 
             EnableTransitionText();
             yield return new WaitForSeconds(timeBetweenWave);
- 
+
         }
     }
 

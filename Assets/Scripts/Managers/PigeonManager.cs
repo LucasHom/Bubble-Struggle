@@ -34,6 +34,15 @@ public class PigeonManager : MonoBehaviour
         }
     }
 
+    public IEnumerator SpawnColumbidae()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            SpawnPigeons();
+            yield return new WaitForSeconds(0.7f);
+        }
+    }
+
     private Vector2 GetRandomCloudPosition(float range = 2f)
     {
         float randomX = Random.Range(-range - 0.2f, range);
@@ -41,7 +50,7 @@ public class PigeonManager : MonoBehaviour
         return new Vector2(-16f + randomX, cloudMovement.getHeight() - randomY);
     }
 
-    int GetWeightedSpawnCount()
+    private int GetWeightedSpawnCount()
     {
         float rand = Random.value;
 

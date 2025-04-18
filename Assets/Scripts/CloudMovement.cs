@@ -37,6 +37,7 @@ public class CloudMovement : MonoBehaviour
             yield return null;
         }
         pigeonManager.SpawnPigeons();
+        // TODO: pigeonManager.SpawnColombidae() on wave 10
 
     }
 
