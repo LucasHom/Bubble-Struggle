@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -52,6 +53,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] int tempBalls;
     [SerializeField] GameObject citizenHealthIndicator;
 
+    //Popups
+    [SerializeField] GameObject popupPrefab;
+    [SerializeField] Sprite waterTankImage;
+
 
 
 
@@ -93,6 +98,7 @@ public class WaveManager : MonoBehaviour
     {
         while (true)
         {
+
             cameraManager.SwitchToGameView();
 
             yield return new WaitForSeconds(1f);
@@ -126,10 +132,12 @@ public class WaveManager : MonoBehaviour
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
+            createPopup("Upgrade", "Increase the amount of water you can hold", "Water Tank", waterTankImage, 4f);
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             yield return new WaitForSeconds(2f);
+
 
             if (currentWave < maxWaves)
             {
@@ -142,14 +150,17 @@ public class WaveManager : MonoBehaviour
             currentWave++;
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             yield return new WaitForSeconds(2f);
-
             EnableTransitionText();
             yield return new WaitForSeconds(timeBetweenWave);
 
         }
     }
 
-
+    private void createPopup(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult)
+    {
+        GameObject popup = Instantiate(popupPrefab, new Vector2(382f, 215f), Quaternion.identity);
+        popup.GetComponent<Popup>().SetUnitInfo(unitType, unitDesc, unitName, unitSprite, spriteSizeMult);
+    }
 
 
     private void EnableTransitionText()
