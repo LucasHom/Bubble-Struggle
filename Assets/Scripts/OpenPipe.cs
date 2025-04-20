@@ -8,6 +8,8 @@ public class OpenPipe : MonoBehaviour
     private OpenPipeButton buttonScript;
     [SerializeField] private GameObject locationButton;
 
+    private bool lastActiveState = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,16 +19,30 @@ public class OpenPipe : MonoBehaviour
     }
 
     // Update is called once per frame
+    //void Update()
+    //{
+    //    if (shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied)
+    //    {
+    //        locationButton.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        locationButton.SetActive(false);
+    //    }
+
+    //}
+
+
+    //Changed for optimization
     void Update()
     {
-        if (shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied)
-        {
-            locationButton.SetActive(true);
-        }
-        else
-        {
-            locationButton.SetActive(false);
-        }
+        bool shouldBeActive = shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied;
 
+        if (shouldBeActive != lastActiveState)
+        {
+            locationButton.SetActive(shouldBeActive);
+            lastActiveState = shouldBeActive;
+        }
     }
+
 }

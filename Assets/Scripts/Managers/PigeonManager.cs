@@ -17,11 +17,11 @@ public class PigeonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log("Pressed p");
-            SpawnPigeons();
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Debug.Log("Pressed p");
+        //    SpawnPigeons();
+        //}
     }
 
     public void SpawnPigeons()
@@ -54,8 +54,9 @@ public class PigeonManager : MonoBehaviour
     {
         float rand = Random.value;
 
-        if (rand < 0.6f) return 1;      // 60% chance
-        else if (rand < 0.9f) return 2; // 30% chance
+        if (rand < 0.2f) return 0;      // 20% chance
+        else if (rand < 0.7f) return 1; // 50% chance
+        else if (rand < 0.9f) return 2; //20% chance
         else return 3;                 // 10% chance
     }
 }

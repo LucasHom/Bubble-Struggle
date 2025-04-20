@@ -57,6 +57,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] GameObject popupPrefab;
     //  Popups images
     [SerializeField] Sprite waterTankImage;
+    [SerializeField] Sprite pigeonImage;
     //  Popup pipe images
     [SerializeField] Sprite pipeImage;
     [SerializeField] Sprite waterProjImage;
@@ -111,6 +112,7 @@ public class WaveManager : MonoBehaviour
             ToggleCitizenHealth();
             shopManager.ToggleCurrency();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+            createPopup("???", "It seems well-hydrated...", "Stupid pigeon", pigeonImage, 5f);
             shopManager.isShopToggleReady = true;
             shopManager.isBackgroundToggleReady = true;
 

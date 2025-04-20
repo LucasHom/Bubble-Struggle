@@ -16,6 +16,13 @@ public class Popup : MonoBehaviour
     [SerializeField] Image unitImage;
     [SerializeField] Image pipeImage;
 
+    private FadeInUI fadeInUI;
+
+    private void Awake()
+    {
+        fadeInUI = unitInfo.GetComponent<FadeInUI>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +38,7 @@ public class Popup : MonoBehaviour
         if (popupUnitEffects.isIdle)
         {
             unitInfo.SetActive(true);
-            unitInfo.GetComponent<FadeInUI>().FadeIn();
+            fadeInUI.FadeIn();
 
             if (unitInfo.GetComponent<FadeInUI>().isVisible)
             {
@@ -43,7 +50,6 @@ public class Popup : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-
         }
     }
 
