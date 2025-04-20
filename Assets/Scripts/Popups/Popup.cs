@@ -14,6 +14,7 @@ public class Popup : MonoBehaviour
     [SerializeField] TextMeshProUGUI unitDescText;
     [SerializeField] TextMeshProUGUI unitNameText;
     [SerializeField] Image unitImage;
+    [SerializeField] Image pipeImage;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +47,38 @@ public class Popup : MonoBehaviour
         }
     }
 
-    public void SetUnitInfo(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult)
+    public void SetUnitInfo(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult, Sprite pipeSprite = null, Color pipeColor = default)
     {
         unitTypeText.text = unitType;
         unitDescText.text = unitDesc;
         unitNameText.text = unitName;
-        unitImage.sprite = unitSprite;
-        //Set unit sprite size
-        unitImage.GetComponent<RectTransform>().sizeDelta = new Vector2(unitSprite.rect.width * spriteSizeMult, unitSprite.rect.height * spriteSizeMult);
+
+        if (pipeSprite)
+        {
+            //Enable correct images
+            pipeImage.enabled = true;
+
+            //Setup pipe item image
+            pipeImage.sprite = pipeSprite;
+            unitImage.sprite = unitSprite;
+            pipeImage.color = pipeColor;
+
+            unitImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(11.1f, 22f);
+            pipeImage.GetComponent<RectTransform>().sizeDelta = new Vector2(40.625f, 48.75f);
+            unitImage.GetComponent<RectTransform>().sizeDelta = new Vector2(unitSprite.rect.width * spriteSizeMult, unitSprite.rect.height * spriteSizeMult);
+        }
+        else
+        {
+            //Enable correct images
+            pipeImage.enabled = false;
+
+            //Setup default image
+            unitImage.sprite = unitSprite;
+            unitImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 14.92f);
+            unitImage.GetComponent<RectTransform>().sizeDelta = new Vector2(unitSprite.rect.width * spriteSizeMult, unitSprite.rect.height * spriteSizeMult);
+            
+        }  
     }
+
+
 }

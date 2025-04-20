@@ -55,7 +55,11 @@ public class WaveManager : MonoBehaviour
 
     //Popups
     [SerializeField] GameObject popupPrefab;
+    //  Popups images
     [SerializeField] Sprite waterTankImage;
+    //  Popup pipe images
+    [SerializeField] Sprite pipeImage;
+    [SerializeField] Sprite waterProjImage;
 
 
 
@@ -111,6 +115,8 @@ public class WaveManager : MonoBehaviour
             shopManager.isBackgroundToggleReady = true;
 
             waveIsOver = false;
+            
+
 
             for (int spawned = 0; spawned < waveSpawns; spawned++)
             {
@@ -133,6 +139,8 @@ public class WaveManager : MonoBehaviour
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
             createPopup("Upgrade", "Increase the amount of water you can hold", "Water Tank", waterTankImage, 4f);
+            //PipePopup example
+            //createPopup("Upgrade", "Increase the amount of water you can hold", "Water Tank", waterProjImage, 3.2f, pipeImage, new Color(154f / 255f, 1f, 1f));
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
@@ -156,10 +164,10 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void createPopup(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult)
+    private void createPopup(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult, Sprite pipeSprite = null, Color pipeColor = default)
     {
         GameObject popup = Instantiate(popupPrefab, new Vector2(382f, 215f), Quaternion.identity);
-        popup.GetComponent<Popup>().SetUnitInfo(unitType, unitDesc, unitName, unitSprite, spriteSizeMult);
+        popup.GetComponent<Popup>().SetUnitInfo(unitType, unitDesc, unitName, unitSprite, spriteSizeMult, pipeSprite, pipeColor);
     }
 
 
