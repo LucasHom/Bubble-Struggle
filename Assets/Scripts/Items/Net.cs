@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public class Net : MonoBehaviour
@@ -11,8 +10,6 @@ public class Net : MonoBehaviour
     [SerializeField] private TextMeshProUGUI netDurabilityText;
     [SerializeField] int maxDurbility = 20;
     public int durability;
-
-
 
 
     //Spawning
@@ -92,7 +89,7 @@ public class Net : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        transform.localScale = Vector3.zero; 
+        transform.localScale = Vector3.zero;
     }
 
     private void CreateSpawnPosition()

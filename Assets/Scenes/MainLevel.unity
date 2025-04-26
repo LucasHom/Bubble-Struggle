@@ -8661,6 +8661,7 @@ GameObject:
   - component: {fileID: 839196638}
   - component: {fileID: 839196637}
   - component: {fileID: 839196639}
+  - component: {fileID: 839196644}
   - component: {fileID: 839196640}
   - component: {fileID: 839196641}
   - component: {fileID: 839196642}
@@ -8726,22 +8727,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebaa8e18721dce041938fbcb35ffc966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  largeBallPrefab: {fileID: 6299765533239844623, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-  mediumBallPrefab: {fileID: 6299765533239844623, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-  smallBallPrefab: {fileID: 6299765533239844623, guid: 6848334d409d530459e8c577d332ffde, type: 3}
-  largeBallGuardedPrefab: {fileID: 6225231712993871107, guid: 51face169f9c901498fe383fa5269707, type: 3}
-  supportBallPrefab: {fileID: 6299765533239844623, guid: 051744ab5c274b049a95217847608fd8, type: 3}
   timeBetweenSpawn: 0.5
   timeBetweenWave: 3
   waveSpawns: 3
   ballsRemaining: 0
   maxCloudHeight: 35
   maxWaves: 10
+  cloudMovement: {fileID: 1935402003}
   currentWave: 0
   waveNumText: {fileID: 140179342}
   waveDescriptionText: {fileID: 1487057403}
   girlfriend: {fileID: 564262034}
-  tempBalls: 0
   citizenHealthIndicator: {fileID: 733147036}
   popupPrefab: {fileID: 941322894145302567, guid: 0882c9716c672d741ad884d7c8d46179, type: 3}
   waterTankImage: {fileID: 21300000, guid: 051e46cab6c06e34689a8fbb8774b54d, type: 3}
@@ -8813,6 +8809,24 @@ MonoBehaviour:
   crosshairInactive: {fileID: 2800000, guid: 638e82210e617564ba6b9f44e64d32ff, type: 3}
   defaultCursor: {fileID: 2800000, guid: dcdc3c68a55ecb946ac1e99e0be66388, type: 3}
   shopManager: {fileID: 839196641}
+--- !u!114 &839196644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839196636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4079ded08f7ac4d912f9143dba3bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeBallPrefab: {fileID: 6299765533239844623, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
+  mediumBallPrefab: {fileID: 6299765533239844623, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
+  smallBallPrefab: {fileID: 6299765533239844623, guid: 6848334d409d530459e8c577d332ffde, type: 3}
+  largeBallGuardedPrefab: {fileID: 6225231712993871107, guid: 51face169f9c901498fe383fa5269707, type: 3}
+  supportBallPrefab: {fileID: 6299765533239844623, guid: 051744ab5c274b049a95217847608fd8, type: 3}
+  allWaves: []
 --- !u!1 &855605789
 GameObject:
   m_ObjectHideFlags: 0

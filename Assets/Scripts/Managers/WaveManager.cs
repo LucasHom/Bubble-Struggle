@@ -6,40 +6,36 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
-    //Objects to Spawn
-    [SerializeField] GameObject largeBallPrefab;
-    [SerializeField] GameObject mediumBallPrefab;
-    [SerializeField] GameObject smallBallPrefab;
-    [SerializeField] GameObject largeBallGuardedPrefab;
-    [SerializeField] GameObject supportBallPrefab;
-
-
-
     //Spawning
-    [SerializeField] float timeBetweenSpawn = 0.5f;
-    [SerializeField] float timeBetweenWave = 4f;
-    [SerializeField] int waveSpawns = 3;
-    private bool checkWaveIsOver = false;
-
     public int ballsRemaining;
-
-
     private float minXSpawn = -7;
     private float maxXSpawn = 7;
+    
+    private Vector3 randomSpawnPosition;
+
+
+    //Wave Tracking
+    private WaveInfo waveInfo;
+    [SerializeField] float timeBetweenWave = 4f;
+    [SerializeField] private int currentWave = 1;
+    private int currentWaveIndex = 0;
+    private int currentSubWaveIndex = 0;
+
+    private bool checkSubWaveIsOver = false;
+    private bool subWaveIsOver = true;
+
+
 
     //Cloud
     [SerializeField] private float maxCloudHeight = 50f;
     [SerializeField] private float maxWaves = 25;
     private float cloudHeightChange;
-    private CloudMovement cloudMovement;
+    [SerializeField] private CloudMovement cloudMovement;
 
     //Camera
     private CameraManager cameraManager;
     private CinemachineBrain cinemachineBrain;
 
-    //Wave Tracking
-    [SerializeField] private int currentWave = 1;
-    private bool waveIsOver = true;
 
     //Transition Text
     [SerializeField] TextMeshProUGUI waveNumText;
@@ -50,8 +46,8 @@ public class WaveManager : MonoBehaviour
 
     //Citizens
     [SerializeField] CitizenManager girlfriend;
-    [SerializeField] int tempBalls;
     [SerializeField] GameObject citizenHealthIndicator;
+
 
     //Popups
     [SerializeField] GameObject popupPrefab;
@@ -63,47 +59,46 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Sprite waterProjImage;
 
 
-
+    private void Awake()
+    {
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        cameraManager = GetComponent<CameraManager>();
+        shopManager = GetComponent<ShopManager>();
+        waveInfo = GetComponent<WaveInfo>();
+    }
 
     void Start()
     {
-        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
-        cameraManager = FindObjectOfType<CameraManager>();
-        cloudMovement = FindObjectOfType<CloudMovement>();
-        shopManager = FindObjectOfType<ShopManager>();
+
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
         citizenHealthIndicator.SetActive(false);
         shopManager.currencyIndicator.SetActive(false);
 
+        randomSpawnPosition = new Vector3(Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f);
 
-
-        StartCoroutine(SpawnWave());
+        StartCoroutine(GameLoop());
     }
 
 
     void Update()
     {
-        tempBalls = Ball.numActiveBalls;
-
-        if (checkWaveIsOver)
+        if (checkSubWaveIsOver)
         {
             updateWaveIsOver();
         }
-
     }
 
     private void updateWaveIsOver()
     {
-        waveIsOver = Ball.numActiveBalls < 1;
+        subWaveIsOver = Ball.numActiveBalls < 1;
     }
 
 
 
-    IEnumerator SpawnWave()
+    private IEnumerator GameLoop()
     {
-        while (true)
+        while (currentWave < maxWaves)
         {
-
             cameraManager.SwitchToGameView();
 
             yield return new WaitForSeconds(1f);
@@ -113,28 +108,42 @@ public class WaveManager : MonoBehaviour
             shopManager.ToggleCurrency();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             createPopup("???", "It seems well-hydrated...", "Stupid pigeon", pigeonImage, 5f);
+
             shopManager.isShopToggleReady = true;
             shopManager.isBackgroundToggleReady = true;
 
-            waveIsOver = false;
-            
 
 
-            for (int spawned = 0; spawned < waveSpawns; spawned++)
+
+
+
+            currentSubWaveIndex = 0;
+
+            //Check if the current wave is over
+            while (currentSubWaveIndex < waveInfo.allWaves[currentWaveIndex].subWaves.Count)
             {
-                yield return new WaitForSeconds(timeBetweenSpawn);
-                Instantiate(largeBallPrefab, new Vector3(Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f), Quaternion.identity);
+                subWaveIsOver = false;
+                waveInfo.SpawnSubWave(currentWaveIndex, currentSubWaveIndex, randomSpawnPosition);
+
+                // Wait for subwave to end
+                checkSubWaveIsOver = true;
+                yield return new WaitUntil(() => subWaveIsOver);
+                checkSubWaveIsOver = false;
+
+                yield return new WaitForSeconds(1f);
+                girlfriend.GiveThanks();
+                yield return new WaitForSeconds(2f);
+
+                currentSubWaveIndex++;
             }
 
-
-            checkWaveIsOver = true;
-            yield return new WaitUntil(() => waveIsOver);
-            checkWaveIsOver = false;
+            currentWaveIndex++;
 
 
-            girlfriend.GiveThanks();
 
-            yield return new WaitForSeconds(3f);
+
+
+
             //Toggle currency off
             ToggleCitizenHealth();
             shopManager.ToggleCurrency();

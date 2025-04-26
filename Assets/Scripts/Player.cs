@@ -120,6 +120,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void FixedUpdate()
+    {
         //Gather input
         if (movement > 0 && !isFacingRight)
         {
@@ -130,14 +135,7 @@ public class Player : MonoBehaviour
             flipPlayer();
         }
         getPlayerMovement();
-    }
 
-    private void FixedUpdate()
-    {
-        //Use gathered input to make actual movements
-        //Vector2 could also be Vector2.right * movement
-        //rb2d.MovePosition(rb2d.position + new Vector2 (movement * Time.fixedDeltaTime, 0f));
-        //Debug.Log(currentHorizontalInput);
         rb2d.velocity = new Vector2(movement, 0f);
     }
 

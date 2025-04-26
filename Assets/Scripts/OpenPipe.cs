@@ -16,24 +16,10 @@ public class OpenPipe : MonoBehaviour
     {
         shopManager = FindObjectOfType<ShopManager>();
         buttonScript = locationButton.GetComponent<OpenPipeButton>();
+        locationButton.SetActive(false);
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    if (shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied)
-    //    {
-    //        locationButton.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        locationButton.SetActive(false);
-    //    }
-
-    //}
-
-
-    //Changed for optimization
     void Update()
     {
         bool shouldBeActive = shopManager.shopContent.activeSelf && GadgetPurchase.waitingForLocation && !buttonScript.occupied;
