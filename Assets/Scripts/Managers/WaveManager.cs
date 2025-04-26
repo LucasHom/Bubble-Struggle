@@ -1,5 +1,7 @@
 using Cinemachine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +30,7 @@ public class WaveManager : MonoBehaviour
 
     //Cloud
     [SerializeField] private float maxCloudHeight = 50f;
-    [SerializeField] private float maxWaves = 25;
+    [SerializeField] private float maxWaves = 10;
     private float cloudHeightChange;
     [SerializeField] private CloudMovement cloudMovement;
 
@@ -50,13 +52,22 @@ public class WaveManager : MonoBehaviour
 
 
     //Popups
+    Queue<Action> popupQueue = new Queue<Action>();
     [SerializeField] GameObject popupPrefab;
     //  Popups images
     [SerializeField] Sprite waterTankImage;
+    [SerializeField] Sprite netImage;
     [SerializeField] Sprite pigeonImage;
+    [SerializeField] Sprite reloadSpeedImage;
+    [SerializeField] Sprite umbrellaImage;
+    [SerializeField] Sprite swiftShoeImage;
+    [SerializeField] Sprite medpackImage;
+
     //  Popup pipe images
     [SerializeField] Sprite pipeImage;
     [SerializeField] Sprite waterProjImage;
+    [SerializeField] Sprite freezeGustImage;
+    [SerializeField] Sprite shieldBubbleImage;
 
 
     private void Awake()
@@ -69,12 +80,25 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        //Allocate all popups
+        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f));
+        popupQueue.Enqueue(() => createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f));
+        popupQueue.Enqueue(() => createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f)));
+
+        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f));
+        popupQueue.Enqueue(() => createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f));
+        popupQueue.Enqueue(() => createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f)));
+
+        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f));
+        popupQueue.Enqueue(() => createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f));
+        popupQueue.Enqueue(() => createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f)));
+
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
         citizenHealthIndicator.SetActive(false);
         shopManager.currencyIndicator.SetActive(false);
 
-        randomSpawnPosition = new Vector3(Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f);
+        randomSpawnPosition = new Vector3(UnityEngine.Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f);
 
         StartCoroutine(GameLoop());
     }
@@ -97,7 +121,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator GameLoop()
     {
-        while (currentWave < maxWaves)
+        while (currentWave <= maxWaves)
         {
             cameraManager.SwitchToGameView();
 
@@ -115,32 +139,7 @@ public class WaveManager : MonoBehaviour
 
 
 
-
-
-            currentSubWaveIndex = 0;
-
-            //Check if the current wave is over
-            while (currentSubWaveIndex < waveInfo.allWaves[currentWaveIndex].subWaves.Count)
-            {
-                subWaveIsOver = false;
-                waveInfo.SpawnSubWave(currentWaveIndex, currentSubWaveIndex, randomSpawnPosition);
-
-                // Wait for subwave to end
-                checkSubWaveIsOver = true;
-                yield return new WaitUntil(() => subWaveIsOver);
-                checkSubWaveIsOver = false;
-
-                yield return new WaitForSeconds(1f);
-                girlfriend.GiveThanks();
-                yield return new WaitForSeconds(2f);
-
-                currentSubWaveIndex++;
-            }
-
-            currentWaveIndex++;
-
-
-
+            yield return StartCoroutine(SpawnWave());
 
 
 
@@ -149,9 +148,12 @@ public class WaveManager : MonoBehaviour
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
-            createPopup("Upgrade", "Increase the amount of water you can hold", "Water Tank", waterTankImage, 4f);
-            //PipePopup example
-            //createPopup("Upgrade", "Increase the amount of water you can hold", "Water Tank", waterProjImage, 3.2f, pipeImage, new Color(154f / 255f, 1f, 1f));
+
+            if (popupQueue.Count > 0)
+            {
+                Action popup = popupQueue.Dequeue();
+                popup();
+            }
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
@@ -174,6 +176,32 @@ public class WaveManager : MonoBehaviour
 
         }
     }
+
+    private IEnumerator SpawnWave()
+    {
+        currentSubWaveIndex = 0;
+
+        //Check if the current wave is over
+        while (currentSubWaveIndex < waveInfo.allWaves[currentWaveIndex].subWaves.Count)
+        {
+            subWaveIsOver = false;
+            waveInfo.SpawnSubWave(currentWaveIndex, currentSubWaveIndex, randomSpawnPosition);
+
+            // Wait for subwave to end
+            checkSubWaveIsOver = true;
+            yield return new WaitUntil(() => subWaveIsOver);
+            checkSubWaveIsOver = false;
+
+            yield return new WaitForSeconds(1f);
+            girlfriend.GiveThanks();
+            yield return new WaitForSeconds(2f);
+
+            currentSubWaveIndex++;
+        }
+
+        currentWaveIndex++;
+    }
+
 
     private void createPopup(string unitType, string unitDesc, string unitName, Sprite unitSprite, float spriteSizeMult, Sprite pipeSprite = null, Color pipeColor = default)
     {
