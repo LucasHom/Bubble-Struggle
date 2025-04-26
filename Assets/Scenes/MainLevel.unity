@@ -331,7 +331,11 @@ MonoBehaviour:
   reloadSpeedButton: {fileID: 940716618}
   playerSpeedButton: {fileID: 1621422265}
   umbrellaButton: {fileID: 6008862}
+  netButton: {fileID: 1034874326}
   medpackButton: {fileID: 334105786}
+  waterPipeButton: {fileID: 572055327}
+  FreezePipeButton: {fileID: 1008244629}
+  ShieldBubblePipeButton: {fileID: 395728196}
 --- !u!1 &71954236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,6 +2595,11 @@ Transform:
   - {fileID: 1954619498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &572055327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6959661464062441574, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
+  m_PrefabInstance: {fileID: 3851191514209178896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &581747371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8735,6 +8744,7 @@ MonoBehaviour:
   cloudMovement: {fileID: 1935402003}
   waveNumText: {fileID: 140179342}
   waveDescriptionText: {fileID: 1487057403}
+  buttonSecurityManager: {fileID: 49825906}
   girlfriend: {fileID: 564262034}
   citizenHealthIndicator: {fileID: 733147036}
   popupPrefab: {fileID: 941322894145302567, guid: 0882c9716c672d741ad884d7c8d46179, type: 3}

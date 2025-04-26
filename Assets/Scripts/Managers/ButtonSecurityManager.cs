@@ -2,6 +2,7 @@ using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ButtonSecurityManager : MonoBehaviour
 {
@@ -17,12 +18,12 @@ public class ButtonSecurityManager : MonoBehaviour
     [SerializeField] private GameObject playerSpeedButton;
 
     [SerializeField] private GameObject umbrellaButton;
-    //[SerializeField] private GameObject waterCapacityButton;
+    [SerializeField] private GameObject netButton;
     [SerializeField] private GameObject medpackButton;
 
-    //[SerializeField] private GameObject waterCapacityButton;
-    //[SerializeField] private GameObject waterCapacityButton;
-    //[SerializeField] private GameObject waterCapacityButton;
+    [SerializeField] private GameObject waterPipeButton;
+    [SerializeField] private GameObject FreezePipeButton;
+    [SerializeField] private GameObject ShieldBubblePipeButton;
 
     // Start is called before the first frame update
     void Start()
@@ -32,21 +33,16 @@ public class ButtonSecurityManager : MonoBehaviour
             { "WaterCapacityButton", new GameObjectPair(waterCapacityButton) },
             { "ReloadSpeedButton", new GameObjectPair(reloadSpeedButton) },
             { "PlayerSpeedButton", new GameObjectPair(playerSpeedButton) },
+
             { "UmbrellaButton", new GameObjectPair(umbrellaButton) },
-            //{ "", object5 },
-            { "MedpackButton", new GameObjectPair(medpackButton) }
-            //{ "", object7 },
-            //{ "", object8 },
-            //{ "", object9 }
+            { "NetButton", new GameObjectPair(netButton) },
+            { "MedpackButton", new GameObjectPair(medpackButton) },
+
+            { "WaterPipeButton", new GameObjectPair(waterPipeButton) },
+            { "FreezePipeButton", new GameObjectPair(FreezePipeButton) },
+            { "ShieldBubblePipeButton", new GameObjectPair(ShieldBubblePipeButton) }
         };
 
-        //Lock("WaterCapacityButton");
-        //Lock("ReloadSpeedButton");
-        //Lock("PlayerSpeedButton");
-        //Lock("UmbrellaButton");
-        //Lock("MedpackButton");
-
-        //Unlock("WaterCapacityButton");
     }
 
     // Update is called once per frame

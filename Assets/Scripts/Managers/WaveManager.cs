@@ -45,6 +45,7 @@ public class WaveManager : MonoBehaviour
 
     //Shop
     private ShopManager shopManager;
+    [SerializeField] private ButtonSecurityManager buttonSecurityManager;
 
     //Citizens
     [SerializeField] CitizenManager girlfriend;
@@ -52,7 +53,7 @@ public class WaveManager : MonoBehaviour
 
 
     //Popups
-    Queue<Action> popupQueue = new Queue<Action>();
+    Queue<Action> unlockQueue = new Queue<Action>();
     [SerializeField] GameObject popupPrefab;
     //  Popups images
     [SerializeField] Sprite waterTankImage;
@@ -81,17 +82,56 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         //Allocate all popups
-        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f));
-        popupQueue.Enqueue(() => createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f));
-        popupQueue.Enqueue(() => createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f)));
+        unlockQueue.Enqueue(() => {
+            createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
+            ButtonSecurityManager.Unlock("WaterCapacityButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
+            ButtonSecurityManager.Unlock("NetButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
+            ButtonSecurityManager.Unlock("WaterPipeButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
+            ButtonSecurityManager.Unlock("ReloadSpeedButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
+            ButtonSecurityManager.Unlock("UmbrellaButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
+            ButtonSecurityManager.Unlock("FreezePipeButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
+            ButtonSecurityManager.Unlock("PlayerSpeedButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
+            ButtonSecurityManager.Unlock("MedpackButton");
+        });
+        unlockQueue.Enqueue(() => {
+            createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
+            ButtonSecurityManager.Unlock("ShieldBubblePipeButton");
+        });
 
-        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f));
-        popupQueue.Enqueue(() => createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f));
-        popupQueue.Enqueue(() => createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f)));
 
-        popupQueue.Enqueue(() => createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f));
-        popupQueue.Enqueue(() => createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f));
-        popupQueue.Enqueue(() => createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f)));
+        //Lock all pipes
+        //buttonSecurityManager.Lock("WaterCapacityButton");
+        //buttonSecurityManager.Lock("ReloadSpeedButton");
+        //buttonSecurityManager.Lock("PlayerSpeedButton");
+
+        //buttonSecurityManager.Lock("NetButton");
+        //buttonSecurityManager.Lock("UmbrellaButton");
+        //buttonSecurityManager.Lock("MedpackButton");
+
+        //buttonSecurityManager.Lock("WaterPipeButton");
+        //buttonSecurityManager.Lock("FreezePipeButton");
+        //buttonSecurityManager.Lock("ShieldBubblePipeButton");
 
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
@@ -149,9 +189,9 @@ public class WaveManager : MonoBehaviour
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
 
-            if (popupQueue.Count > 0)
+            if (unlockQueue.Count > 0)
             {
-                Action popup = popupQueue.Dequeue();
+                Action popup = unlockQueue.Dequeue();
                 popup();
             }
 
