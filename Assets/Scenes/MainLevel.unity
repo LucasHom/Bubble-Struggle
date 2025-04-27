@@ -8715,7 +8715,7 @@ MonoBehaviour:
   shootDelay: 0.1
   ReloadWaterIcon: {fileID: 863206365}
   player: {fileID: 1587596006}
-  reloadDelay: 0.2
+  reloadDelay: 0.22
   reloadAmount: 1
   isReloadIconFlashing: 0
   specialReady: 1

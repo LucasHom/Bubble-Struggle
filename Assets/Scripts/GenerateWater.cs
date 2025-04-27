@@ -22,9 +22,11 @@ public class GenerateWater : MonoBehaviour
 
     [SerializeField] public float reloadDelay = 0.06f;
     [SerializeField] float reloadAmount = 1f;
-    private bool isReloading = false;
+    [SerializeField] private bool isReloading = false;
     private bool canShowReloadIcon = false;
     [SerializeField] private bool isReloadIconFlashing = false;
+
+    private Coroutine reloadCoroutine = null;
 
 
     //Special Ability
@@ -51,17 +53,21 @@ public class GenerateWater : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.R))
         {
-            //if (!isReloading)
-            if (!isReloading && !playerScript.playerIsFrozen)
+            if (!isReloading && !playerScript.playerIsFrozen && (reloadCoroutine == null))
             {
-                playerScript.isReloading = true;
-                StartCoroutine(ReloadWater());
+                reloadCoroutine = StartCoroutine(ReloadWater());
             }
+        }
+
+        if (reloadCoroutine == null)
+        {
+            playerScript.isReloading = false;
+            isReloading = false;
         }
         else
         {
-            playerScript.isReloading = false;
-            isReloading = false; 
+            playerScript.isReloading = true;
+            isReloading = true;
         }
 
         if (Input.GetKey(KeyCode.Space) || (Input.GetKey(KeyCode.Mouse0) && canShowReloadIcon) || (Input.GetKey(KeyCode.Mouse1) && canShowReloadIcon) )
@@ -114,6 +120,33 @@ public class GenerateWater : MonoBehaviour
         ReloadWaterIcon.enabled = false;
         isReloadIconFlashing = false;
     }
+
+
+    //private IEnumerator ReloadWater()
+    //{
+    //    isReloading = true;
+
+    //    while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)) && remainingWater < maxWater)
+    //    {
+    //        remainingWater += reloadAmount;
+
+    //        if (remainingWater > maxWater)
+    //        {
+    //            remainingWater = maxWater;
+    //        }
+
+    //        canShoot = true;
+    //        canShowReloadIcon = false;
+    //        //Debug.Log(remainingWater);
+
+    //        yield return new WaitForSeconds(reloadDelay);
+    //    }
+    //    isReloading = false;
+    //    playerScript.isReloading = false;
+    //}
+
+
+
     private IEnumerator ReloadWater()
     {
         isReloading = true;
@@ -121,7 +154,6 @@ public class GenerateWater : MonoBehaviour
         while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)) && remainingWater < maxWater)
         {
             remainingWater += reloadAmount;
-
             if (remainingWater > maxWater)
             {
                 remainingWater = maxWater;
@@ -129,13 +161,14 @@ public class GenerateWater : MonoBehaviour
 
             canShoot = true;
             canShowReloadIcon = false;
-            //Debug.Log(remainingWater);
 
             yield return new WaitForSeconds(reloadDelay);
         }
-        isReloading = false;
-        playerScript.isReloading = false;
+
+        reloadCoroutine = null; // reset coroutine reference
     }
+
+
 
     IEnumerator ShootDelay()
     {
