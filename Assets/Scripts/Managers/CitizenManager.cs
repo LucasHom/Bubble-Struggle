@@ -44,7 +44,7 @@ public class CitizenManager : MonoBehaviour
     //-----------------
     //Thanks
     //Express Thanks
-    private ParticleSystem coinPS;
+    [SerializeField] private ParticleSystem coinPS;
     private Transform thanksReactionTransform;
     private GameObject thanksReaction;
     private TextMeshProUGUI thanksEarned;
@@ -55,6 +55,7 @@ public class CitizenManager : MonoBehaviour
     [SerializeField] private Sprite worriedReaction;
     [SerializeField] private Sprite sadReaction;
 
+
     //Calculate Thanks
     [SerializeField] public int maxThanks; //Allow to change when the wave changes
     [SerializeField] private float lowestThanksPercent = 0.5f;
@@ -64,6 +65,7 @@ public class CitizenManager : MonoBehaviour
     //Health 
     [SerializeField] public int maxCitizenHealth = 5;
     [SerializeField] public int citizenHealth;
+    [SerializeField] private ParticleSystem healthPS;
 
     //Shop
     [SerializeField] private ShopManager shopManager;
@@ -75,7 +77,6 @@ public class CitizenManager : MonoBehaviour
         citizenHealth = maxCitizenHealth;
         createThanksPercentTable(maxCitizenHealth, 1f);
 
-        coinPS = transform.Find("CitizenThanksPS").GetComponent<ParticleSystem>();
         thanksReactionTransform = transform.Find("CitizenCanvas").Find("ThanksReaction");
         thanksReaction = thanksReactionTransform.gameObject;
         thanksEarned = thanksReactionTransform.Find("ThanksEarned").GetComponent<TextMeshProUGUI>();
@@ -296,6 +297,16 @@ public class CitizenManager : MonoBehaviour
         //playerHealthy = true;
         citizenIsFrozen = false;
 
+    }
+
+    public void AttemptHeal()
+    {
+        if (citizenHealth < maxCitizenHealth)
+        {
+            citizenHealth++;
+            healthPS.Play();
+        }
+        
     }
 
     public int getCitizenHealth()

@@ -9,6 +9,7 @@ public class SlowPassingObject : MonoBehaviour
     {
         if (col.tag == "Ball") 
         {
+            Debug.Log("Ball entered slow zone");
             col.GetComponent<Ball>().SlowDown();
         }
     }

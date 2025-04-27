@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     public int ballsRemaining;
     private float minXSpawn = -7;
     private float maxXSpawn = 7;
-    
+    [SerializeField] private GameObject spawnNotificationPrefab;
     private Vector3 randomSpawnPosition;
 
 
@@ -20,8 +20,8 @@ public class WaveManager : MonoBehaviour
     private WaveInfo waveInfo;
     [SerializeField] float timeBetweenWave = 4f;
     [SerializeField] private int currentWave = 0;
-    private int currentWaveIndex = 0;
-    private int currentSubWaveIndex = 0;
+    [SerializeField] private int currentWaveIndex = 0;
+    [SerializeField] private int currentSubWaveIndex = 0;
 
     private bool checkSubWaveIsOver = false;
     private bool subWaveIsOver = true;
@@ -232,6 +232,7 @@ public class WaveManager : MonoBehaviour
             shopManager.isBackgroundToggleReady = true;
 
 
+
             //Spawn wave
             yield return StartCoroutine(SpawnWave());
 
@@ -243,10 +244,8 @@ public class WaveManager : MonoBehaviour
             shopManager.isBackgroundToggleReady = true;
 
             //Wave rewards
-            if (girlfriend.citizenHealth < girlfriend.maxCitizenHealth)
-            {
-                girlfriend.citizenHealth++;
-            }
+
+
             if (unlockQueue.Count > 0)
             {
                 Action popup = unlockQueue.Dequeue();
@@ -272,6 +271,7 @@ public class WaveManager : MonoBehaviour
             waveNumText.text = "Wave " + currentWave;
             waveDescriptionText.text = waveInfo.allWaves[currentWaveIndex].description;
             EnableTransitionText();
+
             yield return new WaitForSeconds(timeBetweenWave);
         }
     }
@@ -310,8 +310,16 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
 
             currentSubWaveIndex++;
+
+            if (currentSubWaveIndex < waveInfo.allWaves[currentWaveIndex].subWaves.Count)
+            {
+                Instantiate(spawnNotificationPrefab);
+                yield return new WaitForSeconds(1f);
+            }
         }
 
+        girlfriend.AttemptHeal();
+        yield return new WaitForSeconds(1f);
         currentWaveIndex++;
     }
 

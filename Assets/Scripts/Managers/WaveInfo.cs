@@ -40,6 +40,8 @@ public class WaveInfo : MonoBehaviour
     [SerializeField] private GameObject mediumBallPrefab;
     [SerializeField] private GameObject smallBallPrefab;
     [SerializeField] private GameObject largeBallGuardedPrefab;
+    [SerializeField] private GameObject mediumBallGuardedPrefab;
+    [SerializeField] private GameObject smallBallGuardedPrefab;
     [SerializeField] private GameObject supportBallPrefab;
 
     //Spawning
@@ -99,15 +101,13 @@ public class WaveInfo : MonoBehaviour
         sub1_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
 
         SubWave sub2_3 = new SubWave();
-        sub2_2.enemies.Add(new BallSpawnInfo(largeBallPrefab, 3));
+        sub2_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 3));
 
         SubWave sub3_3 = new SubWave();
         sub3_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 3));
         sub3_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+
 
         wave3.subWaves.Add(sub1_3);
         wave3.subWaves.Add(sub2_3);
@@ -118,17 +118,22 @@ public class WaveInfo : MonoBehaviour
         // Wave 4
         Wave wave4 = new Wave("");
         SubWave sub1_4 = new SubWave();
-        sub1_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 3));
+        sub1_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 1));
 
         SubWave sub2_4 = new SubWave();
-        sub2_4.enemies.Add(new BallSpawnInfo(largeBallPrefab, 2));
+        sub2_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
+        sub2_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 1));
 
         SubWave sub3_4 = new SubWave();
-        sub3_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 4));
+        sub3_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 2));
+
+        SubWave sub4_4 = new SubWave();
+        sub4_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 12));
 
         wave4.subWaves.Add(sub1_4);
         wave4.subWaves.Add(sub2_4);
         wave4.subWaves.Add(sub3_4);
+        wave4.subWaves.Add(sub4_4);
         allWaves.Add(wave4);
 
         // Wave 5
