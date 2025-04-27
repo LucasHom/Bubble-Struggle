@@ -877,7 +877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.014, y: 0.341}
+  m_AnchoredPosition: {x: 0.014, y: 0.65}
   m_SizeDelta: {x: 1.39, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166125037
@@ -927,8 +927,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.4
-  m_fontSizeBase: 0.4
+  m_fontSize: 0.62
+  m_fontSizeBase: 0.62
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1868,7 +1868,7 @@ MonoBehaviour:
   PriceObject: {fileID: 395728198}
   StatusText: {fileID: 395728199}
   newText: {fileID: 804189023}
-  basePrice: 120
+  basePrice: 100
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
   shieldBubblePipePrefab: {fileID: 1093725396866519136, guid: 5494d918fe7e43146bfbeb1c2f339064, type: 3}
@@ -2449,7 +2449,7 @@ MonoBehaviour:
   neutralReaction: {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
   worriedReaction: {fileID: 21300000, guid: 6767d88cfeb4527478b519bfa35b6df3, type: 3}
   sadReaction: {fileID: 21300000, guid: b45eb3e478552d8479d6157de8ea2c11, type: 3}
-  maxThanks: 30
+  maxThanks: 15
   lowestThanksPercent: 0.5
   maxCitizenHealth: 5
   citizenHealth: 5
@@ -2705,6 +2705,10 @@ PrefabInstance:
       propertyPath: FloatingText
       value: 
       objectReference: {fileID: 839196642}
+    - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
+      propertyPath: priceIncrease
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
       value: 
@@ -3210,7 +3214,7 @@ MonoBehaviour:
   PriceObject: {fileID: 1801024733}
   StatusText: {fileID: 628093726}
   newText: {fileID: 1389866221}
-  basePrice: 15
+  basePrice: 12
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
   umbrellaPrefab: {fileID: 7561221744652574769, guid: 69a5ad750e0ab2b4280d627040fb3454, type: 3}
@@ -8554,6 +8558,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 839196642}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
+      propertyPath: priceIncrease
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
       value: 
       objectReference: {fileID: 839196637}
@@ -9601,7 +9609,7 @@ MonoBehaviour:
   PriceObject: {fileID: 1008244631}
   StatusText: {fileID: 757241621}
   newText: {fileID: 1305323371}
-  basePrice: 90
+  basePrice: 80
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
   freezePipePrefab: {fileID: 2600465910317561346, guid: 9b5591ebd44fce9499b274af81be8ed6, type: 3}
@@ -17250,7 +17258,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.9}
-  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0.7, y: 0.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770107005
 MonoBehaviour:
@@ -18754,6 +18762,10 @@ PrefabInstance:
       propertyPath: FloatingText
       value: 
       objectReference: {fileID: 839196642}
+    - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
+      propertyPath: priceIncrease
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
       value: 

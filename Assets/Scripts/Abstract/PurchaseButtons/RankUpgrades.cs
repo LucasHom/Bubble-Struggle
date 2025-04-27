@@ -18,7 +18,8 @@ public class RankUpgrades : PurchaseButton
     private int upgradeRank = default;
 
     //Scalars
-    private float priceMultiplier = 1.15f;
+    //private float priceMultiplier = 1.15f;
+    [SerializeField] private float priceIncrease = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,8 @@ public class RankUpgrades : PurchaseButton
     //Override for rank upgrade purchase
     public override void AttemptPurchase(Action upgradeAction)
     {
-        int price = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
+        //int price = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
+        int price = (int)(basePrice + (priceIncrease * upgradeRank));
 
         if (upgradeRank < maxAmountUpgrades)
         {
@@ -70,7 +72,8 @@ public class RankUpgrades : PurchaseButton
 
                 upgradeRank += 1;
                 StatusText.text = $"Rank {upgradeRank}";
-                int nextPrice = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
+                //int nextPrice = (int)Mathf.Ceil(basePrice * Mathf.Pow(priceMultiplier, upgradeRank));
+                int nextPrice = (int)(basePrice + (priceIncrease * upgradeRank));
 
                 PriceText.text = upgradeRank >= maxAmountUpgrades ? "Max" : $"${nextPrice}";
 

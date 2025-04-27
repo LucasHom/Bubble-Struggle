@@ -13,10 +13,6 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
-
-        gameView.gameObject.SetActive(true);
-        waveView.gameObject.SetActive(false);
-        cloudView.gameObject.SetActive(false);
     }
 
     void Update()

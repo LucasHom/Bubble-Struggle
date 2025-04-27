@@ -25,6 +25,10 @@ public class Pigeon : MonoBehaviour
 
     private CloudMovement cloudMovement;
 
+    //For popup
+    public static bool showPopup = false;
+    private static bool alreadyShowedPopup = false;
+
     void Start()
     {
         cloudMovement = FindObjectOfType<CloudMovement>();
@@ -51,6 +55,11 @@ public class Pigeon : MonoBehaviour
         GameObject col = collision.gameObject;
         if (col.name == "Cloud")
         {
+            if (!alreadyShowedPopup)
+            {
+                alreadyShowedPopup = true;
+                showPopup = true;
+            }
             Instantiate(sewageExplosionPrefab, transform.position, Quaternion.identity);
 
             //Change movement

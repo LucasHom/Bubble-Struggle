@@ -18,6 +18,8 @@ public class Popup : MonoBehaviour
 
     private FadeInUI fadeInUI;
 
+    public static bool IsPopupOpen = false;
+
     private void Awake()
     {
         fadeInUI = unitInfo.GetComponent<FadeInUI>();
@@ -26,6 +28,7 @@ public class Popup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        IsPopupOpen = true;
         Time.timeScale = 0f; // Pause the game
         unitInfo.SetActive(false);
         continueText.SetActive(false);
@@ -47,6 +50,7 @@ public class Popup : MonoBehaviour
                 if (Input.anyKeyDown)
                 {
                     Time.timeScale = 1f; // Resume the game
+                    IsPopupOpen = false;
                     Destroy(gameObject);
                 }
             }

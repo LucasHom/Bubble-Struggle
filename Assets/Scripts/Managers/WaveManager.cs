@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     //Wave Tracking
     private WaveInfo waveInfo;
     [SerializeField] float timeBetweenWave = 4f;
-    [SerializeField] private int currentWave = 1;
+    [SerializeField] private int currentWave = 0;
     private int currentWaveIndex = 0;
     private int currentSubWaveIndex = 0;
 
@@ -82,56 +82,96 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         //Allocate all popups
-        unlockQueue.Enqueue(() => {
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
+        //});
+
+
+        //UNCOMMENT TO ENABLE BUTTON SECURITY
+
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
             ButtonSecurityManager.Unlock("WaterCapacityButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
             ButtonSecurityManager.Unlock("NetButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
             ButtonSecurityManager.Unlock("WaterPipeButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
             ButtonSecurityManager.Unlock("ReloadSpeedButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
             ButtonSecurityManager.Unlock("UmbrellaButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
             ButtonSecurityManager.Unlock("FreezePipeButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
             ButtonSecurityManager.Unlock("PlayerSpeedButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
             ButtonSecurityManager.Unlock("MedpackButton");
         });
-        unlockQueue.Enqueue(() => {
+        unlockQueue.Enqueue(() =>
+        {
             createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
             ButtonSecurityManager.Unlock("ShieldBubblePipeButton");
         });
 
 
         //Lock all pipes
-        //buttonSecurityManager.Lock("WaterCapacityButton");
-        //buttonSecurityManager.Lock("ReloadSpeedButton");
-        //buttonSecurityManager.Lock("PlayerSpeedButton");
+        buttonSecurityManager.Lock("WaterCapacityButton");
+        buttonSecurityManager.Lock("ReloadSpeedButton");
+        buttonSecurityManager.Lock("PlayerSpeedButton");
 
-        //buttonSecurityManager.Lock("NetButton");
-        //buttonSecurityManager.Lock("UmbrellaButton");
-        //buttonSecurityManager.Lock("MedpackButton");
+        buttonSecurityManager.Lock("NetButton");
+        buttonSecurityManager.Lock("UmbrellaButton");
+        buttonSecurityManager.Lock("MedpackButton");
 
-        //buttonSecurityManager.Lock("WaterPipeButton");
-        //buttonSecurityManager.Lock("FreezePipeButton");
-        //buttonSecurityManager.Lock("ShieldBubblePipeButton");
+        buttonSecurityManager.Lock("WaterPipeButton");
+        buttonSecurityManager.Lock("FreezePipeButton");
+        buttonSecurityManager.Lock("ShieldBubblePipeButton");
 
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
@@ -157,48 +197,66 @@ public class WaveManager : MonoBehaviour
         subWaveIsOver = Ball.numActiveBalls < 1;
     }
 
-
-
     private IEnumerator GameLoop()
     {
+        //Return to game view
+        yield return new WaitForSeconds(2f);
+        cameraManager.SwitchToWaveView();
+        currentWave++;
+        yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+        yield return new WaitForSeconds(2f);
+        waveNumText.text = "Wave " + currentWave;
+        waveDescriptionText.text = waveInfo.allWaves[currentWaveIndex].description;
+        EnableTransitionText();
+        yield return new WaitForSeconds(timeBetweenWave);
+
         while (currentWave <= maxWaves)
         {
             cameraManager.SwitchToGameView();
 
             yield return new WaitForSeconds(1f);
             DisableTransitionText();
-            //Toggle currency on
+
+            //Check for pigeon popup
+            if (Pigeon.showPopup)
+            {
+                yield return StartCoroutine(WaitForPigeonPopup());
+            }
+
+            //Toggle UI on
             ToggleCitizenHealth();
             shopManager.ToggleCurrency();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
-            createPopup("???", "It seems well-hydrated...", "Stupid pigeon", pigeonImage, 5f);
 
             shopManager.isShopToggleReady = true;
             shopManager.isBackgroundToggleReady = true;
 
 
-
-
+            //Spawn wave
             yield return StartCoroutine(SpawnWave());
 
 
-
-            //Toggle currency off
+            //Enable scene views and popups
             ToggleCitizenHealth();
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
 
+            //Wave rewards
+            if (girlfriend.citizenHealth < girlfriend.maxCitizenHealth)
+            {
+                girlfriend.citizenHealth++;
+            }
             if (unlockQueue.Count > 0)
             {
                 Action popup = unlockQueue.Dequeue();
                 popup();
             }
+            girlfriend.maxThanks = (int)(girlfriend.maxThanks * 1.1f);
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             yield return new WaitForSeconds(2f);
-
 
             if (currentWave < maxWaves)
             {
@@ -211,11 +269,26 @@ public class WaveManager : MonoBehaviour
             currentWave++;
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             yield return new WaitForSeconds(2f);
+            waveNumText.text = "Wave " + currentWave;
+            waveDescriptionText.text = waveInfo.allWaves[currentWaveIndex].description;
             EnableTransitionText();
             yield return new WaitForSeconds(timeBetweenWave);
-
         }
     }
+
+    private IEnumerator WaitForPigeonPopup()
+    {
+        createPopup("???", "It seems well-hydrated...", "Stupid pigeon", pigeonImage, 5f);
+        Popup.IsPopupOpen = true;
+        Pigeon.showPopup = false;
+
+        // Wait until the popup is no longer active
+        while (Popup.IsPopupOpen)
+        {
+            yield return null;
+        }
+    }
+
 
     private IEnumerator SpawnWave()
     {
