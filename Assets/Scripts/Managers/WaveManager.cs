@@ -82,96 +82,96 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         //Allocate all popups
-        unlockQueue.Enqueue(() => {
-            createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
-        });
-        unlockQueue.Enqueue(() => {
-            createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
-        });
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
+        //});
+        //unlockQueue.Enqueue(() => {
+        //    createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
+        //});
 
 
         //UNCOMMENT TO ENABLE BUTTON SECURITY
 
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
-        //    ButtonSecurityManager.Unlock("WaterCapacityButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
-        //    ButtonSecurityManager.Unlock("NetButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
-        //    ButtonSecurityManager.Unlock("WaterPipeButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
-        //    ButtonSecurityManager.Unlock("ReloadSpeedButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
-        //    ButtonSecurityManager.Unlock("UmbrellaButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
-        //    ButtonSecurityManager.Unlock("FreezePipeButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
-        //    ButtonSecurityManager.Unlock("PlayerSpeedButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
-        //    ButtonSecurityManager.Unlock("MedpackButton");
-        //});
-        //unlockQueue.Enqueue(() =>
-        //{
-        //    createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
-        //    ButtonSecurityManager.Unlock("ShieldBubblePipeButton");
-        //});
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Upgrade", "Increase water capacity", "Water Tank", waterTankImage, 4f);
+            ButtonSecurityManager.Unlock("WaterCapacityButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Item", "Catches up to 15 purified sludge", "Splash Net", netImage, 2.5f);
+            ButtonSecurityManager.Unlock("NetButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Pipe", "Periodically shoots water", "Water pipe", waterProjImage, 3.2f, pipeImage, new Color(6f / 255f, 154f / 255f, 1f));
+            ButtonSecurityManager.Unlock("WaterPipeButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Upgrade", "Increase reload speed", "Reload speed", reloadSpeedImage, 4f);
+            ButtonSecurityManager.Unlock("ReloadSpeedButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Item", "Shields citizen from incoming sludge", "Umbrella", umbrellaImage, 3f);
+            ButtonSecurityManager.Unlock("UmbrellaButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Pipe", "Periodically shoots a cold gust, momentarily freezing contacted sludge", "Freeze pipe", freezeGustImage, 2f, pipeImage, new Color(71f / 255f, 227f / 255f, 1f));
+            ButtonSecurityManager.Unlock("FreezePipeButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Upgrade", "Increase player speed", "Swift shoe", swiftShoeImage, 4f);
+            ButtonSecurityManager.Unlock("PlayerSpeedButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Item", "Crack open to heal citizen", "Medpack", medpackImage, 2.5f);
+            ButtonSecurityManager.Unlock("MedpackButton");
+        });
+        unlockQueue.Enqueue(() =>
+        {
+            createPopup("Pipe", "Generates shield bubbles to deflect sludge", "Shield bubble pipe", shieldBubbleImage, 2f, pipeImage, new Color(102f / 255f, 148f / 255f, 172f / 255f));
+            ButtonSecurityManager.Unlock("ShieldBubblePipeButton");
+        });
 
 
-        ////Lock all pipes
-        //buttonSecurityManager.Lock("WaterCapacityButton");
-        //buttonSecurityManager.Lock("ReloadSpeedButton");
-        //buttonSecurityManager.Lock("PlayerSpeedButton");
+        //Lock all pipes
+        buttonSecurityManager.Lock("WaterCapacityButton");
+        buttonSecurityManager.Lock("ReloadSpeedButton");
+        buttonSecurityManager.Lock("PlayerSpeedButton");
 
-        //buttonSecurityManager.Lock("NetButton");
-        //buttonSecurityManager.Lock("UmbrellaButton");
-        //buttonSecurityManager.Lock("MedpackButton");
+        buttonSecurityManager.Lock("NetButton");
+        buttonSecurityManager.Lock("UmbrellaButton");
+        buttonSecurityManager.Lock("MedpackButton");
 
-        //buttonSecurityManager.Lock("WaterPipeButton");
-        //buttonSecurityManager.Lock("FreezePipeButton");
-        //buttonSecurityManager.Lock("ShieldBubblePipeButton");
+        buttonSecurityManager.Lock("WaterPipeButton");
+        buttonSecurityManager.Lock("FreezePipeButton");
+        buttonSecurityManager.Lock("ShieldBubblePipeButton");
 
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;

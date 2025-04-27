@@ -105,13 +105,22 @@ public class WaveInfo : MonoBehaviour
 
         SubWave sub3_3 = new SubWave();
         sub3_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 3));
+        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
         sub3_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+
+        SubWave sub4_3 = new SubWave();
+        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
 
 
         wave3.subWaves.Add(sub1_3);
         wave3.subWaves.Add(sub2_3);
         wave3.subWaves.Add(sub3_3);
+        wave3.subWaves.Add(sub4_3);
 
         allWaves.Add(wave3);
 

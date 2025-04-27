@@ -147,13 +147,37 @@ public class GenerateWater : MonoBehaviour
 
 
 
+    //private IEnumerator ReloadWater()
+    //{
+    //    isReloading = true;
+
+    //    while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)) && remainingWater < maxWater)
+    //    {
+    //        remainingWater += reloadAmount;
+    //        if (remainingWater > maxWater)
+    //        {
+    //            remainingWater = maxWater;
+    //        }
+
+    //        canShoot = true;
+    //        canShowReloadIcon = false;
+
+    //        yield return new WaitForSeconds(reloadDelay);
+    //    }
+
+    //    reloadCoroutine = null; // reset coroutine reference
+    //}
+
     private IEnumerator ReloadWater()
     {
         isReloading = true;
 
-        while ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)) && remainingWater < maxWater)
+        while (remainingWater < maxWater)
         {
+
+
             remainingWater += reloadAmount;
+
             if (remainingWater > maxWater)
             {
                 remainingWater = maxWater;
@@ -162,10 +186,17 @@ public class GenerateWater : MonoBehaviour
             canShoot = true;
             canShowReloadIcon = false;
 
+            // Check if player let go of reload keys
+            if (!(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)))
+            {
+                break; // Exit the coroutine immediately
+            }
+
             yield return new WaitForSeconds(reloadDelay);
         }
 
-        reloadCoroutine = null; // reset coroutine reference
+        reloadCoroutine = null; // Reset coroutine reference
+        isReloading = false;
     }
 
 
