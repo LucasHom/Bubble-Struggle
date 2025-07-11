@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D bc2d;
     [SerializeField] private ParticleSystem turnDust;
+    [SerializeField] private ParticleSystem movePS;
 
     [SerializeField] public bool playerHealthy = true;
     [SerializeField] public bool playerIsFrozen = false;
@@ -16,8 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isInvincible = false;
     [SerializeField] private float flashInterval = 0.2f;
     [SerializeField] private float freezeTime = 1.5f;
-
-    //private Color originalColor;
+    [SerializeField] private Color flashColor = Color.white;
 
     //Puddles
     [SerializeField] public float puddleBuffer = 2f;
@@ -57,28 +57,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    //private void toggleTransparency()
-    //{
-    //    if (spriteRenderer.color.a == 1f)
-    //    {
-    //        Color halfTransparentColor = originalColor;
-    //        halfTransparentColor.a = 0.1f; 
-    //        spriteRenderer.color = halfTransparentColor; 
-    //    }
-    //    else
-    //    {
-
-    //        Color fullOpaqueColor = originalColor; 
-    //        fullOpaqueColor.a = 1f; 
-    //        spriteRenderer.color = fullOpaqueColor;
-    //    }
-    //}
-
     public void getPlayerMovement()
     {
         if (!playerHealthy)
         {
-            spriteRenderer.color = Color.gray;
+            spriteRenderer.color = flashColor;
             movement = 0f;
             currentHorizontalInput = 0f;
 
@@ -91,6 +74,7 @@ public class Player : MonoBehaviour
         }
         else if (playerHealthy && !isReloading && !playerIsFrozen)
         {
+
             spriteRenderer.color = new Color(255f, 255f, 255f);
 
             if (Input.GetKey(KeyCode.A))
@@ -137,6 +121,15 @@ public class Player : MonoBehaviour
         getPlayerMovement();
 
         rb2d.velocity = new Vector2(movement, 0f);
+
+        if (rb2d.velocity.sqrMagnitude > 0f && movePS.isPlaying == false)
+        {
+            movePS.Play();
+        }
+        else if (rb2d.velocity.sqrMagnitude == 0f && movePS.isPlaying == true)
+        {
+            movePS.Stop();
+        }
     }
 
     public void startFreezePlayerCoroutine()

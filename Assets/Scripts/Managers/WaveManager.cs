@@ -161,17 +161,17 @@ public class WaveManager : MonoBehaviour
 
 
         //Lock all pipes
-        buttonSecurityManager.Lock("WaterCapacityButton");
-        buttonSecurityManager.Lock("ReloadSpeedButton");
-        buttonSecurityManager.Lock("PlayerSpeedButton");
+        //buttonSecurityManager.Lock("WaterCapacityButton");
+        //buttonSecurityManager.Lock("ReloadSpeedButton");
+        //buttonSecurityManager.Lock("PlayerSpeedButton");
 
-        buttonSecurityManager.Lock("NetButton");
-        buttonSecurityManager.Lock("UmbrellaButton");
-        buttonSecurityManager.Lock("MedpackButton");
+        //buttonSecurityManager.Lock("NetButton");
+        //buttonSecurityManager.Lock("UmbrellaButton");
+        //buttonSecurityManager.Lock("MedpackButton");
 
-        buttonSecurityManager.Lock("WaterPipeButton");
-        buttonSecurityManager.Lock("FreezePipeButton");
-        buttonSecurityManager.Lock("ShieldBubblePipeButton");
+        //buttonSecurityManager.Lock("WaterPipeButton");
+        //buttonSecurityManager.Lock("FreezePipeButton");
+        //buttonSecurityManager.Lock("ShieldBubblePipeButton");
 
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
