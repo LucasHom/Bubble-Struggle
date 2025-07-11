@@ -293,6 +293,8 @@ public class WaveManager : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         currentSubWaveIndex = 0;
+        Instantiate(spawnNotificationPrefab);
+        yield return new WaitForSeconds(1f);
 
         //Check if the current wave is over
         while (currentSubWaveIndex < waveInfo.allWaves[currentWaveIndex].subWaves.Count)
