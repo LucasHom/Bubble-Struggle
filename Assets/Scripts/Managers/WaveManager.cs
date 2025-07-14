@@ -27,7 +27,6 @@ public class WaveManager : MonoBehaviour
     private bool subWaveIsOver = true;
 
 
-
     //Cloud
     [SerializeField] private float maxCloudHeight = 50f;
     [SerializeField] private float maxWaves = 10;
@@ -176,7 +175,6 @@ public class WaveManager : MonoBehaviour
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
         citizenHealthIndicator.SetActive(false);
-        shopManager.currencyIndicator.SetActive(false);
 
         randomSpawnPosition = new Vector3(UnityEngine.Random.Range(minXSpawn, maxXSpawn), cloudMovement.transform.position.y, 0f);
 
@@ -244,13 +242,14 @@ public class WaveManager : MonoBehaviour
             shopManager.isBackgroundToggleReady = true;
 
             //Wave rewards
-
-
             if (unlockQueue.Count > 0)
             {
                 Action popup = unlockQueue.Dequeue();
                 popup();
+
+                shopManager.newUnlock = true;
             }
+
             girlfriend.maxThanks = (int)(girlfriend.maxThanks * 1.1f);
 
             cameraManager.SwitchToCloudView();

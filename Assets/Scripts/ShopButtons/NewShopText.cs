@@ -26,7 +26,6 @@ public class NewShopText : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Enabled");
         StartCoroutine(emphasizeText.Emphasize(myText, baseFontSize, fontSizeMultiplier));
     }
 }

@@ -13,6 +13,11 @@ public class ShopManager : MonoBehaviour
     [SerializeField] float currencyTextMinSize;
     public int currency = 0;
 
+    //New improvement notification
+    [SerializeField] public GameObject newNotif;
+    [SerializeField] public TextMeshProUGUI newNotifText;
+    public bool newUnlock = false;
+
     
     //Open-Close shop
     public bool isBackgroundToggleReady = false;
@@ -25,12 +30,16 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currencyIndicator.SetActive(false);
+        newNotif.SetActive(false);
+        newNotifText.enabled = false;
+
+
         shopContent.SetActive(false);
         isBackgroundActive = false;
         Transform currencyCounter = currencyIndicator.transform.Find("CurrencyCounter");
         currencyCounterText = currencyCounter.GetComponent<TextMeshProUGUI>();
         increaseCurrency(0);
-        //currencyIndicator.SetActive(true);
     }
 
     // Update is called once per frame
@@ -46,10 +55,23 @@ public class ShopManager : MonoBehaviour
     public void ToggleCurrency()
     {
         currencyIndicator.SetActive(!currencyIndicator.activeSelf);
+
+        newNotif.SetActive(!newNotif.activeSelf);
+        if (newUnlock == true)
+        {
+            newNotifText.enabled = true;
+        }
     }
 
     private void ToggleShop()
     {
+        //Turn off new notification under currency indicator
+        if (newNotifText.enabled == true)
+        {
+            newUnlock = false;
+            newNotifText.enabled = false;
+        }
+
         isBackgroundActive = !isBackgroundActive;
         shopContent.SetActive(!shopContent.activeSelf);
         if (shopContent.activeSelf)
@@ -58,7 +80,6 @@ public class ShopManager : MonoBehaviour
             GadgetPurchase.waitingForLocation = false;
             resetCurrencyIncrease();
         }
-
 
         Time.timeScale = isBackgroundActive ? 0f : 1f;
     }
