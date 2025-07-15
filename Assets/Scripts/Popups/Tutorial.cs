@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    //tutorial name is either player or citizen
+    //tutorial name is either player or gold
     public string tutorialName = "player";
 
     //Part 1: Move, Reload, Shoot
@@ -31,13 +31,14 @@ public class Tutorial : MonoBehaviour
 
     //Part 4: Price
     [SerializeField] private GameObject part4;
+    [SerializeField] private Image bimage;
 
     private void Awake()
     {
         part1.SetActive(false);
         part2.SetActive(false);
         part3.SetActive(false);
-        //part4.SetActive(false);
+        part4.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -47,7 +48,7 @@ public class Tutorial : MonoBehaviour
         {
             StartCoroutine(confirmPartOneTwoThree());
         }
-        else if (tutorialName == "citizen")
+        else if (tutorialName == "gold")
         {
             StartCoroutine(confirmPartFour());
         }
@@ -135,12 +136,11 @@ public class Tutorial : MonoBehaviour
         anykey.SetActive(false);
         //delay to not accidentaly skip
         yield return new WaitForSecondsRealtime(1.5f);
+        anykey.SetActive(true);
         while (!Input.anyKeyDown)
         {
-            anykey.SetActive(true);
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(0.8f);
         part3.SetActive(false);
     }
 
@@ -158,12 +158,11 @@ public class Tutorial : MonoBehaviour
     private IEnumerator confirmPrice()
     {
         part4.SetActive(true);
-        //yield return new WaitForSecondsRealtime(1.5f);
-        //while (!Input.anyKeyDown)
-        //{
-        //    anykey.SetActive(true);
-        //    yield return null;
-        //}
+        while (!Input.GetKeyDown(KeyCode.B))
+        {
+            yield return null;
+        }
+        bimage.color = new Color(0f, 1f, 0f, 0.5f);
         yield return new WaitForSecondsRealtime(0.8f);
         part4.SetActive(false);
     }

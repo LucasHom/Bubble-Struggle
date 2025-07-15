@@ -69,6 +69,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Sprite freezeGustImage;
     [SerializeField] Sprite shieldBubbleImage;
 
+    // Tutorial
+    private bool tutorialEnabled = true; // Set to false to disable tutorial popups
+    [SerializeField] private GameObject tutorialPrefab;
+
 
     private void Awake()
     {
@@ -199,6 +203,14 @@ public class WaveManager : MonoBehaviour
     {
         //Return to game view
         yield return new WaitForSeconds(2f);
+
+        // move, reload, shoot tutorial
+        if (tutorialEnabled)
+        {
+            // Set tutorial name to "player" for the first part
+            Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity).GetComponent<Tutorial>().tutorialName = "player";
+        }
+
         cameraManager.SwitchToWaveView();
         currentWave++;
         yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
@@ -230,7 +242,6 @@ public class WaveManager : MonoBehaviour
             shopManager.isBackgroundToggleReady = true;
 
 
-
             //Spawn wave
             yield return StartCoroutine(SpawnWave());
 
@@ -240,6 +251,7 @@ public class WaveManager : MonoBehaviour
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
+            tutorialEnabled = false;
 
             //Wave rewards
             if (unlockQueue.Count > 0)
@@ -250,7 +262,7 @@ public class WaveManager : MonoBehaviour
                 shopManager.newUnlock = true;
             }
 
-            girlfriend.maxThanks = (int)(girlfriend.maxThanks * 1.1f);
+            girlfriend.maxThanks = (int)(girlfriend.maxThanks * 1.1f); //increase midges possible rewards
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
@@ -309,6 +321,14 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             girlfriend.GiveThanks();
             yield return new WaitForSeconds(2f);
+
+            // gold tutorial
+            if (tutorialEnabled)
+            {
+                // Set tutorial name to "gold" for gold tutorial
+                Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity).GetComponent<Tutorial>().tutorialName = "gold";
+                yield return new WaitForSeconds(2f);
+            }
 
             currentSubWaveIndex++;
 

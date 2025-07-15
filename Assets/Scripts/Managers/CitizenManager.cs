@@ -115,7 +115,7 @@ public class CitizenManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) 
+        if (Input.GetKeyDown(KeyCode.T)) 
         { 
             GiveThanks();
         }
