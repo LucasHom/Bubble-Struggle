@@ -70,6 +70,9 @@ public class CitizenManager : MonoBehaviour
     //Shop
     [SerializeField] private ShopManager shopManager;
 
+    //Animation
+    [SerializeField] private Animator animator;
+
 
     void Start()
     {
@@ -92,7 +95,7 @@ public class CitizenManager : MonoBehaviour
     {
         if (!citizenIsFrozen)
         {
-            spriteRenderer.color = Color.magenta;
+            spriteRenderer.color = Color.white;
             if (canCitizenMove)
             {
                 currentHorizontalStrength = Mathf.MoveTowards(currentHorizontalStrength, horizontalMaxInput * randomDirection, accelerationRate * Time.deltaTime);
@@ -243,13 +246,25 @@ public class CitizenManager : MonoBehaviour
 
             float totalDistance = distanceToLeftWall + distanceToRightWall;
             float moveLeftProbability = distanceToRightWall / totalDistance;
-            //Debug.Log("Left prob" + moveLeftProbability);
             randomDirection = UnityEngine.Random.value < moveLeftProbability ? 1 : -1;
-            //Debug.Log("Random direction" + randomDirection);
+
+            if(randomDirection < 0)
+            {
+                spriteRenderer.flipX = true; // Move left
+            }
+            else
+            {
+                spriteRenderer.flipX = false; // Move right
+            }
 
             canCitizenMove = true;
+            if (!citizenIsFrozen)
+            {
+                animator.SetBool("isRunning", true); //start run animation
+            }
             yield return new WaitForSeconds(moveTime);
             canCitizenMove = false;
+            animator.SetBool("isRunning", false); //end run animation
         }
     }
 

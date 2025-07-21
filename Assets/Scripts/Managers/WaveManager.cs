@@ -251,7 +251,6 @@ public class WaveManager : MonoBehaviour
             shopManager.ToggleCurrency();
             shopManager.isShopToggleReady = false;
             shopManager.isBackgroundToggleReady = true;
-            tutorialEnabled = false;
 
             //Wave rewards
             if (unlockQueue.Count > 0)
@@ -325,9 +324,13 @@ public class WaveManager : MonoBehaviour
             // gold tutorial
             if (tutorialEnabled)
             {
+                shopManager.isShopToggleReady = false;
                 // Set tutorial name to "gold" for gold tutorial
                 Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity).GetComponent<Tutorial>().tutorialName = "gold";
+                tutorialEnabled = false;
                 yield return new WaitForSeconds(2f);
+                shopManager.isShopToggleReady = true;
+
             }
 
             currentSubWaveIndex++;
