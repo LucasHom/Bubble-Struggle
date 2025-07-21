@@ -164,17 +164,17 @@ public class WaveManager : MonoBehaviour
 
 
         //Lock all pipes
-        //buttonSecurityManager.Lock("WaterCapacityButton");
-        //buttonSecurityManager.Lock("ReloadSpeedButton");
-        //buttonSecurityManager.Lock("PlayerSpeedButton");
+        buttonSecurityManager.Lock("WaterCapacityButton");
+        buttonSecurityManager.Lock("ReloadSpeedButton");
+        buttonSecurityManager.Lock("PlayerSpeedButton");
 
-        //buttonSecurityManager.Lock("NetButton");
-        //buttonSecurityManager.Lock("UmbrellaButton");
-        //buttonSecurityManager.Lock("MedpackButton");
+        buttonSecurityManager.Lock("NetButton");
+        buttonSecurityManager.Lock("UmbrellaButton");
+        buttonSecurityManager.Lock("MedpackButton");
 
-        //buttonSecurityManager.Lock("WaterPipeButton");
-        //buttonSecurityManager.Lock("FreezePipeButton");
-        //buttonSecurityManager.Lock("ShieldBubblePipeButton");
+        buttonSecurityManager.Lock("WaterPipeButton");
+        buttonSecurityManager.Lock("FreezePipeButton");
+        buttonSecurityManager.Lock("ShieldBubblePipeButton");
 
 
         cloudHeightChange = (maxCloudHeight - cloudMovement.startingCloudHeight) / maxWaves;
@@ -326,11 +326,14 @@ public class WaveManager : MonoBehaviour
             {
                 shopManager.isShopToggleReady = false;
                 // Set tutorial name to "gold" for gold tutorial
-                Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity).GetComponent<Tutorial>().tutorialName = "gold";
-                tutorialEnabled = false;
-                yield return new WaitForSeconds(2f);
-                shopManager.isShopToggleReady = true;
+                GameObject pricetut = Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+                pricetut.GetComponent<Tutorial>().tutorialName = "gold";
 
+                yield return new WaitUntil(() => pricetut == null);
+                tutorialEnabled = false;
+                shopManager.ToggleShop();
+                shopManager.isShopToggleReady = true;
+                yield return new WaitForSeconds(2f);
             }
 
             currentSubWaveIndex++;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +18,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] public GameObject newNotif;
     [SerializeField] public TextMeshProUGUI newNotifText;
     public bool newUnlock = false;
+    [SerializeField] private GameObject emptyNotif; //Empty notification when no new unlocks are available
 
-    
+
     //Open-Close shop
     public bool isBackgroundToggleReady = false;
     public bool isShopToggleReady = false;
@@ -31,6 +33,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         currencyIndicator.SetActive(false);
+        emptyNotif.SetActive(true);
         newNotif.SetActive(false);
         newNotifText.enabled = false;
 
@@ -63,14 +66,16 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void ToggleShop()
+    public void ToggleShop()
     {
         //Turn off new notification under currency indicator
         if (newNotifText.enabled == true)
         {
+            emptyNotif.SetActive(false); //only matters on first run because is always false after this
             newUnlock = false;
             newNotifText.enabled = false;
         }
+
 
         isBackgroundActive = !isBackgroundActive;
         shopContent.SetActive(!shopContent.activeSelf);
