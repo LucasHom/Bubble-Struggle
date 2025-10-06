@@ -15,7 +15,7 @@ public abstract class ItemPurchase : PurchaseButton
     private int priceRank = default;
 
     //Scalars
-    private float priceMultiplier = 1.1f;
+    [SerializeField] private float priceMultiplier = 1f;
 
     //Colors
     private Color readyWhite = Color.white;

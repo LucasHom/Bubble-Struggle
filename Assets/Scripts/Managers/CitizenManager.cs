@@ -58,7 +58,7 @@ public class CitizenManager : MonoBehaviour
 
     //Calculate Thanks
     [SerializeField] public int maxThanks; //Allow to change when the wave changes
-    [SerializeField] private float lowestThanksPercent = 0.5f;
+    [SerializeField] private float lowestThanksPercent = 0.70f;
     private Dictionary<int, float> healthToThanks = new Dictionary<int, float>();
     //------------------
 

@@ -63,10 +63,10 @@ public class WaveInfo : MonoBehaviour
         sub1_1.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
 
         SubWave sub2_1 = new SubWave();
-        sub2_1.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
+        sub2_1.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub2_1.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
 
         SubWave sub3_1 = new SubWave();
-        sub3_1.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
         sub3_1.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
 
         wave1.subWaves.Add(sub1_1);
@@ -76,96 +76,137 @@ public class WaveInfo : MonoBehaviour
         allWaves.Add(wave1);
 
         // Wave 2
-        Wave wave2 = new Wave("The sludge is getting heavier...");
+        Wave wave2 = new Wave("Protecting Midge");
 
         SubWave sub1_2 = new SubWave();
-        sub1_2.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub1_2.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
 
         SubWave sub2_2 = new SubWave();
         sub2_2.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
-        sub2_2.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub2_2.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
 
         SubWave sub3_2 = new SubWave();
-        sub3_2.enemies.Add(new BallSpawnInfo(largeBallPrefab, 2));
+        sub3_2.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
+
+        SubWave sub4_2 = new SubWave();
+        sub4_2.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub4_2.enemies.Add(new BallSpawnInfo(smallBallPrefab, 3));
+
 
         wave2.subWaves.Add(sub1_2);
         wave2.subWaves.Add(sub2_2);
         wave2.subWaves.Add(sub3_2);
+        wave2.subWaves.Add(sub4_2);
 
         allWaves.Add(wave2);
 
         // Wave 3
-        Wave wave3 = new Wave("");
+        Wave wave3 = new Wave("Sky looks heavy...");
         SubWave sub1_3 = new SubWave();
-        sub1_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 2));
-        sub1_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
+        sub1_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
 
         SubWave sub2_3 = new SubWave();
-        sub2_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 3));
+        sub2_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub2_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
 
         SubWave sub3_3 = new SubWave();
         sub3_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
-        sub3_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub3_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
 
         SubWave sub4_3 = new SubWave();
-        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub4_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
-        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub4_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
-        sub4_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
-        sub4_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub4_3.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
+
+        SubWave sub5_3 = new SubWave();
+        sub5_3.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub5_3.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
 
 
         wave3.subWaves.Add(sub1_3);
         wave3.subWaves.Add(sub2_3);
         wave3.subWaves.Add(sub3_3);
         wave3.subWaves.Add(sub4_3);
+        wave3.subWaves.Add(sub5_3);
 
         allWaves.Add(wave3);
 
         // Wave 4
-        Wave wave4 = new Wave("");
+        Wave wave4 = new Wave("Persevering thick air");
         SubWave sub1_4 = new SubWave();
-        sub1_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 1));
+        sub1_4.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub1_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
 
         SubWave sub2_4 = new SubWave();
-        sub2_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
-        sub2_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 1));
+        sub2_4.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub2_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
 
         SubWave sub3_4 = new SubWave();
-        sub3_4.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 2));
+        sub3_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
+        sub3_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
 
         SubWave sub4_4 = new SubWave();
-        sub4_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 12));
+        sub4_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 3));
+        sub4_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+
+        SubWave sub5_4 = new SubWave();
+        sub5_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub5_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub5_4.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+
+        SubWave sub6_4 = new SubWave();
+        sub6_4.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 4));
+
+        SubWave sub7_4 = new SubWave();
+        sub7_4.enemies.Add(new BallSpawnInfo(smallBallPrefab, 8));
 
         wave4.subWaves.Add(sub1_4);
         wave4.subWaves.Add(sub2_4);
         wave4.subWaves.Add(sub3_4);
         wave4.subWaves.Add(sub4_4);
+        wave4.subWaves.Add(sub5_4);
+        wave4.subWaves.Add(sub6_4);
+        wave4.subWaves.Add(sub7_4);
+
         allWaves.Add(wave4);
 
         // Wave 5
-        Wave wave5 = new Wave("");
+        Wave wave5 = new Wave("TIPPING POINT");
         SubWave sub1_5 = new SubWave();
-        sub1_5.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
-        sub1_5.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 3));
+        sub1_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 3));
 
         SubWave sub2_5 = new SubWave();
-        sub2_5.enemies.Add(new BallSpawnInfo(largeBallPrefab, 3));
+        sub2_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
 
         SubWave sub3_5 = new SubWave();
-        sub3_5.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 5));
+        sub3_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+
+        SubWave sub4_5 = new SubWave();
+        sub4_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+
+        SubWave sub5_5 = new SubWave();
+        sub5_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+
+        SubWave sub6_5 = new SubWave();
+        sub6_5.enemies.Add(new BallSpawnInfo(largeBallPrefab, 1));
+        sub6_5.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 2));
+        sub6_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
+        sub6_5.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 1));
+        sub6_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 4));
+        sub6_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 2));
+        sub6_5.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
+        sub6_5.enemies.Add(new BallSpawnInfo(largeBallPrefab, 2));
 
         wave5.subWaves.Add(sub1_5);
         wave5.subWaves.Add(sub2_5);
         wave5.subWaves.Add(sub3_5);
+        wave5.subWaves.Add(sub4_5);
+        wave5.subWaves.Add(sub5_5);
+        wave5.subWaves.Add(sub6_5);
         allWaves.Add(wave5);
 
         // Wave 6
-        Wave wave6 = new Wave("");
+        Wave wave6 = new Wave("Atmospheric armor");
         SubWave sub1_6 = new SubWave();
-        sub1_6.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 4));
+        sub1_6.enemies.Add(new BallSpawnInfo(largeBallGuardedPrefab, 1));
 
         SubWave sub2_6 = new SubWave();
         sub2_6.enemies.Add(new BallSpawnInfo(largeBallPrefab, 2));
@@ -231,9 +272,10 @@ public class WaveInfo : MonoBehaviour
         // Wave 10
         Wave wave10 = new Wave("");
         SubWave sub1_10 = new SubWave();
-        sub1_10.enemies.Add(new BallSpawnInfo(largeBallPrefab, 3));
-        sub1_10.enemies.Add(new BallSpawnInfo(mediumBallPrefab, 4));
+        //1 ball
+        sub1_10.enemies.Add(new BallSpawnInfo(smallBallPrefab, 1));
 
+        //crazy wave
         SubWave sub2_10 = new SubWave();
         sub2_10.enemies.Add(new BallSpawnInfo(largeBallPrefab, 6));
 

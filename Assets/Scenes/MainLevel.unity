@@ -128,63 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1111710338977269082, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
   m_PrefabInstance: {fileID: 622332593}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &17794758
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6299765533239844623, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_Name
-      value: ball_medium
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c4c928926ac52584fa0607b5bf5681b7, type: 3}
 --- !u!1 &30180523
 GameObject:
   m_ObjectHideFlags: 0
@@ -6756,7 +6699,7 @@ MonoBehaviour:
   PriceObject: {fileID: 395728198}
   StatusText: {fileID: 395728199}
   newText: {fileID: 804189023}
-  basePrice: 100
+  basePrice: 80
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
   shieldBubblePipePrefab: {fileID: 1093725396866519136, guid: 5494d918fe7e43146bfbeb1c2f339064, type: 3}
@@ -7338,7 +7281,7 @@ MonoBehaviour:
   worriedReaction: {fileID: 21300000, guid: 6767d88cfeb4527478b519bfa35b6df3, type: 3}
   sadReaction: {fileID: 21300000, guid: b45eb3e478552d8479d6157de8ea2c11, type: 3}
   maxThanks: 15
-  lowestThanksPercent: 0.5
+  lowestThanksPercent: 0.7
   maxCitizenHealth: 5
   citizenHealth: 5
   healthPS: {fileID: 1190923634}
@@ -7547,7 +7490,7 @@ PrefabInstance:
       objectReference: {fileID: 839196642}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: priceIncrease
-      value: 2.3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
@@ -8054,9 +7997,10 @@ MonoBehaviour:
   PriceObject: {fileID: 1801024733}
   StatusText: {fileID: 628093726}
   newText: {fileID: 1389866221}
-  basePrice: 12
+  basePrice: 15
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
+  priceMultiplier: 1
   umbrellaPrefab: {fileID: 7561221744652574769, guid: 69a5ad750e0ab2b4280d627040fb3454, type: 3}
   maxUmbrellas: 10
 --- !u!1 &624991577
@@ -13293,7 +13237,7 @@ PrefabInstance:
       objectReference: {fileID: 839196642}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: priceIncrease
-      value: 2.3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
@@ -14606,9 +14550,10 @@ MonoBehaviour:
   PriceObject: {fileID: 1034874324}
   StatusText: {fileID: 1034874325}
   newText: {fileID: 1912717091}
-  basePrice: 8
+  basePrice: 10
   isReady: 0
   notReadyTextPrefab: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
+  priceMultiplier: 1
   netPrefab: {fileID: 7942808225714819119, guid: 63cfaa70adadc3d42bacb059649f7fbc, type: 3}
   maxNets: 5
 --- !u!1 &1044071972
@@ -27685,63 +27630,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pigeonPrefab: {fileID: 4678771409138320048, guid: 59810e2b54f01ff498429ea8dba5b4ab, type: 3}
---- !u!1001 &1942755638
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6299765533239844623, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_Name
-      value: ball_large
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6557772299989005533, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ca812a831d87fa349aee961cb845c8ba, type: 3}
 --- !u!4 &1947692095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6015385005102171149, guid: c6eac3b29feae4a48973d243007e3394, type: 3}
@@ -28559,6 +28447,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1395921457289241735, guid: e30fdb8ef65e08440bb2ef6c9dd27e98, type: 3}
     - target: {fileID: 7317246715305559911, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
+      propertyPath: priceMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317246715305559911, guid: f88873d3aa07b7842bc2d7d5b9b4a692, type: 3}
       propertyPath: notReadyTextPrefab
       value: 
       objectReference: {fileID: 8874300344085807400, guid: adc15d30548b32e438b59362fe9e5cef, type: 3}
@@ -28609,7 +28501,7 @@ PrefabInstance:
       objectReference: {fileID: 1094928761}
     - target: {fileID: 7324483360137024664, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
       propertyPath: basePrice
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7324483360137024664, guid: 819fe72aea194c7469cfef9633f93998, type: 3}
       propertyPath: ShopManager
@@ -28822,7 +28714,7 @@ PrefabInstance:
       objectReference: {fileID: 839196642}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: priceIncrease
-      value: 2.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3076814485170496382, guid: 7c8e57c30b1386a40b8cd6e99a7320df, type: 3}
       propertyPath: WaterGenerator
@@ -29094,5 +28986,3 @@ SceneRoots:
   - {fileID: 1475255525}
   - {fileID: 497521583}
   - {fileID: 581747371}
-  - {fileID: 17794758}
-  - {fileID: 1942755638}
