@@ -35,6 +35,12 @@ public class Tutorial : MonoBehaviour
 
     // Animation
     [SerializeField] private Animator buttonAnimator_A;
+    [SerializeField] private Animator buttonAnimator_D;
+    [SerializeField] private Animator buttonAnimator_R;
+    [SerializeField] private Animator buttonAnimator_S;
+    [SerializeField] private Animator buttonAnimator_B;
+    [SerializeField] private Animator buttonAnimator_mouse0;
+    [SerializeField] private Animator buttonAnimator_mouse1;
 
     private void Awake()
     {
@@ -89,26 +95,28 @@ public class Tutorial : MonoBehaviour
             {
                 moveda = true;
                 aimage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-                buttonAnimator_A.Play("a_button", 0, 0.5f); // Layer 0, time = 0%
-                buttonAnimator_A.Update(0f); // Force immediate update
-                buttonAnimator_A.speed = 0f;
+                stopButton(buttonAnimator_A);
 
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
                 movedd = true;
-                dimage.color = new Color(0f, 1f, 0f, 0.5f);
+                dimage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                stopButton(buttonAnimator_D);
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 shot = true;
-                m0image.color = new Color(0f, 1f, 0f, 0.5f);
+                m0image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                stopButton(buttonAnimator_mouse0);
             }
             if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S))
             {
                 reloaded = true;
-                rimage.color = new Color(0f, 1f, 0f, 0.5f);
-                simage.color = new Color(0f, 1f, 0f, 0.5f);
+                rimage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                simage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                stopButton(buttonAnimator_S);
+                stopButton(buttonAnimator_R);
             }
             yield return null;
         }
@@ -125,7 +133,8 @@ public class Tutorial : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 bursted = true;
-                m1image.color = new Color(0f, 1f, 0f, 0.5f);
+                m1image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                stopButton(buttonAnimator_mouse1);
             }
             yield return null;
         }
@@ -166,8 +175,16 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        bimage.color = new Color(0f, 1f, 0f, 0.5f);
+        bimage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        stopButton(buttonAnimator_B);
         yield return new WaitForSecondsRealtime(0.8f);
         part4.SetActive(false);
+    }
+
+    private void stopButton(Animator buttonAnimator)
+    {
+        buttonAnimator.Play(0, 0, 0.5f); // Layer 0, time = 0%
+        buttonAnimator.Update(0f); // Force immediate update
+        buttonAnimator.speed = 0f;
     }
 }

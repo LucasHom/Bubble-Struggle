@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.02
+      scalar: 0.04
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 90
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5001,4 +5001,3 @@ MonoBehaviour:
   puddleHeight: -4.495
   horizontalBarrierForce: 2
   bounceForce: {x: 0, y: 12}
-  size: small
