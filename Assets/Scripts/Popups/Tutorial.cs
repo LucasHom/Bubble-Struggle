@@ -33,6 +33,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject part4;
     [SerializeField] private Image bimage;
 
+    // Animation
+    [SerializeField] private Animator buttonAnimator_A;
+
     private void Awake()
     {
         part1.SetActive(false);
@@ -85,9 +88,10 @@ public class Tutorial : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A))
             {
                 moveda = true;
-                aimage.color = new Color(0f, 1f, 0f, 0.5f);
-                //myAnimator.Play("YourClipName", 0, 0f); // Layer 0, time = 0%
-                //myAnimator.Update(0f); // Force immediate update
+                aimage.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+                buttonAnimator_A.Play("a_button", 0, 0.5f); // Layer 0, time = 0%
+                buttonAnimator_A.Update(0f); // Force immediate update
+                buttonAnimator_A.speed = 0f;
 
             }
             if (Input.GetKeyDown(KeyCode.D))

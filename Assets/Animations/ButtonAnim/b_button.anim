@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: testui
+  m_Name: b_button
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: ec1eeae5213feda49aa58499275ea68b, type: 3}
+      value: {fileID: 300058205, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
     - time: 0.26666668
-      value: {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
+      value: {fileID: -40041469, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
     - time: 0.53333336
-      value: {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
+      value: {fileID: 300058205, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ec1eeae5213feda49aa58499275ea68b, type: 3}
-    - {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
-    - {fileID: 21300000, guid: aaa85e9c0ecc1304b9f30edd5ba54531, type: 3}
+    - {fileID: 300058205, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
+    - {fileID: -40041469, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
+    - {fileID: 300058205, guid: 181829bb56cf0754caf80f9c6262e16c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
