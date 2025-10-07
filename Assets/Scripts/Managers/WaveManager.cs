@@ -261,7 +261,7 @@ public class WaveManager : MonoBehaviour
                 shopManager.newUnlock = true;
             }
 
-            girlfriend.maxThanks = (int)(girlfriend.maxThanks * 1.1f); //increase midges possible rewards
+            girlfriend.maxThanks = (int)(girlfriend.maxThanks + 2); //increase midges possible rewards
 
             cameraManager.SwitchToCloudView();
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
