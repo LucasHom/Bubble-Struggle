@@ -43,7 +43,7 @@ public class Umbrella : MonoBehaviour
 
         if (activeUmbrellas.Count == 0)
         {
-            transform.position = citizen.transform.position + new Vector3(0, 0.5f);
+            transform.position = citizen.transform.position + new Vector3(0, -0.3f);
             FixedJoint2D fixedJoint = gameObject.AddComponent<FixedJoint2D>();
             fixedJoint.connectedBody = citizen.GetComponent<Rigidbody2D>();
         }

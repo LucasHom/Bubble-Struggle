@@ -187,7 +187,7 @@ public class GenerateWater : MonoBehaviour
             canShowReloadIcon = false;
 
             // Check if player let go of reload keys
-            if (!(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Mouse1)))
+            if (!(Input.GetKey(KeyCode.S) ||  Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.Mouse1)))
             {
                 break; // Exit the coroutine immediately
             }
