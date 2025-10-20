@@ -13713,7 +13713,7 @@ MonoBehaviour:
   supportBallPrefab: {fileID: 6299765533239844623, guid: 051744ab5c274b049a95217847608fd8, type: 3}
   timeBetweenSpawn: 0.5
   allWaves: []
-  testingMode: 1
+  testingMode: 0
 --- !u!1 &855605789
 GameObject:
   m_ObjectHideFlags: 0
@@ -27072,7 +27072,7 @@ RectTransform:
   m_GameObject: {fileID: 1770107003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 166125036}
