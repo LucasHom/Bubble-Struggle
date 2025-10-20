@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     //Wave Tracking
     private WaveInfo waveInfo;
     [SerializeField] float timeBetweenWave = 4f;
-    [SerializeField] private int currentWave = 0;
+    [SerializeField] public int currentWave = 0;
     [SerializeField] private int currentWaveIndex = 0;
     [SerializeField] private int currentSubWaveIndex = 0;
 
@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
 
 
     //Cloud
-    [SerializeField] private float maxCloudHeight = 50f;
+    [SerializeField] private float maxCloudHeight = 45f;
     [SerializeField] private float maxWaves = 10;
     private float cloudHeightChange;
     [SerializeField] private CloudMovement cloudMovement;
@@ -249,6 +249,8 @@ public class WaveManager : MonoBehaviour
             //Spawn wave
             yield return StartCoroutine(SpawnWave());
 
+            //End wave
+            currentWave++;
 
             //Enable scene views and popups
             ToggleCitizenHealth();
@@ -271,23 +273,26 @@ public class WaveManager : MonoBehaviour
             yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
             yield return new WaitForSeconds(2f);
 
-            if (currentWave < maxWaves)
+            if (currentWave <= maxWaves)
             {
                 StartCoroutine(cloudMovement.ChangeCloudHeight(cloudHeightChange));
+
+                yield return new WaitForSeconds(2f);
+                cameraManager.SwitchToWaveView();
+                yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+                yield return new WaitForSeconds(2f);
+                waveNumText.text = "Wave " + currentWave;
+                waveDescriptionText.text = waveInfo.allWaves[currentWaveIndex].description;
+                EnableTransitionText();
+
+                yield return new WaitForSeconds(timeBetweenWave);
             }
 
-            yield return new WaitForSeconds(2f);
-
-            cameraManager.SwitchToWaveView();
-            currentWave++;
-            yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
-            yield return new WaitForSeconds(2f);
-            waveNumText.text = "Wave " + currentWave;
-            waveDescriptionText.text = waveInfo.allWaves[currentWaveIndex].description;
-            EnableTransitionText();
-
-            yield return new WaitForSeconds(timeBetweenWave);
+        
         }
+
+        //Wave 11: Bossfight
+        StartCoroutine(FlashFlood());
     }
 
     private IEnumerator WaitForPigeonPopup()
@@ -352,6 +357,39 @@ public class WaveManager : MonoBehaviour
         girlfriend.AttemptHeal();
         yield return new WaitForSeconds(1f);
         currentWaveIndex++;
+    }
+
+
+    private IEnumerator FlashFlood()
+    {
+        Debug.Log("flash flooding");
+        StartCoroutine(cloudMovement.ChangeCloudHeight(cloudHeightChange));
+
+        yield return new WaitForSeconds(2f);
+        cameraManager.SwitchToWaveView();
+        yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+        yield return new WaitForSeconds(2f);
+        waveNumText.text = "Protect midge";
+        waveDescriptionText.text = "";
+        EnableTransitionText();
+
+        yield return new WaitForSeconds(timeBetweenWave);
+
+        cameraManager.SwitchToGameView();
+        StartCoroutine(cloudMovement.FloatDown()); //balls should fall from cloud as float down
+        yield return new WaitUntil(() => !cinemachineBrain.IsBlending);
+        DisableTransitionText();
+        ToggleCitizenHealth();
+        shopManager.ToggleCurrency();
+        shopManager.isShopToggleReady = true;
+        shopManager.isBackgroundToggleReady = true;
+
+        yield return new WaitForSeconds(1f);
+
+        //Spawn boss wave
+        //handle everything in cloud script? new cloud script
+
+        yield return null;
     }
 
 

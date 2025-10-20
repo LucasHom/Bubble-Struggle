@@ -230,8 +230,17 @@ public class GenerateWater : MonoBehaviour
 
 
 
+
     IEnumerator ShootWaterSpecial()
     {
+        GameObject leftProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+        Rigidbody2D Lrb2d = leftProjectile.GetComponent<Rigidbody2D>();
+        Lrb2d.AddForce(new Vector2(-1f, 0.25f).normalized * (shootForce / 2), ForceMode2D.Impulse);
+
+        GameObject rightProjectile = Instantiate(waterProjectilePrefab, shootPoint.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+        Rigidbody2D Rrb2d = rightProjectile.GetComponent<Rigidbody2D>();
+        Rrb2d.AddForce(new Vector2(1f, 0.25f).normalized * (shootForce / 2), ForceMode2D.Impulse);
+
         while (remainingWater > 0)
         {
             yield return new WaitForSeconds(0.01f);

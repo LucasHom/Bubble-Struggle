@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -85,6 +83,22 @@ public class Ball : MonoBehaviour
             {
                 //Debug.Log("Started freeze routine");
                 col.gameObject.GetComponent<Player>().startFreezePlayerCoroutine();
+                if (rb2d.velocity.y < 0f && Mathf.Abs(rb2d.velocity.y) > 5.5f)
+                {
+                    rb2d.AddForce(new Vector2(0f, 15f), ForceMode2D.Impulse);
+                    //Debug.Log("Bounced high");
+                }
+                else if (rb2d.velocity.y < 0f)
+                {
+                    rb2d.AddForce(new Vector2(0f, 8f), ForceMode2D.Impulse);
+                    //Debug.Log("Bounced medium");
+                }
+                else
+                {
+                    rb2d.AddForce(new Vector2(0f, 2.5f), ForceMode2D.Impulse);
+                    //Debug.Log("Bounced low");
+                }
+                
             }
             
         }
@@ -96,6 +110,18 @@ public class Ball : MonoBehaviour
                 CitizenManager cman = col.gameObject.GetComponent<CitizenManager>();
                 cman.setCitizenHealth(cman.getCitizenHealth() - 1);
                 cman.startFreezeCitizenCoroutine();
+                if (rb2d.velocity.y < 0f && Mathf.Abs(rb2d.velocity.y) > 5.5f)
+                {
+                    rb2d.AddForce(new Vector2(0f, 15f), ForceMode2D.Impulse);
+                }
+                else if (rb2d.velocity.y < 0f)
+                {
+                    rb2d.AddForce(new Vector2(0f, 8f), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rb2d.AddForce(new Vector2(0f, 2.5f), ForceMode2D.Impulse);
+                }
             }
         }
     }

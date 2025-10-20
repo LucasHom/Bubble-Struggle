@@ -10,6 +10,7 @@ public class CloudMovement : MonoBehaviour
 
     //Pigeon
     private PigeonManager pigeonManager;
+    [SerializeField] private WaveManager waveManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +37,31 @@ public class CloudMovement : MonoBehaviour
 
             yield return null;
         }
-        pigeonManager.SpawnPigeons();
-        // TODO: pigeonManager.SpawnColombidae() on wave 10
+        if (waveManager.currentWave == 10)
+        {
+            StartCoroutine(pigeonManager.SpawnColumbidae());
+        }
+        else
+        {
+            pigeonManager.SpawnPigeons();
+        }
 
+
+    }
+
+    public IEnumerator FloatDown()
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 2f)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     public void RandomizeColliderOffset(float range = 0.3f)
