@@ -13713,7 +13713,7 @@ MonoBehaviour:
   supportBallPrefab: {fileID: 6299765533239844623, guid: 051744ab5c274b049a95217847608fd8, type: 3}
   timeBetweenSpawn: 0.5
   allWaves: []
-  testingMode: 0
+  testingMode: 1
 --- !u!1 &855605789
 GameObject:
   m_ObjectHideFlags: 0
